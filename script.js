@@ -1,0 +1,15 @@
+const $=s=>document.querySelector(s),content=window.siteContent;
+function renderMetrics(){$("#metrics").innerHTML=content.metrics.map(x=>`<div class="metric"><strong>${x[0]}</strong><span>${x[1]}</span></div>`).join("")}
+const visualMap={
+simulation:"<div class='visual-core'><span class='visual-label'>SIMULATION</span><div class='ring r1'></div><div class='ring r2'></div><div class='signal'></div><div class='road'></div></div>",
+driving:"<div class='visual-core driving'><span class='visual-label'>LARGE WORLD</span><div class='horizon'></div><div class='road road-wide'></div><div class='lane'></div></div>",
+medical:"<div class='visual-core medical'><span class='visual-label'>VR / TRAINING</span><div class='medical-ring'></div><div class='pulse'></div><div class='cross'>+</div></div>",
+games:"<div class='visual-core games'><span class='visual-label'>GAME DEV</span><div class='pixel p1'></div><div class='pixel p2'></div><div class='pixel p3'></div><div class='pixel p4'></div><div class='cursor'>↗</div></div>"};
+function renderWork(){$("#workGrid").innerHTML=content.work.map((p,i)=>`<article class="work-card"><div class="work-visual">${visualMap[p.visual]}</div><div class="work-body"><div class="work-top"><span class="work-type">${p.type}</span><span>0${i+1}</span></div><h3>${p.title}</h3><p>${p.description}</p><div class="tags">${p.tags.map(t=>`<span>${t}</span>`).join("")}</div></div></article>`).join("")}
+function renderServices(){$("#serviceGrid").innerHTML=content.services.map(x=>`<article class="service"><span class="service-no">${x[0]}</span><h3>${x[1]}</h3><p>${x[2]}</p><span class="service-arrow">↗</span></article>`).join("")}
+function renderStudio(){$("#studioCopy").textContent=content.studioCopy;$("#principles").innerHTML=content.principles.map(x=>`<div class="principle"><span>${x[0]}</span><div><h3>${x[1]}</h3><p>${x[2]}</p></div></div>`).join("");$("#studioMeta").innerHTML=content.studioMeta.map(x=>`<div><span>${x[0]}</span><strong>${x[1]}</strong></div>`).join("")}
+function renderProcess(){$("#processGrid").innerHTML=content.process.map(x=>`<div class="process-step"><span>${x[0]}</span><h3>${x[1]}</h3><p>${x[2]}</p></div>`).join("")}
+function renderContact(){$("#contactActions").innerHTML=content.contact.map(x=>`<a class="contact-link" href="${x[2]}" target="_blank" rel="noreferrer"><span>${x[0]}</span><strong>${x[1]}</strong><b>↗</b></a>`).join("")}
+renderMetrics();renderWork();renderServices();renderStudio();renderProcess();renderContact();$("#year").textContent=new Date().getFullYear();
+addEventListener("scroll",()=>{const h=document.documentElement;$("#readingProgress").style.width=(scrollY/(h.scrollHeight-innerHeight)*100)+"%";$("#backToTop").classList.toggle("is-visible",scrollY>600)},{passive:true});
+$("#backToTop").onclick=()=>scrollTo({top:0,behavior:"smooth"});
