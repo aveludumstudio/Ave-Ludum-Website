@@ -1,4 +1,4 @@
-const siteContent={
+window.siteContent={
 work:[
 {title:"Supermarket VR",type:"INTERACTIVE VR SIMULATOR",description:"A virtual reality simulation recreating a client's supermarket environment, with detailed 3D assets, checkout operations and customer-service workflows.",image:"https://raw.githubusercontent.com/aveludumstudio/Ave-Ludum-Website/main/assets/project-supermarket-vr.svg",tags:["VR","Simulation","3D","Training"]},
 {title:"Mini Dungeon",type:"MOBILE ROUGELITE",description:"A top-down survivors-like roguelite with procedural map generation, created to showcase the studio's mobile development capabilities.",image:"https://raw.githubusercontent.com/aveludumstudio/Ave-Ludum-Website/main/assets/project-mini-dungeon.svg",tags:["Mobile","Roguelite","Procedural","Gameplay"]},
