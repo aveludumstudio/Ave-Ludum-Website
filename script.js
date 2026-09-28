@@ -14,3 +14,23 @@ $("#contactActions").innerHTML=c.contact.map(x=>`<a class="contact-link" href="$
 const modal=$("#projectModal"),openModal=p=>{ $("#modalImage").src=p.image;$("#modalImage").alt=p.title;$("#modalType").textContent=p.type;$("#modalTitle").textContent=p.title;$("#modalDescription").textContent=p.description;$("#modalRole").textContent=p.role||"Studio production";$("#modalStack").textContent=(p.stack||p.tags).join(" · ");$("#modalAsset").href=p.image;modal.setAttribute("aria-hidden","false");document.body.classList.add("modal-open")};
 document.addEventListener("click",e=>{const b=e.target.closest(".project-open");if(b){const p=c.work.find(x=>x.title===b.dataset.project);if(p)openModal(p)}if(e.target.closest("[data-close-modal]")){modal.setAttribute("aria-hidden","true");document.body.classList.remove("modal-open")}});
 $("#year").textContent=new Date().getFullYear();
+const themeToggle=$("#themeToggle"),backToTop=$("#backToTop"),themeColor=$("#themeColor");
+const applyTheme=theme=>{
+  const dark=theme==="dark";
+  document.documentElement.dataset.theme=dark?"dark":"light";
+  themeToggle.textContent=dark?"LIGHT MODE":"DARK MODE";
+  themeToggle.setAttribute("aria-label",dark?"Switch to light mode":"Switch to dark mode");
+  themeToggle.setAttribute("aria-pressed",String(dark));
+  if(themeColor)themeColor.setAttribute("content",dark?"#050505":"#ffffff");
+};
+const savedTheme=localStorage.getItem("ave-ludum-theme");
+applyTheme(savedTheme||(window.matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light"));
+themeToggle.addEventListener("click",()=>{
+  const next=document.documentElement.dataset.theme==="dark"?"light":"dark";
+  localStorage.setItem("ave-ludum-theme",next);
+  applyTheme(next);
+});
+const updateBackToTop=()=>backToTop.classList.toggle("visible",window.scrollY>600);
+window.addEventListener("scroll",updateBackToTop,{passive:true});
+updateBackToTop();
+backToTop.addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
