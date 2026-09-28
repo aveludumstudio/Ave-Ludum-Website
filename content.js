@@ -22,11 +22,11 @@ services:[
 ["06","TECHNICAL PRODUCTION","Unity, C#, optimization, integration and production support."]
 ],
 studioCopy:"Ave Ludum Studio is a game development studio based in Makassar, South Sulawesi. The studio focuses on interactive games, client-commissioned VR simulations, original IP and projects connected to environmental issues and local cultural richness, including South Sulawesi folklore. The team covers creative development, production, programming and visual art.",
-studioMeta:[["BASE","Makassar, South Sulawesi, Indonesia"],["FOCUS","Games · VR/XR · Simulation · AR"],["TEAM","Creative · Production · Programming · Visual Art"],["CONTACT","ave.ludum@gmail.com"]],
+studioMeta:[["BASE","Makassar, South Sulawesi, Indonesia"],["FOCUS","Games · VR/XR · Training Simulation · AR"],["TEAM","Creative · Production · Programming · Visual Art"],["CONTACT","ave.ludum@gmail.com"]],
 process:[["01","BRIEF","Goals, audience, platform and constraints."],["02","SCOPE","Technical approach, milestones and deliverables."],["03","PROTOTYPE","Validate the core experience with a working slice."],["04","BUILD","Iterative production, testing and review."],["05","SHIP","Deployment, handover and documentation."]],
 testimonials:[
-{quote:"Client review documentation from hands-on VR testing and project iteration.",source:"Client review session"},
-{quote:"Selected project work spanning games, simulation, AR, VR/XR and interactive 3D.",source:"Ave Ludum Studio portfolio"}
+{quote:"Good quality project, as initially agreed",source:"VR Client Review"},
+{quote:"Perfect for visualizing projects, better than expected",source:"Booth Render Client Review"}
 ],
 contact:[["EMAIL","ave.ludum@gmail.com","mailto:ave.ludum@gmail.com"],["INSTAGRAM","@ave.ludum","https://www.instagram.com/ave.ludum/"],["GITHUB","aveludumstudio","https://github.com/aveludumstudio/Ave-Ludum-Website"]]
 };
