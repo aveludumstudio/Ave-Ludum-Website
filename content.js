@@ -9,9 +9,8 @@ work:[
 {title:"Project Key Art",type:"PROJECT KEY ART",description:"A featured visual development piece from the studio, presented as project key art.",image:"assets/project-key-art.jpg?v=20260929-1",tags:["Key Art","Visual Development","Concept"],stack:["3D","Visual Development"],category:"3D / Visualization",role:"Visual development and project key art"}
 ],
 clientReview:[
-{image:"assets/client-review-01.jpg?v=20260929-1",caption:"Hands-on VR demonstration during a client review session."},
-{image:"assets/client-review-02.jpg?v=20260929-1",caption:"Client review session — testing the VR experience and interaction flow."},
-{image:"assets/client-review-03.jpg?v=20260929-1",caption:"Project testing and iteration during an on-site review session."}
+{image:"assets/client-review-field-01.jpg?v=20260929-1",caption:"Field visit and project discussion during client research."},
+{image:"assets/client-review-field-02.jpg?v=20260929-1",caption:"Project discussion and review session during field work."}
 ],
 filters:["All","Game Development","VR / XR","Simulation","AR","3D / Visualization"],
 services:[
