@@ -1,9 +1,16 @@
 const $=s=>document.querySelector(s),c=window.siteContent;
-$("#workGrid").innerHTML=c.work.map((p,i)=>`<article class="work-card"><a href="${p.image}" target="_blank" rel="noreferrer"><div class="work-image"><img src="${p.image}" alt="${p.title} portfolio media"><span class="project-no">0${i+1}</span></div></a><div class="work-body"><p class="work-type">${p.type}</p><h3>${p.title}</h3><p>${p.description}</p><div class="tags">${p.tags.map(t=>`<span>${t}</span>`).join("")}</div></div></article>`).join("");
-$("#reviewGrid").innerHTML=c.clientReview.map((r,i)=>`<figure class="review-card"><img src="${r.image}" alt="Client review session ${i+1}"><figcaption><span>0${i+1}</span>${r.caption}</figcaption></figure>`).join("");
+let activeFilter="All";
+const renderWork=()=>{$("#workGrid").innerHTML=c.work.filter(p=>activeFilter==="All"||p.tags.includes(activeFilter)||p.type.includes(activeFilter.toUpperCase())).map((p,i)=>`<article class="work-card"><button class="project-open" data-project="${p.title}" type="button"><div class="work-image"><img src="${p.image}" alt="${p.title} portfolio media"><span class="project-no">0${i+1}</span></div><div class="work-body"><p class="work-type">${p.type}</p><h3>${p.title}</h3><p>${p.description}</p><div class="tags">${p.tags.map(t=>`<span>${t}</span>`).join("")}</div><span class="case-link">View case study ↗</span></div></button></article>`).join("")};
+$("#filterBar").innerHTML=c.filters.map(f=>`<button type="button" class="${f==="All"?"active":""}" data-filter="${f}">${f}</button>`).join("");
+$("#filterBar").addEventListener("click",e=>{const b=e.target.closest("[data-filter]");if(!b)return;activeFilter=b.dataset.filter;document.querySelectorAll("#filterBar button").forEach(x=>x.classList.toggle("active",x===b));renderWork()});
+renderWork();
+$("#reviewGrid").innerHTML=c.clientReview.map((r,i)=>`<figure class="review-card"><img src="${r.image}" alt="Client review session ${i+1}" loading="lazy"><figcaption><span>0${i+1}</span>${r.caption}</figcaption></figure>`).join("");
+$("#testimonialGrid").innerHTML=c.testimonials.map(x=>`<article class="testimonial"><p>“${x.quote}”</p><span>${x.source}</span></article>`).join("");
 $("#serviceGrid").innerHTML=c.services.map(x=>`<article class="service"><span>${x[0]}</span><h3>${x[1]}</h3><p>${x[2]}</p></article>`).join("");
 $("#studioCopy").textContent=c.studioCopy;
 $("#studioMeta").innerHTML=c.studioMeta.map(x=>`<div><span>${x[0]}</span><strong>${x[1]}</strong></div>`).join("");
 $("#processGrid").innerHTML=c.process.map(x=>`<div class="process-step"><span>${x[0]}</span><h3>${x[1]}</h3><p>${x[2]}</p></div>`).join("");
 $("#contactActions").innerHTML=c.contact.map(x=>`<a class="contact-link" href="${x[2]}" target="_blank" rel="noreferrer"><span>${x[0]}</span><strong>${x[1]}</strong><b>↗</b></a>`).join("");
+const modal=$("#projectModal"),openModal=p=>{ $("#modalImage").src=p.image;$("#modalImage").alt=p.title;$("#modalType").textContent=p.type;$("#modalTitle").textContent=p.title;$("#modalDescription").textContent=p.description;$("#modalRole").textContent=p.role||"Studio production";$("#modalStack").textContent=(p.stack||p.tags).join(" · ");$("#modalAsset").href=p.image;modal.setAttribute("aria-hidden","false");document.body.classList.add("modal-open")};
+document.addEventListener("click",e=>{const b=e.target.closest(".project-open");if(b){const p=c.work.find(x=>x.title===b.dataset.project);if(p)openModal(p)}if(e.target.closest("[data-close-modal]")){modal.setAttribute("aria-hidden","true");document.body.classList.remove("modal-open")}});
 $("#year").textContent=new Date().getFullYear();
