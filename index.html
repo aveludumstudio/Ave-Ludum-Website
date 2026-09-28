@@ -17,7 +17,7 @@
 <meta name="twitter:description" content="Games, VR/XR, simulations, AR and interactive 3D experiences from Makassar, Indonesia.">
 <meta name="twitter:image" content="https://raw.githubusercontent.com/aveludumstudio/Ave-Ludum-Website/main/assets/project-key-art.jpg">
 <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/aveludumstudio/Ave-Ludum-Website/main/assets/logo-ave-ludum.png">
-<meta name="theme-color" content="#ffffff">
+<meta name="theme-color" content="#ffffff" id="themeColor">
 <title>Ave Ludum Studio | Game Development, VR/XR & Interactive 3D</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Mono:wght@400;500&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
 <header class="site-header">
   <a class="brand" href="#top" aria-label="Ave Ludum home"><img src="https://raw.githubusercontent.com/aveludumstudio/Ave-Ludum-Website/main/assets/logo-ave-ludum.png" alt="Ave Ludum symbol"><span>AVE LUDUM<br><small>STUDIO</small></span></a>
   <nav><a href="#work">Work</a><a href="#studio">Studio</a><a href="#services">Services</a><a href="#contact">Contact</a></nav>
-  <a class="header-cta" href="#contact">Start a project ↗</a>
+  <div class="header-tools"><button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to dark mode" aria-pressed="false">DARK MODE</button><a class="header-cta" href="#contact">Start a project ↗</a></div>
 </header>
 <main id="top" tabindex="-1">
 <section class="hero shell">
@@ -70,9 +70,10 @@
   <div><p class="kicker">06 / CONTACT</p><h2>LET'S BUILD<br>SOMETHING.</h2><p>For commissions, partnerships and project enquiries, contact the studio directly.</p><form class="quote-form" action="mailto:ave.ludum@gmail.com" method="post" enctype="text/plain"><label>Your name<input name="name" required></label><label>Project type<select name="project"><option>Game Development</option><option>VR / XR</option><option>Simulation</option><option>AR</option><option>3D / Visualization</option><option>Other</option></select></label><label>Project brief<textarea name="brief" rows="4" required placeholder="What are you trying to build?"></textarea></label><button class="button black" type="submit">Start a project ↗</button></form><div class="contact-actions" id="contactActions"></div></div>
 </section>
 </main>
+<button class="back-to-top" id="backToTop" type="button" aria-label="Back to top">↑ TOP</button>
 <div class="project-modal" id="projectModal" aria-hidden="true"><div class="modal-backdrop" data-close-modal></div><article class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" type="button" data-close-modal aria-label="Close project details">×</button><img id="modalImage" src="" alt=""><p class="kicker" id="modalType"></p><h2 id="modalTitle"></h2><p id="modalDescription"></p><div class="modal-meta"><div><span>ROLE</span><strong id="modalRole"></strong></div><div><span>STACK</span><strong id="modalStack"></strong></div></div><a class="button black" id="modalAsset" href="" target="_blank" rel="noreferrer">Open project media ↗</a></article></div><footer class="footer shell"><span>AVE LUDUM STUDIO · GAME DEVELOPMENT STUDIO</span><span>MAKASSAR, INDONESIA · © <span id="year"></span></span></footer>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"Ave Ludum Studio","description":"Game development studio focused on games, VR/XR, simulation, AR and interactive 3D experiences.","email":"mailto:ave.ludum@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Makassar","addressRegion":"South Sulawesi","addressCountry":"ID"},"sameAs":["https://www.instagram.com/ave.ludum/","https://github.com/aveludumstudio"]}
 </script>
-<script src="content.js?v=20260929-2"></script><script src="script.js?v=20260929-2"></script>
+<script src="content.js?v=20260929-3"></script><script src="script.js?v=20260929-3"></script>
 </body></html>
