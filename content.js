@@ -6,11 +6,12 @@ work:[
 {title:"Booth Renders",type:"3D BOOTH / STAND RENDER",description:"Realtime 3D booth and stand renders for events, showcases and conventions, helping clients visualize the planned structure and flow.",image:"https://raw.githubusercontent.com/aveludumstudio/Ave-Ludum-Website/main/assets/project-booth-renders.svg",tags:["3D","Visualization","Events"]},
 {title:"The Legend of Toakala",type:"HISTORY / CULTURAL HERITAGE",description:"A history-themed game from Maros adapting the Toa Kala folktale into an interactive 3D gaming experience.",image:"https://raw.githubusercontent.com/aveludumstudio/Ave-Ludum-Website/main/assets/project-toakala.svg",tags:["Cultural Heritage","3D","Game"]},
 {title:"Pilah Bumi",type:"SIMULATION / ENVIRONMENTAL",description:"A 3D free-roam waste sorting and management simulator where players collect scattered trash and sort it into distinct categories.",image:"https://raw.githubusercontent.com/aveludumstudio/Ave-Ludum-Website/main/assets/project-pilah-bumi.svg",tags:["Simulation","Environmental","3D"]},
-{title:"Project Key Art",type:"PROJECT KEY ART",description:"A featured visual development piece from the studio, presented as project key art.",image:"https://raw.githubusercontent.com/aveludumstudio/Ave-Ludum-Website/main/assets/project-key-art.jpg",tags:["Key Art","Visual Development","Concept"]}
+{title:"Project Key Art",type:"PROJECT KEY ART",description:"A featured visual development piece from the studio, presented as project key art.",image:"assets/project-key-art.jpg",tags:["Key Art","Visual Development","Concept"]}
 ],
 clientReview:[
-{image:"https://raw.githubusercontent.com/aveludumstudio/Ave-Ludum-Website/main/assets/client-review-01.jpg",caption:"VR demonstration during a client review session."},
-{image:"https://raw.githubusercontent.com/aveludumstudio/Ave-Ludum-Website/main/assets/client-review-01.jpg",caption:"Second VR demonstration during a client review session."}
+{image:"assets/client-review-01.jpg",caption:"Hands-on VR demonstration during a client review session."},
+{image:"assets/client-review-02.jpg",caption:"Client review session — testing the VR experience and interaction flow."},
+{image:"assets/client-review-03.jpg",caption:"Project testing and iteration during an on-site review session."}
 ],
 services:[
 ["01","GAME DEVELOPMENT","Original IP, gameplay systems, mobile games, prototyping and production."],
