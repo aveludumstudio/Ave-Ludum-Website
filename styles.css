@@ -27,3 +27,9 @@
 [data-theme="dark"] .contact-link,[data-theme="dark"] .meta-grid,[data-theme="dark"] .process-step,[data-theme="dark"] .service,[data-theme="dark"] .modal-meta{border-color:#f5f5f2}
 [data-theme="dark"] .work-body>p:not(.work-type),[data-theme="dark"] .body-copy,[data-theme="dark"] .contact>div>p:not(.kicker),[data-theme="dark"] .section-note,[data-theme="dark"] .service p,[data-theme="dark"] .process-step p,[data-theme="dark"] .modal-card>p:not(.kicker){color:#aaa}
 @media(max-width:700px){.header-tools{gap:5px}.theme-toggle{padding:10px 8px;font-size:8px}.header-cta{padding:10px 9px}}
+
+.team-photo{margin:0;border:1px solid var(--line);background:var(--white)}
+.team-photo img{display:block;width:100%;height:auto;max-height:620px;object-fit:cover}
+.team-photo figcaption{display:flex;gap:16px;padding:15px 18px;border-top:1px solid var(--line);font-size:12px}
+.team-photo figcaption span{font:10px var(--mono);color:var(--gray);text-transform:uppercase}
+@media(max-width:560px){.team-photo img{min-height:260px;object-fit:cover}.team-photo figcaption{flex-direction:column;gap:6px}}
