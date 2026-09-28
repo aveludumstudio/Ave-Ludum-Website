@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aveludumstudio.github.io/Ave-Ludum-Website/sitemap.xml
