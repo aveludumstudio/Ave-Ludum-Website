@@ -45,6 +45,21 @@ levelDesign:{
   {name:"Village entrance",x:67.2,y:30.4,shot:"assets/toakala-shrine.webp",note:"The exit to the east, toward Toakala's village and the next part of the story."}
  ]
 },
+// "Concept art" section. kind:"painting" or "sketch" controls the layout.
+conceptArt:[
+ {kind:"painting",image:"assets/concept-toakala-lakeside.webp",width:1920,height:1080,title:"Lakeside",
+  note:"A greyscale mood painting for light and atmosphere: a quiet shore under the karst hills.",
+  alt:"Greyscale painting of a long-haired figure standing by a lake, with butterflies and karst hills behind"},
+ {kind:"painting",image:"assets/concept-toakala-village-gate.webp",width:1920,height:1080,title:"Village gate",
+  note:"A stone gateway into a jungle village, lit by torches and framed by hanging roots.",
+  alt:"Greyscale painting of a torch-lit stone archway at the top of steps, leading into a jungle village"},
+ {kind:"sketch",image:"assets/concept-toakala-level2-plan.webp",width:1239,height:2000,title:"Level 2 route",
+  note:"The route on paper: a fallen-tree start (A), a karst cliff path (B), the bridge (C), a welcome gate (D) and the village with Balla Lompoa (E).",
+  alt:"Notebook page planning level 2 as a route from A to E, with sketches of each area"},
+ {kind:"sketch",image:"assets/concept-toakala-story-sketch.webp",width:1156,height:2000,title:"Story and characters",
+  note:"Story beats for a level, a forest scene, and studies of the pengawal, the royal guard.",
+  alt:"Notebook page with a forest sketch, story notes and drawings of an ape-like guard holding a sword"}
+],
 studioCopy:[
 "Ave Ludum is a small game studio in Makassar, South Sulawesi. Most of our work is either commissioned — VR simulators, AR apps, 3D visualisation — or our own games.",
 "We care a lot about the place we're from. Several of our projects start with South Sulawesi folklore or local environmental problems, and we go out to see the places and people involved before we build anything."

@@ -75,6 +75,32 @@ $("#levelPrev").addEventListener("click",()=>showStop(stop-1));
 $("#levelNext").addEventListener("click",()=>showStop(stop+1));
 showStop(0);
 
+// Concept art grid + lightbox
+const art=c.conceptArt,artDialog=$("#artDialog");
+let artIndex=0;
+const artItems=kind=>art.map((a,i)=>a.kind!==kind?"":`
+  <figure class="concept-item">
+    <button type="button" data-art="${i}" aria-label="View ${a.title} full size">
+      <img src="${a.image}" alt="${a.alt}" width="${a.width}" height="${a.height}" loading="lazy" decoding="async">
+    </button>
+    <figcaption><strong>${a.title}</strong> ${a.note}</figcaption>
+  </figure>`).join("");
+$("#conceptGrid").innerHTML=`<div class="concept-paintings">${artItems("painting")}</div><div class="concept-sketches">${artItems("sketch")}</div>`;
+const showArt=i=>{
+  artIndex=(i+art.length)%art.length;
+  const a=art[artIndex];
+  $("#artImage").src=a.image;$("#artImage").alt=a.alt;
+  $("#artDialog").classList.toggle("is-tall",a.height>a.width);
+  $("#artTitle").textContent=a.title;
+  $("#artNote").textContent=a.note;
+};
+$("#conceptGrid").addEventListener("click",e=>{const b=e.target.closest("[data-art]");if(!b)return;showArt(+b.dataset.art);artDialog.showModal()});
+$("#artPrev").addEventListener("click",()=>showArt(artIndex-1));
+$("#artNext").addEventListener("click",()=>showArt(artIndex+1));
+$("#artClose").addEventListener("click",()=>artDialog.close());
+artDialog.addEventListener("click",e=>{if(e.target===artDialog)artDialog.close()});
+artDialog.addEventListener("keydown",e=>{if(e.key==="ArrowLeft")showArt(artIndex-1);if(e.key==="ArrowRight")showArt(artIndex+1)});
+
 // Studio
 $("#studioCopy").innerHTML=c.studioCopy.map(p=>`<p>${p}</p>`).join("");
 $("#photos").innerHTML=c.fieldPhotos.map(f=>`<figure><img src="${f.image}" alt="${f.caption}" width="${f.width}" height="${f.height}" loading="lazy" decoding="async"><figcaption>${f.caption}</figcaption></figure>`).join("");

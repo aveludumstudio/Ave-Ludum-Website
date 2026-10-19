@@ -114,6 +114,35 @@ nav a:hover{color:var(--ink)}
 .level-nav button{width:42px;height:42px;border:1px solid var(--line);border-radius:50%;background:transparent;color:var(--ink);font-size:18px;cursor:pointer}
 .level-nav button:hover{border-color:var(--ink)}
 
+/* Concept art: paintings stacked on the left, notebook pages on the right */
+.concept-grid{display:grid;grid-template-columns:1.6fr 2fr;gap:20px}
+.concept-paintings{display:grid;gap:24px}
+.concept-sketches{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr auto;gap:0 20px}
+/* share rows so both pages end at the same line whatever the caption length */
+.concept-sketches .concept-item{display:grid;grid-row:span 2;grid-template-rows:subgrid}
+.concept-item{margin:0;display:flex;flex-direction:column}
+.concept-item button{display:block;flex:1;min-height:0;padding:0;border:0;border-radius:var(--radius);overflow:hidden;background:var(--line);cursor:zoom-in}
+.concept-item img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.concept-paintings img{aspect-ratio:16/9}
+/* tall pages fill whatever height the paintings column sets */
+.concept-sketches button{position:relative;min-height:240px}
+.concept-sketches img{position:absolute;inset:0;object-position:top}
+.concept-item button:hover img{transform:scale(1.03)}
+.concept-item figcaption{color:var(--muted);font-size:15px;margin-top:10px}
+.concept-item figcaption strong{display:block;color:var(--ink);font:700 18px var(--display)}
+/* sketches are drawn on light paper; keep them readable in dark mode */
+.concept-sketches button{background:#e6e6e6}
+
+.art-dialog{width:min(1200px,calc(100% - 32px));max-height:calc(100vh - 32px);padding:0;border:0;border-radius:10px;background:var(--surface);color:var(--ink);overflow:auto}
+.art-dialog::backdrop{background:rgba(20,16,10,.85)}
+.art-dialog>img{width:100%;max-height:calc(100vh - 180px);object-fit:contain;background:#111}
+.art-dialog.is-tall{width:min(640px,calc(100% - 32px))}
+.art-dialog.is-tall>img{max-height:none}
+.art-caption{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:18px 24px}
+.art-caption h2{font-size:22px;margin-bottom:4px}
+.art-caption p{color:var(--muted);margin:0;max-width:70ch}
+.art-caption .level-nav{padding:0;flex:none}
+
 /* Studio */
 .studio{background:var(--surface)}
 .studio-intro{display:grid;grid-template-columns:4fr 7fr;gap:56px;margin-bottom:44px}
@@ -188,6 +217,8 @@ nav a:hover{color:var(--ink)}
 @media (max-width:900px){
   .hero,.studio-intro,.level-intro,.level-layout,.services,.contact{grid-template-columns:1fr;gap:36px}
   .level-layout{gap:20px}
+  .concept-grid{grid-template-columns:1fr;gap:24px}
+  .concept-sketches button{flex:none;aspect-ratio:3/4}
   .hero{padding:40px 0 64px}
   .hero-art{order:-1}
   .section{padding:64px 0}
@@ -202,6 +233,7 @@ nav a:hover{color:var(--ink)}
   .photos figure:first-child img{height:auto;aspect-ratio:16/9}
   .dialog-body{padding:22px}
   .dialog-thumbs{padding:10px 22px 0}
+  .art-caption{flex-direction:column;align-items:flex-start;padding:16px 18px}
   .level-pin{width:22px;height:22px;font-size:11px;border-width:1.5px}
   .contact-form{padding:20px}
   .footer-inner{flex-direction:column;gap:4px}

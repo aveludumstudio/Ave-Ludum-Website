@@ -22,7 +22,7 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Karla:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20261020-2">
+<link rel="stylesheet" href="styles.css?v=20261020-3">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -87,6 +87,14 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
   </div>
 </section>
 
+<section id="concept-art" class="section shell concept">
+  <div class="level-intro">
+    <h2>Concept art</h2>
+    <p>Before anything is built in Unity, it's sketched and painted. These are early pieces for <em>The Legend of Toakala</em>: mood paintings to set the tone, and notebook pages planning the story and the route through a level.</p>
+  </div>
+  <div class="concept-grid" id="conceptGrid"></div>
+</section>
+
 <section id="studio" class="section studio">
   <div class="shell">
     <div class="studio-intro">
@@ -149,10 +157,22 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
   </div>
 </dialog>
 
+<dialog class="art-dialog" id="artDialog" aria-labelledby="artTitle">
+  <button class="dialog-close" type="button" id="artClose" aria-label="Close">×</button>
+  <img id="artImage" src="" alt="">
+  <div class="art-caption">
+    <div><h2 id="artTitle"></h2><p id="artNote"></p></div>
+    <div class="level-nav">
+      <button type="button" id="artPrev" aria-label="Previous image">←</button>
+      <button type="button" id="artNext" aria-label="Next image">→</button>
+    </div>
+  </div>
+</dialog>
+
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"Ave Ludum Studio","url":"https://aveludumstudio.github.io/Ave-Ludum-Website/","logo":"https://aveludumstudio.github.io/Ave-Ludum-Website/assets/logo-ave-ludum.png","email":"ave.ludum@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Makassar","addressRegion":"South Sulawesi","addressCountry":"ID"},"sameAs":["https://www.instagram.com/ave.ludum/","https://github.com/aveludumstudio"]}
 </script>
-<script src="content.js?v=20261020-2"></script>
-<script src="script.js?v=20261020-2"></script>
+<script src="content.js?v=20261020-3"></script>
+<script src="script.js?v=20261020-3"></script>
 </body>
 </html>
