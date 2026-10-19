@@ -22,7 +22,7 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Karla:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20261020-3">
+<link rel="stylesheet" href="styles.css?v=20261020-4">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -132,13 +132,21 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
     <button class="button" type="submit">Write the email</button>
     <p class="form-note">This opens your email app with the message filled in. Nothing is sent until you hit send.</p>
   </form>
+  <div class="visit">
+    <div class="visit-text">
+      <h3>Visit the studio</h3>
+      <address id="visitAddress"></address>
+      <a class="link" id="visitLink" href="" target="_blank" rel="noopener">Get directions in Google Maps</a>
+    </div>
+    <iframe class="visit-map" id="visitMap" title="Map showing Ave Ludum Studio in Makassar" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
 </section>
 </main>
 
 <footer class="footer">
   <div class="shell footer-inner">
     <span>© <span id="year"></span> Ave Ludum Studio</span>
-    <span>Makassar, Indonesia</span>
+    <a href="#contact">Rappocini, Makassar, Indonesia</a>
   </div>
 </footer>
 
@@ -170,9 +178,9 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
 </dialog>
 
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"Ave Ludum Studio","url":"https://aveludumstudio.github.io/Ave-Ludum-Website/","logo":"https://aveludumstudio.github.io/Ave-Ludum-Website/assets/logo-ave-ludum.png","email":"ave.ludum@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Makassar","addressRegion":"South Sulawesi","addressCountry":"ID"},"sameAs":["https://www.instagram.com/ave.ludum/","https://github.com/aveludumstudio"]}
+{"@context":"https://schema.org","@type":"Organization","name":"Ave Ludum Studio","url":"https://aveludumstudio.github.io/Ave-Ludum-Website/","logo":"https://aveludumstudio.github.io/Ave-Ludum-Website/assets/logo-ave-ludum.png","email":"ave.ludum@gmail.com","address":{"@type":"PostalAddress","streetAddress":"Jln. Mapala IV, Blok E30 No. 13, Tidung, Kec. Rappocini","addressLocality":"Makassar","addressRegion":"South Sulawesi","postalCode":"90222","addressCountry":"ID"},"location":{"@type":"Place","geo":{"@type":"GeoCoordinates","latitude":-5.1678416,"longitude":119.4414785},"hasMap":"https://maps.app.goo.gl/prLRSztEHbN9Wsh98"},"sameAs":["https://www.instagram.com/ave.ludum/","https://github.com/aveludumstudio"]}
 </script>
-<script src="content.js?v=20261020-3"></script>
-<script src="script.js?v=20261020-3"></script>
+<script src="content.js?v=20261020-4"></script>
+<script src="script.js?v=20261020-4"></script>
 </body>
 </html>

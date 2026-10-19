@@ -119,6 +119,10 @@ $("#contactForm").addEventListener("submit",e=>{
   const body=`Hi Ave Ludum,\n\n${d.get("brief")}\n\n— ${d.get("name")}`;
   window.location.href=`mailto:${c.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 });
+const loc=c.location;
+$("#visitAddress").innerHTML=loc.address.join("<br>");
+$("#visitLink").href=loc.mapsUrl;
+$("#visitMap").src=loc.embedUrl;
 $("#year").textContent=new Date().getFullYear();
 
 // Theme

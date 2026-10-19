@@ -89,5 +89,11 @@ process:[
 ["Hand over","Final build, deployment help and documentation."]
 ],
 email:"ave.ludum@gmail.com",
-contact:[["Email","ave.ludum@gmail.com","mailto:ave.ludum@gmail.com"],["Instagram","@ave.ludum","https://www.instagram.com/ave.ludum/"],["GitHub","aveludumstudio","https://github.com/aveludumstudio"]]
+location:{
+ address:["Jln. Mapala IV, Blok E30 No. 13","Tidung, Kec. Rappocini","Makassar, South Sulawesi 90222"],
+ mapsUrl:"https://maps.app.goo.gl/prLRSztEHbN9Wsh98",
+ // Google Maps place embed for the studio's listing (pinned by place ID, no API key needed)
+ embedUrl:"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1200!2d119.4414785!3d-5.1678416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dbee3c33fcef485%3A0x6dc7682745e6b7e6!2sAve%20Ludum%20Studio!5e0!3m2!1sen!2sid!4v1760900000000!5m2!1sen!2sid"
+},
+contact:[["Email","ave.ludum@gmail.com","mailto:ave.ludum@gmail.com"],["Instagram","@ave.ludum","https://www.instagram.com/ave.ludum/"],["Studio","Open in Google Maps","https://maps.app.goo.gl/prLRSztEHbN9Wsh98"],["GitHub","aveludumstudio","https://github.com/aveludumstudio"]]
 };

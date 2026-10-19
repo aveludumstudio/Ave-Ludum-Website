@@ -189,7 +189,17 @@ nav a:hover{color:var(--ink)}
 .contact-form .button{justify-self:start}
 .form-note{color:var(--muted);font-size:14px;margin:0}
 
+/* Studio location, full width under the contact form */
+.visit{grid-column:1/-1;display:grid;grid-template-columns:5fr 6fr;gap:72px;align-items:center;margin-top:32px;padding-top:40px;border-top:1px solid var(--line)}
+.visit h3{font-size:26px;margin-bottom:12px}
+.visit address{font-style:normal;color:var(--muted);font-size:18px;margin-bottom:18px}
+.visit-map{display:block;width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:var(--radius);background:var(--line)}
+:root[data-theme="dark"] .visit-map{filter:invert(.9) hue-rotate(180deg)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .visit-map{filter:invert(.9) hue-rotate(180deg)}}
+
 /* Footer */
+.footer a{text-decoration:none}
+.footer a:hover{color:var(--ink);text-decoration:underline}
 .footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:15px}
 .footer-inner{display:flex;justify-content:space-between;gap:16px}
 
@@ -217,6 +227,8 @@ nav a:hover{color:var(--ink)}
 @media (max-width:900px){
   .hero,.studio-intro,.level-intro,.level-layout,.services,.contact{grid-template-columns:1fr;gap:36px}
   .level-layout{gap:20px}
+  .visit{grid-template-columns:1fr;gap:24px;margin-top:8px}
+  .visit-map{aspect-ratio:4/3}
   .concept-grid{grid-template-columns:1fr;gap:24px}
   .concept-sketches button{flex:none;aspect-ratio:3/4}
   .hero{padding:40px 0 64px}
