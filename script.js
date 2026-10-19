@@ -120,6 +120,8 @@ $("#contactForm").addEventListener("submit",e=>{
   window.location.href=`mailto:${c.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 });
 const loc=c.location;
+$("#visitIntro").textContent=loc.intro;
+$("#visitPhoto").src=loc.photo;$("#visitPhoto").alt=loc.photoAlt;
 $("#visitAddress").innerHTML=loc.address.join("<br>");
 $("#visitLink").href=loc.mapsUrl;
 $("#visitMap").src=loc.embedUrl;

@@ -90,6 +90,9 @@ process:[
 ],
 email:"ave.ludum@gmail.com",
 location:{
+ intro:"We work out of a small house on a quiet street in Rappocini, Makassar. Look for the sign above the gate.",
+ photo:"assets/studio-front.webp",
+ photoAlt:"The front of the studio: a small house behind a black gate, with an Ave Ludum Studio banner hanging from the carport",
  address:["Jln. Mapala IV, Blok E30 No. 13","Tidung, Kec. Rappocini","Makassar, South Sulawesi 90222"],
  mapsUrl:"https://maps.app.goo.gl/prLRSztEHbN9Wsh98",
  // Google Maps place embed for the studio's listing (pinned by place ID, no API key needed)
