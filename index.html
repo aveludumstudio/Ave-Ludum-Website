@@ -22,7 +22,7 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Karla:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20261020">
+<link rel="stylesheet" href="styles.css?v=20261020-2">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -62,6 +62,29 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
     <div class="filters" id="filters" role="group" aria-label="Filter projects"></div>
   </div>
   <div class="work-grid" id="workGrid" aria-live="polite"></div>
+</section>
+
+<section id="level-design" class="section shell level">
+  <div class="level-intro">
+    <h2>Inside a level</h2>
+    <p>This is the main level of <em>The Legend of Toakala</em>, seen from above in the Unity editor. Pick a marker to follow the route a player takes through it.</p>
+  </div>
+  <div class="level-layout">
+    <figure class="level-map">
+      <img id="levelMapImage" src="" alt="Top-down view of the Toakala level in the Unity editor: cliffs, a river, forest and wooden bridges" loading="lazy" decoding="async">
+      <div class="level-pins" id="levelPins"></div>
+    </figure>
+    <div class="level-panel" aria-live="polite">
+      <div class="level-view" id="levelView"></div>
+      <p class="level-count" id="levelCount"></p>
+      <h3 id="levelName"></h3>
+      <p id="levelNote"></p>
+      <div class="level-nav">
+        <button type="button" id="levelPrev" aria-label="Previous stop">←</button>
+        <button type="button" id="levelNext" aria-label="Next stop">→</button>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section id="studio" class="section studio">
@@ -114,6 +137,7 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
 <dialog class="project-dialog" id="projectDialog" aria-labelledby="dialogTitle">
   <button class="dialog-close" type="button" id="dialogClose" aria-label="Close">×</button>
   <img id="dialogImage" src="" alt="">
+  <div class="dialog-thumbs" id="dialogThumbs"></div>
   <div class="dialog-body">
     <p class="dialog-type" id="dialogType"></p>
     <h2 id="dialogTitle"></h2>
@@ -128,7 +152,7 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"Ave Ludum Studio","url":"https://aveludumstudio.github.io/Ave-Ludum-Website/","logo":"https://aveludumstudio.github.io/Ave-Ludum-Website/assets/logo-ave-ludum.png","email":"ave.ludum@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Makassar","addressRegion":"South Sulawesi","addressCountry":"ID"},"sameAs":["https://www.instagram.com/ave.ludum/","https://github.com/aveludumstudio"]}
 </script>
-<script src="content.js?v=20261020"></script>
-<script src="script.js?v=20261020"></script>
+<script src="content.js?v=20261020-2"></script>
+<script src="script.js?v=20261020-2"></script>
 </body>
 </html>

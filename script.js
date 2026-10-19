@@ -30,7 +30,14 @@ const dialog=$("#projectDialog");
 $("#workGrid").addEventListener("click",e=>{
   const b=e.target.closest(".work-open");if(!b)return;
   const p=c.work[b.dataset.index];
-  $("#dialogImage").src=p.image;$("#dialogImage").alt=`${p.title} screenshot`;
+  const shots=p.gallery||[{image:p.image,alt:`${p.title} screenshot`}];
+  const show=i=>{
+    $("#dialogImage").src=shots[i].image;$("#dialogImage").alt=shots[i].alt;
+    document.querySelectorAll("#dialogThumbs button").forEach((t,j)=>t.setAttribute("aria-pressed",String(j===i)));
+  };
+  $("#dialogThumbs").innerHTML=shots.length>1?shots.map((s,i)=>`<button type="button" data-shot="${i}" aria-label="Show image ${i+1} of ${shots.length}"><img src="${s.image}" alt=""></button>`).join(""):"";
+  $("#dialogThumbs").onclick=e=>{const t=e.target.closest("[data-shot]");if(t)show(+t.dataset.shot)};
+  show(0);
   $("#dialogType").textContent=p.type;
   $("#dialogTitle").textContent=p.title;
   $("#dialogDescription").textContent=p.description;
@@ -40,6 +47,33 @@ $("#workGrid").addEventListener("click",e=>{
 });
 $("#dialogClose").addEventListener("click",()=>dialog.close());
 dialog.addEventListener("click",e=>{if(e.target===dialog)dialog.close()}); // click on backdrop
+
+// Level design walkthrough
+const level=c.levelDesign;
+let stop=0;
+$("#levelMapImage").src=level.image;
+$("#levelMapImage").width=level.width;$("#levelMapImage").height=level.height;
+$("#levelPins").innerHTML=level.stops.map((s,i)=>`<button type="button" class="level-pin" data-stop="${i}" style="left:${s.x}%;top:${s.y}%" aria-label="${i+1}. ${s.name}">${i+1}</button>`).join("");
+const showStop=i=>{
+  stop=(i+level.stops.length)%level.stops.length;
+  const s=level.stops[stop];
+  document.querySelectorAll(".level-pin").forEach((p,j)=>p.setAttribute("aria-pressed",String(j===stop)));
+  // No in-game shot for this stop: zoom into the layout around the marker instead.
+  // The view is 16:10 and the image is drawn at ZOOM x its width; work out the
+  // background-position that puts the marker in the middle of the view.
+  const ZOOM=3.2,scaleY=ZOOM*(level.height/level.width)*1.6;
+  const centre=(pct,scale)=>Math.min(100,Math.max(0,(scale*pct/100-.5)/(scale-1)*100));
+  $("#levelView").innerHTML=s.shot
+    ?`<img src="${s.shot}" alt="${s.name}, in the game">`
+    :`<span class="level-zoom" role="img" aria-label="Close-up of the ${s.name} area in the editor" style="background-image:url(${level.image});background-size:${ZOOM*100}% auto;background-position:${centre(s.x,ZOOM)}% ${centre(s.y,scaleY)}%"></span>`;
+  $("#levelCount").textContent=`Stop ${stop+1} of ${level.stops.length} · ${s.shot?"In game":"Editor view"}`;
+  $("#levelName").textContent=s.name;
+  $("#levelNote").textContent=s.note;
+};
+$("#levelPins").addEventListener("click",e=>{const p=e.target.closest("[data-stop]");if(p)showStop(+p.dataset.stop)});
+$("#levelPrev").addEventListener("click",()=>showStop(stop-1));
+$("#levelNext").addEventListener("click",()=>showStop(stop+1));
+showStop(0);
 
 // Studio
 $("#studioCopy").innerHTML=c.studioCopy.map(p=>`<p>${p}</p>`).join("");
