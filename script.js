@@ -22,8 +22,33 @@ $("#filters").addEventListener("click",e=>{
   activeFilter=b.dataset.filter;
   document.querySelectorAll("#filters button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));
   renderWork();
+  $("#workGrid").scrollTo({left:0});
+  syncWorkCarousel();
 });
 renderWork();
+
+// Work carousel: arrows step one card at a time; swiping/trackpad still works
+const workGrid=$("#workGrid");
+const cardStep=()=>{const card=workGrid.querySelector(".work-card");return card?card.getBoundingClientRect().width+parseFloat(getComputedStyle(workGrid).columnGap||0):workGrid.clientWidth};
+const syncWorkCarousel=()=>{
+  const max=workGrid.scrollWidth-workGrid.clientWidth;
+  $("#workPrev").disabled=workGrid.scrollLeft<=2;
+  $("#workNext").disabled=workGrid.scrollLeft>=max-2;
+  // progress bar shows which slice of the list is in view
+  const visible=max>0?workGrid.clientWidth/workGrid.scrollWidth:1;
+  $("#workProgress").style.width=`${visible*100}%`;
+  $("#workProgress").style.left=`${max>0?(workGrid.scrollLeft/workGrid.scrollWidth)*100:0}%`;
+  $(".carousel-bar").hidden=max<=2;
+};
+$("#workPrev").addEventListener("click",()=>workGrid.scrollBy({left:-cardStep(),behavior:"smooth"}));
+$("#workNext").addEventListener("click",()=>workGrid.scrollBy({left:cardStep(),behavior:"smooth"}));
+workGrid.addEventListener("scroll",syncWorkCarousel,{passive:true});
+workGrid.addEventListener("keydown",e=>{
+  if(e.key==="ArrowRight"){e.preventDefault();$("#workNext").click()}
+  if(e.key==="ArrowLeft"){e.preventDefault();$("#workPrev").click()}
+});
+addEventListener("resize",syncWorkCarousel);
+syncWorkCarousel();
 
 // Project dialog
 const dialog=$("#projectDialog");
@@ -126,6 +151,72 @@ $("#visitAddress").innerHTML=loc.address.join("<br>");
 $("#visitLink").href=loc.mapsUrl;
 $("#visitMap").src=loc.embedUrl;
 $("#year").textContent=new Date().getFullYear();
+
+// Chapters: each section is a screen; arrows, the rail, the header nav and the
+// keyboard move between them, and ordinary scrolling still works (CSS snaps gently).
+const chapters=[...document.querySelectorAll(".chapter")];
+const reduceMotion=matchMedia("(prefers-reduced-motion: reduce)").matches;
+let current=0;
+const pad=n=>String(n+1).padStart(2,"0");
+$("#chapterRail").innerHTML=chapters.map((ch,i)=>`<li><a href="#${ch.id}" data-chapter="${i}"><span class="rail-dot"></span><span class="rail-name">${ch.dataset.title}</span></a></li>`).join("");
+const goTo=i=>{
+  const target=chapters[Math.max(0,Math.min(chapters.length-1,i))];
+  target.scrollIntoView({behavior:reduceMotion?"auto":"smooth",block:"start"});
+};
+const setCurrent=i=>{
+  current=i;
+  const ch=chapters[i];
+  $("#chapterLabel").innerHTML=`<b>${pad(i)}</b> ${ch.dataset.title}`;
+  $("#chapterPrev").disabled=i===0;
+  $("#chapterNext").disabled=i===chapters.length-1;
+  document.querySelectorAll("#chapterRail a").forEach((a,j)=>a.toggleAttribute("aria-current",j===i));
+  document.querySelectorAll("nav[aria-label='Main'] a").forEach(a=>a.toggleAttribute("aria-current",a.getAttribute("href")===`#${ch.id}`));
+  history.replaceState(null,"",i===0?location.pathname+location.search:`#${ch.id}`);
+};
+// The chapter crossing the middle of the screen is the current one
+const chapterObserver=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)setCurrent(chapters.indexOf(e.target))});
+},{rootMargin:"-45% 0px -54% 0px"});
+chapters.forEach(ch=>chapterObserver.observe(ch));
+setCurrent(0);
+
+$("#chapterPrev").addEventListener("click",()=>goTo(current-1));
+$("#chapterNext").addEventListener("click",()=>goTo(current+1));
+document.addEventListener("click",e=>{if(e.target.closest("[data-go='next']"))goTo(current+1)});
+
+// Up/down arrows jump a whole chapter once you've reached its edge;
+// inside a tall chapter they scroll normally so nothing gets skipped.
+document.addEventListener("keydown",e=>{
+  if(e.defaultPrevented||e.altKey||e.ctrlKey||e.metaKey||document.querySelector("dialog[open]"))return;
+  if(e.target.closest("input,textarea,select,[contenteditable],iframe"))return;
+  const r=chapters[current].getBoundingClientRect(),header=$(".site-header").offsetHeight;
+  if(e.key==="ArrowDown"&&r.bottom<=innerHeight+4&&current<chapters.length-1){e.preventDefault();goTo(current+1)}
+  if(e.key==="ArrowUp"&&r.top>=header-4&&current>0){e.preventDefault();goTo(current-1)}
+});
+
+// Fade content in as each chapter arrives (skipped for reduced motion)
+if(!reduceMotion){
+  chapters.forEach(ch=>{
+    const parts=ch.querySelectorAll(":scope > *:not(.hero-next), :scope > .shell > *");
+    parts.forEach((el,i)=>{el.classList.add("reveal");el.style.setProperty("--i",i)});
+  });
+  const revealObserver=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("is-in");revealObserver.unobserve(e.target)}});
+  },{threshold:.12});
+  chapters.forEach(ch=>revealObserver.observe(ch));
+}
+
+// Reading progress along the header
+const progress=$("#scrollProgress");
+let ticking=false;
+addEventListener("scroll",()=>{
+  if(ticking)return;ticking=true;
+  requestAnimationFrame(()=>{
+    const max=document.documentElement.scrollHeight-innerHeight;
+    progress.style.transform=`scaleX(${max>0?scrollY/max:0})`;
+    ticking=false;
+  });
+},{passive:true});
 
 // Theme
 const root=document.documentElement,themeColor=$("#themeColor");
