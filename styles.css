@@ -193,11 +193,17 @@ nav[aria-label="Main"] a:hover{color:var(--ink)}
 .contact-links span{color:var(--muted)}
 .contact-links a{font-weight:600;text-decoration:none}
 .contact-links a:hover{color:var(--accent);text-decoration:underline}
-.contact-form{display:grid;gap:18px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+.contact-form{display:grid;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
 .contact-form label{display:grid;gap:6px;font-weight:600;font-size:15px}
 .contact-form input,.contact-form select,.contact-form textarea{width:100%;border:1px solid var(--line);border-radius:4px;background:var(--bg);color:var(--ink);padding:11px 12px;font:16px var(--body)}
 .contact-form textarea{resize:vertical}
 .contact-form input:focus,.contact-form select:focus,.contact-form textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
+.contact-direct{margin-top:14px}
+.contact-direct a{font-weight:600}
+.contact-form .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+.contact-form .optional{color:var(--muted);font-weight:400}
+.contact-form .consent{display:flex;align-items:flex-start;gap:10px;font-weight:400;font-size:15px}
+.contact-form .consent input{width:18px;height:18px;margin:2px 0 0;flex:none;accent-color:var(--accent)}
 .contact-form .button{justify-self:start}
 .form-note{color:var(--muted);font-size:14px;margin:0}
 
@@ -318,6 +324,7 @@ nav[aria-label="Main"] a[aria-current]::after{content:"";display:block;height:2p
   .visit{grid-template-columns:1fr}
   .level-pin{width:22px;height:22px;font-size:11px;border-width:1.5px}
   .contact-form{padding:20px}
+  .contact-form .form-row{grid-template-columns:1fr}
   .footer-inner{flex-direction:column;gap:4px}
 }
 @media (prefers-reduced-motion:reduce){

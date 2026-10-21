@@ -140,8 +140,11 @@ $("#contactLinks").innerHTML=c.contact.map(([label,value,href])=>`<li><span>${la
 $("#contactForm").addEventListener("submit",e=>{
   e.preventDefault();
   const d=new FormData(e.target);
-  const subject=`Project enquiry: ${d.get("project")}`;
-  const body=`Hi Ave Ludum,\n\n${d.get("brief")}\n\n— ${d.get("name")}`;
+  const subject=`Project quote request: ${d.get("project")}${d.get("company").trim()?` (${d.get("company").trim()})`:""}`;
+  // one line per field; optional fields are left out when empty
+  const fields=[["Name","name"],["Reply to","reply"],["Company","company"],["Project type","project"],["Target platform","platform"],["Target deadline","deadline"],["Budget range","budget"],["Reference links","links"]];
+  const details=fields.map(([label,key])=>[label,d.get(key).trim()]).filter(([,v])=>v).map(([label,v])=>`${label}: ${v}`).join("\n");
+  const body=`Hi Ave Ludum,\n\nGoal / problem:\n${d.get("brief").trim()}\n\n${details}\n\nI agree to be contacted about this enquiry.\n\n— ${d.get("name").trim()}`;
   window.location.href=`mailto:${c.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 });
 const loc=c.location;

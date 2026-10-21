@@ -61,8 +61,7 @@ conceptArt:[
   alt:"Notebook page with a forest sketch, story notes and drawings of an ape-like guard holding a sword"}
 ],
 studioCopy:[
-"Ave Ludum is a small game studio in Makassar, South Sulawesi. Most of our work is either commissioned — VR simulators, AR apps, 3D visualisation — or our own games.",
-"We care a lot about the place we're from. Several of our projects start with South Sulawesi folklore or local environmental problems, and we go out to see the places and people involved before we build anything."
+"Ave Ludum Studio is an independent studio from Makassar, South Sulawesi. Alongside original games inspired by Indonesian places and folklore, we build interactive work for clients—combining game-development thinking with clear scope, practical prototypes, and collaborative delivery."
 ],
 fieldPhotos:[
 {image:"assets/team-photo.jpg",width:1800,height:1012,caption:"The team on a field trip in Maros."},
@@ -74,19 +73,16 @@ testimonials:[
 {quote:"Perfect for visualising projects — better than expected.",source:"Booth render client"}
 ],
 services:[
-["Games","Original games and client games, from first prototype to release. Mobile and PC."],
-["VR / XR","Training simulators and walkthroughs for standalone VR headsets."],
-["Simulation","Purpose-built simulators for schools, training programs and institutions."],
-["AR","Phone-based AR for campaigns, merchandise and communities."],
-["3D & visualisation","Real-time environments, booth and stand renders, interactive scenes."],
-["Unity support","Optimisation, integrations and extra hands for teams already in production."]
+["Unity Prototypes & Gameplay","Test a mechanic or concept with a focused playable build. Useful for pitches, proof-of-concept work, and early validation."],
+["Interactive 3D & Product Demos","Let customers explore a product, space, or process through a simple interactive experience built for an agreed platform."],
+["Training Simulations & VR","Prototype a procedural or training scenario with clear interactions and feedback. Content is developed with your subject-matter expert."],
+["Development Support","Add a feature, fix a defined bug, optimize a small section, or provide specialist Unity implementation for an existing project."]
 ],
 process:[
-["Talk","Tell us what you need, who it's for and what it has to run on."],
-["Scope","We come back with an approach, milestones and a quote."],
-["Prototype","A small playable version early, so we can check the idea works."],
-["Build","Regular builds for you to try, with fixes as we go."],
-["Hand over","Final build, deployment help and documentation."]
+["Scope","Define the audience, problem, target platform, must-have interactions, and budget range."],
+["Prototype","Agree on a small deliverable and show progress early."],
+["Build & review","Share working builds at agreed milestones; gather consolidated feedback."],
+["Handoff","Deliver the agreed build, source files if included, and concise handoff notes."]
 ],
 email:"ave.ludum@gmail.com",
 location:{

@@ -22,7 +22,7 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Karla:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20261021-2">
+<link rel="stylesheet" href="styles.css?v=20261021-3">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -140,7 +140,7 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
     <dl class="service-list" id="serviceList"></dl>
   </div>
   <div>
-    <h3>How a project usually goes</h3>
+    <h3>How we work</h3>
     <ol class="process" id="process"></ol>
   </div>
 </section>
@@ -148,16 +148,34 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
 <section id="contact" class="section shell contact chapter" data-title="Contact">
   <div>
     <h2>Have a project in mind?</h2>
-    <p>Send us a few lines about what you're making and we'll get back to you.</p>
+    <p>Send us a short brief. You don't need a technical specification yet—just tell us what you want people to do, what success looks like, and when you need it.</p>
+    <p class="contact-direct">Prefer email? <a href="mailto:ave.ludum@gmail.com">Contact us directly.</a></p>
     <ul class="contact-links" id="contactLinks"></ul>
   </div>
   <form class="contact-form" id="contactForm">
-    <label>Your name<input name="name" autocomplete="name" required></label>
-    <label>What kind of project?
-      <select name="project"><option>Game</option><option>VR / XR</option><option>Simulation</option><option>AR</option><option>3D / visualisation</option><option>Something else</option></select>
-    </label>
-    <label>Tell us a bit about it<textarea name="brief" rows="5" required></textarea></label>
-    <button class="button" type="submit">Write the email</button>
+    <div class="form-row">
+      <label>Name<input name="name" autocomplete="name" required></label>
+      <label>Work email / WhatsApp<input name="reply" autocomplete="email" required></label>
+    </div>
+    <div class="form-row">
+      <label><span>Company <span class="optional">(optional)</span></span><input name="company" autocomplete="organization"></label>
+      <label>Project type
+        <select name="project"><option>Unity prototype</option><option>Interactive 3D</option><option>Training simulation</option><option>VR</option><option>Game feature</option><option>Unsure</option></select>
+      </label>
+    </div>
+    <div class="form-row">
+      <label>Target platform<input name="platform" placeholder="e.g. PC, Android, Quest" required></label>
+      <label>Target deadline<input name="deadline" placeholder="e.g. end of March" required></label>
+    </div>
+    <label>Goal / problem<textarea name="brief" rows="3" placeholder="What should people be able to do, and what does success look like?" required></textarea></label>
+    <div class="form-row">
+      <label>Budget range
+        <select name="budget"><option>Rp1.5–4m</option><option>Rp4–8m</option><option>Rp8–15m</option><option>Rp15m+</option><option selected>Not sure</option></select>
+      </label>
+      <label><span>Reference links <span class="optional">(optional)</span></span><input name="links" type="text" inputmode="url" placeholder="Videos, sites, docs"></label>
+    </div>
+    <label class="consent"><input type="checkbox" name="consent" required> I agree to be contacted by Ave Ludum Studio about this enquiry.</label>
+    <button class="button" type="submit">Request a Project Quote</button>
     <p class="form-note">This opens your email app with the message filled in. Nothing is sent until you hit send.</p>
   </form>
 </section>
@@ -213,7 +231,7 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"Ave Ludum Studio","url":"https://aveludumstudio.github.io/Ave-Ludum-Website/","logo":"https://aveludumstudio.github.io/Ave-Ludum-Website/assets/logo-ave-ludum.png","email":"ave.ludum@gmail.com","address":{"@type":"PostalAddress","streetAddress":"Jln. Mapala IV, Blok E30 No. 13, Tidung, Kec. Rappocini","addressLocality":"Makassar","addressRegion":"South Sulawesi","postalCode":"90222","addressCountry":"ID"},"location":{"@type":"Place","geo":{"@type":"GeoCoordinates","latitude":-5.1678416,"longitude":119.4414785},"hasMap":"https://maps.app.goo.gl/prLRSztEHbN9Wsh98"},"sameAs":["https://www.instagram.com/ave.ludum/","https://github.com/aveludumstudio"]}
 </script>
-<script src="content.js?v=20261021-2"></script>
-<script src="script.js?v=20261021-2"></script>
+<script src="content.js?v=20261021-3"></script>
+<script src="script.js?v=20261021-3"></script>
 </body>
 </html>
