@@ -63,10 +63,11 @@ nav[aria-label="Main"] a:hover{color:var(--ink)}
 
 /* Hero */
 .hero{position:relative;display:grid;grid-template-columns:5fr 6fr;gap:56px;align-items:center;align-content:center;padding:56px 0 96px}
-.hero-place{color:var(--muted);font-weight:600;margin-bottom:18px}
+.hero-place{color:var(--accent);font-weight:600;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px}
 .hero h1{font-size:clamp(38px,5.2vw,64px);max-width:14ch}
 .lead{font-size:clamp(17px,1.6vw,20px);color:var(--muted);max-width:46ch;margin:24px 0 32px}
 .hero-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px}
+.hero-micro{color:var(--muted);font-size:15px;max-width:46ch;margin:18px 0 0}
 .hero-art{margin:0}
 .hero-art img{width:100%;height:auto;border-radius:var(--radius);box-shadow:0 30px 60px -30px rgba(60,20,0,.45)}
 
@@ -299,7 +300,10 @@ nav[aria-label="Main"] a[aria-current]::after{content:"";display:block;height:2p
   .section{padding:40px 0 88px}
   .hero{padding:20px 0 88px;gap:24px}
   .hero h1{font-size:clamp(32px,9vw,40px)}
-  .lead{margin:16px 0 24px}
+  .lead{margin:14px 0 20px;font-size:16px}
+  .hero-place{font-size:11px;letter-spacing:.04em;margin-bottom:12px}
+  .hero-art img{aspect-ratio:2.4/1;object-fit:cover}
+  .hero-micro{font-size:14px;margin-top:14px}
   .hero-next{display:none}
   .header-inner{justify-content:space-between}
   .service-list,.quotes,.dialog-meta{grid-template-columns:1fr}
