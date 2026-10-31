@@ -73,7 +73,7 @@ team:{
   ]
  },
  crew:{
-  intro:"The studio team are professional local game developers who are from or based in Makassar.",
+  intro:"The studio team are professional game developers.",
   people:[
    {name:"Dharma",photo:"assets/team/dharma.jpg",fullName:"Muhammad Ikhsan, S. Kom.",role:"Programmer",job:"Gameplay & VR Interaction Developer"},
    {name:"Zara",photo:"assets/team/zara.jpg",fullName:"Zara Trimurti Sayojanagandi, S.ST.",role:"2D Generalist",job:"2D Character, Environment and UI Artist"},
