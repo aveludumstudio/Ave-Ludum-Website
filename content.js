@@ -79,8 +79,8 @@ team:{
    {name:"Zara",photo:"assets/team/zara.jpg",fullName:"Zara Trimurti Sayojanagandi, S.ST.",role:"2D Generalist",job:"2D Character, Environment and UI Artist"},
    {name:"Anes",photo:"assets/team/anes.jpg",fullName:"Annisa Anggrayoga",role:"Marketing",job:"Promotional Strategist, Branding and Public Communication"},
    {name:"Fari",photo:"assets/team/fari.jpg",fullName:"Dzar Ghifari Firjatullah",role:"UI/UX",job:"UI/UX, Branding and Public Communication"},
-   {name:"Wildan",photo:"assets/team/wildan.jpg",fullName:"Wildan Haq",role:"2D Artist",isNew:true},
-   {name:"Dara",photo:"assets/team/dara.jpg",fullName:"Dara",role:"3D Artist",isNew:true}
+   {name:"Wildan",photo:"assets/team/wildan.jpg",fullName:"Wildan Haq",role:"2D Artist",job:"2D Character Artist & Generalist",isNew:true},
+   {name:"Dara",photo:"assets/team/dara.jpg",fullName:"Dara Aulia Faradiba, S. Kom.",role:"3D Artist",job:"3D Prop Artist & Generalist",isNew:true}
   ]
  }
 },
