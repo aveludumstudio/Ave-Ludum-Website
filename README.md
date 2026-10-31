@@ -6,7 +6,7 @@ Static HTML/CSS/JS site for GitHub Pages.
 Update `content.js` to change the public-facing text, work, services, studio information, process and contact links. No build step is required.
 
 ## Team photos
-Each team member has a photo slot in `assets/team/`, named after them in lowercase: `fri.jpg`, `zaki.jpg`, `muja.jpg`, `dharma.jpg`, `zara.jpg`, `anes.jpg`, `fari.jpg`, `wildan.jpg`, `dara.jpg`. These start as grey placeholder silhouettes. To add a real photo, replace the file with a square headshot (about 400×400 px) and keep the same name. The site shows it in a small circle, so keep the face centred. Names, roles and job descriptions are in `content.js` under `team`.
+Each team member has a photo slot in `assets/team/`, named after them in lowercase: `fri.jpg`, `zaki.jpg`, `muja.jpg`, `dharma.jpg`, `zara.jpg`, `anes.jpg`, `fari.jpg`, `wildan.jpg`, `dara.jpg`. To change a photo, replace the file with a square headshot (about 400×400 px) and keep the same name. The site shows it in a small circle, so keep the face centred. Names, roles and job descriptions are in `content.js` under `team`.
 
 ## Files
 - `index.html` — page structure

@@ -61,7 +61,7 @@ conceptArt:[
   alt:"Notebook page with a forest sketch, story notes and drawings of an ape-like guard holding a sword"}
 ],
 // "The team" chapter. Names, roles and job descriptions come from the studio
-// portfolio deck. Each photo slot is assets/team/<name>.jpg (a placeholder for now);
+// portfolio deck. Each photo slot is assets/team/<name>.jpg ;
 // overwrite the file with a square headshot to replace it. No photo = initial.
 team:{
  management:{
