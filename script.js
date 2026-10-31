@@ -131,6 +131,28 @@ $("#studioCopy").innerHTML=c.studioCopy.map(p=>`<p>${p}</p>`).join("");
 $("#photos").innerHTML=c.fieldPhotos.map(f=>`<figure><img src="${f.image}" alt="${f.caption}" width="${f.width}" height="${f.height}" loading="lazy" decoding="async"><figcaption>${f.caption}</figcaption></figure>`).join("");
 $("#quotes").innerHTML=c.testimonials.map(t=>`<blockquote><p>“${t.quote}”</p><footer>${t.source}</footer></blockquote>`).join("");
 
+// Team: photo if one is set, otherwise the person's initial
+const personCard=p=>`
+  <li class="person${p.isNew?" is-new":""}">
+    ${p.photo?`<img class="person-photo" src="${p.photo}" alt="${p.fullName}" loading="lazy" decoding="async" data-initial="${p.name[0]}">`:`<span class="person-photo person-initial" aria-hidden="true">${p.name[0]}</span>`}
+    <div class="person-text">
+      <p class="person-name">${p.name}${p.isNew?` <span class="person-badge">New</span>`:""}</p>
+      ${p.fullName&&p.fullName!==p.name?`<p class="person-full">${p.fullName}</p>`:""}
+      <p class="person-role">${p.role}</p>
+      ${p.job?`<p class="person-job">${p.job}</p>`:""}
+    </div>
+  </li>`;
+$("#teamManagementIntro").textContent=c.team.management.intro;
+$("#teamManagement").innerHTML=c.team.management.people.map(personCard).join("");
+$("#teamCrewIntro").textContent=c.team.crew.intro;
+$("#teamCrew").innerHTML=c.team.crew.people.map(personCard).join("");
+// a missing photo file falls back to the initial instead of a broken image
+document.querySelectorAll("#team img.person-photo").forEach(img=>img.addEventListener("error",()=>{
+  const s=document.createElement("span");
+  s.className="person-photo person-initial";s.setAttribute("aria-hidden","true");s.textContent=img.dataset.initial;
+  img.replaceWith(s);
+},{once:true}));
+
 // Services + process
 $("#serviceList").innerHTML=c.services.map(([name,text])=>`<div><dt>${name}</dt><dd>${text}</dd></div>`).join("");
 $("#process").innerHTML=c.process.map(([name,text])=>`<li><strong>${name}.</strong> ${text}</li>`).join("");

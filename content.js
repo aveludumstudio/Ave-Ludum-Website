@@ -60,6 +60,30 @@ conceptArt:[
   note:"Story beats for a level, a forest scene, and studies of the pengawal, the royal guard.",
   alt:"Notebook page with a forest sketch, story notes and drawings of an ape-like guard holding a sword"}
 ],
+// "The team" chapter. Names, roles and job descriptions come from the studio
+// portfolio deck. Each photo slot is assets/team/<name>.jpg (a placeholder for now);
+// overwrite the file with a square headshot to replace it. No photo = initial.
+team:{
+ management:{
+  intro:"The studio management are leaders and members of a local game development community in Makassar, working to keep the city's game industry growing.",
+  people:[
+   {name:"Fri",photo:"assets/team/fri.jpg",fullName:"Ir. Farhan Ramadhani Irsyad Samad Suhaeb, S.Tr.Kom.",role:"Director / Founder",job:"Creative Direction & Production Studio Lead"},
+   {name:"Zaki",photo:"assets/team/zaki.jpg",fullName:"Andi Muhammad Zaki Robbani, S. Kom.",role:"General Manager",job:"Project Management, Team and Client Coordinator"},
+   {name:"Muja",photo:"assets/team/muja.jpg",fullName:"Siti Mujadilah, S. Kom.",role:"Administration",job:"Scheduling, Archiving, and Logistical Management"}
+  ]
+ },
+ crew:{
+  intro:"The studio team are professional local game developers who are from or based in Makassar.",
+  people:[
+   {name:"Dharma",photo:"assets/team/dharma.jpg",fullName:"Muhammad Ikhsan, S. Kom.",role:"Programmer",job:"Gameplay & VR Interaction Developer"},
+   {name:"Zara",photo:"assets/team/zara.jpg",fullName:"Zara Trimurti Sayojanagandi, S.ST.",role:"2D Generalist",job:"2D Character, Environment and UI Artist"},
+   {name:"Anes",photo:"assets/team/anes.jpg",fullName:"Annisa Anggrayoga",role:"Marketing",job:"Promotional Strategist, Branding and Public Communication"},
+   {name:"Fari",photo:"assets/team/fari.jpg",fullName:"Dzar Ghifari Firjatullah",role:"UI/UX",job:"UI/UX, Branding and Public Communication"},
+   {name:"Wildan",photo:"assets/team/wildan.jpg",fullName:"Wildan Haq",role:"2D Artist",isNew:true},
+   {name:"Dara",photo:"assets/team/dara.jpg",fullName:"Dara",role:"3D Artist",isNew:true}
+  ]
+ }
+},
 studioCopy:[
 "Ave Ludum Studio is an independent studio from Makassar, South Sulawesi. Alongside original games inspired by Indonesian places and folklore, we build interactive work for clients—combining game-development thinking with clear scope, practical prototypes, and collaborative delivery."
 ],
