@@ -79,7 +79,7 @@ team:{
    {name:"Zara",photo:"assets/team/zara.jpg",fullName:"Zara Trimurti Sayojanagandi, S.ST.",role:"2D Generalist",job:"2D Character, Environment and UI Artist"},
    {name:"Anes",photo:"assets/team/anes.jpg",fullName:"Annisa Anggrayoga",role:"Marketing",job:"Promotional Strategist, Branding and Public Communication"},
    {name:"Fari",photo:"assets/team/fari.jpg",fullName:"Dzar Ghifari Firjatullah",role:"UI/UX",job:"UI/UX, Branding and Public Communication"},
-   {name:"Wildan",photo:"assets/team/wildan.jpg",fullName:"Wildan Haq",role:"2D Artist",job:"2D Character Artist & Generalist",isNew:true},
+   {name:"Wildan",photo:"assets/team/wildan.jpg",fullName:"Wildan Dhiya'ul Haq Umar, S.Tr.Kom",role:"2D Artist",job:"2D Character Artist & Generalist",isNew:true},
    {name:"Dara",photo:"assets/team/dara.jpg",fullName:"Dara Aulia Faradiba, S. Kom.",role:"3D Artist",job:"3D Prop Artist & Generalist",isNew:true}
   ]
  }
@@ -88,7 +88,8 @@ studioCopy:[
 "Ave Ludum Studio is an independent studio from Makassar, South Sulawesi. Alongside original games inspired by Indonesian places and folklore, we build interactive work for clients—combining game-development thinking with clear scope, practical prototypes, and collaborative delivery."
 ],
 fieldPhotos:[
-{image:"assets/team-photo.jpg",width:1800,height:1012,caption:"The team on a field trip in Maros."},
+{image:"assets/toakala-discussion.jpg",width:2000,height:1125,focus:"center 78%",caption:"Discussing The Legend of Toakala with Achmad Yusran Arief of Dinas Kebudayaan dan Kepariwisataan Sulawesi Selatan and storywriter Rizka Aulia Sabila."},
+{image:"assets/team-photo.jpg",width:1800,height:1012,focus:"center 82%",caption:"The team on a field trip in Maros."},
 {image:"assets/client-review-field-01.jpg",width:1600,height:1067,caption:"Talking through a project on site."},
 {image:"assets/client-review-field-02.jpg",width:1600,height:1067,caption:"Review session during field work."}
 ],

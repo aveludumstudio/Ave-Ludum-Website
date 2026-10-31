@@ -128,7 +128,7 @@ artDialog.addEventListener("keydown",e=>{if(e.key==="ArrowLeft")showArt(artIndex
 
 // Studio
 $("#studioCopy").innerHTML=c.studioCopy.map(p=>`<p>${p}</p>`).join("");
-$("#photos").innerHTML=c.fieldPhotos.map(f=>`<figure><img src="${f.image}" alt="${f.caption}" width="${f.width}" height="${f.height}" loading="lazy" decoding="async"><figcaption>${f.caption}</figcaption></figure>`).join("");
+$("#photos").innerHTML=c.fieldPhotos.map(f=>`<figure><img src="${f.image}" alt="${f.caption}" width="${f.width}" height="${f.height}"${f.focus?` style="object-position:${f.focus}"`:""} loading="lazy" decoding="async"><figcaption>${f.caption}</figcaption></figure>`).join("");
 $("#quotes").innerHTML=c.testimonials.map(t=>`<blockquote><p>“${t.quote}”</p><footer>${t.source}</footer></blockquote>`).join("");
 
 // Team: photo if one is set, otherwise the person's initial
