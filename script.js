@@ -141,6 +141,10 @@ const personCard=p=>`
       <p class="person-role">${p.role}</p>
       ${p.job?`<p class="person-job">${p.job}</p>`:""}
     </div>
+    ${p.portfolio?`<a class="person-porto" href="${p.portfolio.url}" target="_blank" rel="noopener">
+      <img src="${p.portfolio.preview}" alt="" loading="lazy" decoding="async">
+      <span>View ${p.name}'s portfolio <small>${p.portfolio.kind} ↗</small></span>
+    </a>`:""}
   </li>`;
 $("#teamManagementIntro").textContent=c.team.management.intro;
 $("#teamManagement").innerHTML=c.team.management.people.map(personCard).join("");
