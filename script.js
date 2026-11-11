@@ -1,5 +1,53 @@
 const $=s=>document.querySelector(s),c=window.siteContent;
 
+// Mouse drag for strips that fingers can already scroll natively.
+// onEnd(dx) runs after a drag, e.g. to settle on the nearest card.
+const dragScroll=(el,onEnd)=>{
+  let startX=0,startLeft=0,dragging=false,moved=false;
+  el.addEventListener("pointerdown",e=>{
+    if(e.pointerType!=="mouse"||e.button!==0)return;
+    dragging=true;moved=false;startX=e.clientX;startLeft=el.scrollLeft;
+  });
+  addEventListener("pointermove",e=>{
+    if(!dragging)return;
+    const dx=e.clientX-startX;
+    if(!moved&&Math.abs(dx)<6)return;
+    if(!moved){moved=true;el.classList.add("is-dragging")} // turns snapping off while dragging
+    el.scrollLeft=startLeft-dx;
+  });
+  addEventListener("pointerup",e=>{
+    if(!dragging)return;dragging=false;
+    if(!moved)return;
+    el.classList.remove("is-dragging");
+    onEnd?.(e.clientX-startX);
+    setTimeout(()=>moved=false); // let the click that ends the drag be swallowed first
+  });
+  // a drag shouldn't also count as a click on the card it started on
+  el.addEventListener("click",e=>{if(moved){e.preventDefault();e.stopImmediatePropagation()}},true);
+  el.addEventListener("dragstart",e=>e.preventDefault());
+};
+
+// Swipe with a finger, or drag with the mouse, to step back/forward (step gets -1 or 1)
+const onSwipe=(el,step)=>{
+  let x0=null,y0=0,id=null;
+  el.classList.add("swipeable");
+  el.addEventListener("pointerdown",e=>{if(e.button!==0)return;x0=e.clientX;y0=e.clientY;id=e.pointerId});
+  addEventListener("pointerup",e=>{
+    if(x0===null||e.pointerId!==id)return;
+    const dx=e.clientX-x0,dy=e.clientY-y0;x0=null;
+    if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.2)step(dx<0?1:-1);
+  });
+  addEventListener("pointercancel",()=>x0=null);
+  el.addEventListener("dragstart",e=>e.preventDefault());
+};
+
+// Close a dialog on a backdrop click, but not when a drag inside it ends out there
+const closeOnBackdrop=d=>{
+  let downOnBackdrop=false;
+  d.addEventListener("pointerdown",e=>downOnBackdrop=e.target===d);
+  d.addEventListener("click",e=>{if(e.target===d&&downOnBackdrop)d.close()});
+};
+
 // Work grid + filters (filters come from the categories actually used)
 const categories=["All",...new Set(c.work.map(p=>p.category))];
 let activeFilter="All";
@@ -49,17 +97,26 @@ workGrid.addEventListener("keydown",e=>{
 });
 addEventListener("resize",syncWorkCarousel);
 syncWorkCarousel();
+// after a mouse drag, settle on a whole card in the direction it was dragged
+dragScroll(workGrid,dx=>{
+  const step=cardStep(),pos=workGrid.scrollLeft/step;
+  workGrid.scrollTo({left:(dx<0?Math.ceil(pos-.15):Math.floor(pos+.15))*step,behavior:"smooth"});
+});
 
 // Project dialog
 const dialog=$("#projectDialog");
+let shots=[],shot=0;
+const show=i=>{
+  shot=(i+shots.length)%shots.length;
+  $("#dialogImage").src=shots[shot].image;$("#dialogImage").alt=shots[shot].alt;
+  document.querySelectorAll("#dialogThumbs button").forEach((t,j)=>t.setAttribute("aria-pressed",String(j===shot)));
+};
+onSwipe($("#dialogImage"),d=>{if(shots.length>1)show(shot+d)});
+dragScroll($("#dialogThumbs"));
 $("#workGrid").addEventListener("click",e=>{
   const b=e.target.closest(".work-open");if(!b)return;
   const p=c.work[b.dataset.index];
-  const shots=p.gallery||[{image:p.image,alt:`${p.title} screenshot`}];
-  const show=i=>{
-    $("#dialogImage").src=shots[i].image;$("#dialogImage").alt=shots[i].alt;
-    document.querySelectorAll("#dialogThumbs button").forEach((t,j)=>t.setAttribute("aria-pressed",String(j===i)));
-  };
+  shots=p.gallery||[{image:p.image,alt:`${p.title} screenshot`}];
   $("#dialogThumbs").innerHTML=shots.length>1?shots.map((s,i)=>`<button type="button" data-shot="${i}" aria-label="Show image ${i+1} of ${shots.length}"><img src="${s.image}" alt=""></button>`).join(""):"";
   $("#dialogThumbs").onclick=e=>{const t=e.target.closest("[data-shot]");if(t)show(+t.dataset.shot)};
   show(0);
@@ -71,7 +128,8 @@ $("#workGrid").addEventListener("click",e=>{
   dialog.showModal();
 });
 $("#dialogClose").addEventListener("click",()=>dialog.close());
-dialog.addEventListener("click",e=>{if(e.target===dialog)dialog.close()}); // click on backdrop
+closeOnBackdrop(dialog);
+dialog.addEventListener("keydown",e=>{if(shots.length<2)return;if(e.key==="ArrowLeft")show(shot-1);if(e.key==="ArrowRight")show(shot+1)});
 
 // Level design walkthrough
 const level=c.levelDesign;
@@ -98,6 +156,7 @@ const showStop=i=>{
 $("#levelPins").addEventListener("click",e=>{const p=e.target.closest("[data-stop]");if(p)showStop(+p.dataset.stop)});
 $("#levelPrev").addEventListener("click",()=>showStop(stop-1));
 $("#levelNext").addEventListener("click",()=>showStop(stop+1));
+onSwipe($("#levelView"),d=>showStop(stop+d));
 showStop(0);
 
 // Concept art grid + lightbox
@@ -123,7 +182,8 @@ $("#conceptGrid").addEventListener("click",e=>{const b=e.target.closest("[data-a
 $("#artPrev").addEventListener("click",()=>showArt(artIndex-1));
 $("#artNext").addEventListener("click",()=>showArt(artIndex+1));
 $("#artClose").addEventListener("click",()=>artDialog.close());
-artDialog.addEventListener("click",e=>{if(e.target===artDialog)artDialog.close()});
+closeOnBackdrop(artDialog);
+onSwipe($("#artImage"),d=>showArt(artIndex+d));
 artDialog.addEventListener("keydown",e=>{if(e.key==="ArrowLeft")showArt(artIndex-1);if(e.key==="ArrowRight")showArt(artIndex+1)});
 
 // Studio

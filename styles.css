@@ -319,6 +319,13 @@ nav[aria-label="Main"] a[aria-current]::after{content:"";display:block;height:2p
 .dialog-close{position:absolute;top:12px;right:12px;width:40px;height:40px;border:0;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;font-size:24px;line-height:1;cursor:pointer}
 .dialog-close:hover{background:rgba(0,0,0,.85)}
 
+/* Drag and swipe: strips scroll under the mouse, slides step on a sideways swipe */
+.work-grid,.dialog-thumbs{cursor:grab}
+.work-grid.is-dragging,.dialog-thumbs.is-dragging{scroll-snap-type:none;cursor:grabbing;user-select:none}
+.is-dragging *{cursor:grabbing!important;pointer-events:none}
+.swipeable{cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-drag:none}
+.swipeable:active{cursor:grabbing}
+
 /* Footer socials */
 .footer-inner{align-items:center;flex-wrap:wrap}
 .footer-socials{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
