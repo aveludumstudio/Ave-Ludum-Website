@@ -141,6 +141,7 @@ const personCard=p=>`
       <p class="person-role">${p.role}</p>
       ${p.job?`<p class="person-job">${p.job}</p>`:""}
     </div>
+    ${p.socials?`<ul class="person-socials" aria-label="${p.name}'s socials">${p.socials.map(([label,url])=>`<li><a href="${url}" target="_blank" rel="noopener me">${label}</a></li>`).join("")}</ul>`:""}
     ${p.portfolio?`<a class="person-porto" href="${p.portfolio.url}" target="_blank" rel="noopener">
       <img src="${p.portfolio.preview}" alt="" loading="lazy" decoding="async">
       <span>View ${p.name}'s portfolio <small>${p.portfolio.kind} ↗</small></span>

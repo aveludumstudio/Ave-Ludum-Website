@@ -183,6 +183,9 @@ nav[aria-label="Main"] a:hover{color:var(--ink)}
 .person-photo{flex:none;width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid var(--accent)}
 .person-initial{display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 16%,var(--surface));color:var(--accent);font:800 22px var(--display)}
 .person-text{flex:1;min-width:0}
+.person-socials{flex-basis:100%;list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:5px}
+.person-socials a{display:block;padding:2px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:12px;font-weight:600;text-decoration:none}
+.person-socials a:hover,.person-socials a:focus-visible{color:var(--accent);border-color:var(--accent)}
 .person-porto{flex-basis:100%;display:flex;align-items:center;gap:10px;padding:5px;border:1px solid var(--line);border-radius:calc(var(--radius) - 4px);color:var(--ink);text-decoration:none;background:var(--bg)}
 .person-porto img{flex:none;width:76px;aspect-ratio:16/10;border-radius:4px;object-fit:cover;object-position:top;transition:transform .3s}
 .person-porto span{display:flex;flex-direction:column;font-weight:600;font-size:13px;line-height:1.3}

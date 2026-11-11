@@ -64,12 +64,14 @@ conceptArt:[
 // portfolio deck. Each photo slot is assets/team/<name>.jpg;
 // overwrite the file with a square headshot to replace it. No photo = initial.
 // portfolio (optional): link, preview image and kind ("Website" or "PDF").
+// socials (optional): [label, url] pairs shown as small links on the card.
 team:{
  management:{
   intro:"The studio management are leaders and members of a local game development community in Makassar, working to keep the city's game industry growing.",
   people:[
    {name:"Fri",photo:"assets/team/fri.jpg",fullName:"Ir. Farhan Ramadhani Irsyad Samad Suhaeb, S.Tr.Kom.",role:"Director / Founder",job:"Creative Direction & Production Studio Lead",
-    portfolio:{url:"https://thelegokid4455.github.io/FRI-Portfolio-Website/#work",preview:"assets/team/portfolio/fri.jpg",kind:"Website"}},
+    portfolio:{url:"https://thelegokid4455.github.io/FRI-Portfolio-Website/#work",preview:"assets/team/portfolio/fri.jpg",kind:"Website"},
+    socials:[["Instagram","https://www.instagram.com/fri.devmode/"],["LinkedIn","https://www.linkedin.com/in/thelegokid4455/"],["X","https://x.com/thelegokid4455"],["YouTube","https://www.youtube.com/channel/UCwUxdnYoyPZ1x41hwLohwRg"],["Facebook","https://facebook.com/thelegokid4455"],["GitHub","https://github.com/thelegokid4455"],["itch.io","https://thelegokid4455.itch.io/"],["Sketchfab","https://sketchfab.com/thelegokid4455"],["Linktree","https://linktr.ee/thelegokid4455"]]},
    {name:"Zaki",photo:"assets/team/zaki.jpg",fullName:"Andi Muhammad Zaki Robbani, S. Kom.",role:"General Manager",job:"Project Management, Team and Client Coordinator"},
    {name:"Muja",photo:"assets/team/muja.jpg",fullName:"Siti Mujadilah, S. Kom.",role:"Administration",job:"Scheduling, Archiving, and Logistical Management"}
   ]
