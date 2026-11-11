@@ -163,6 +163,7 @@ $("#serviceList").innerHTML=c.services.map(([name,text])=>`<div><dt>${name}</dt>
 $("#process").innerHTML=c.process.map(([name,text])=>`<li><strong>${name}.</strong> ${text}</li>`).join("");
 
 // Contact
+$("#footerSocials").innerHTML=c.socials.map(([label,url])=>`<li><a href="${url}" target="_blank" rel="noopener">${label}</a></li>`).join("");
 $("#contactLinks").innerHTML=c.contact.map(([label,value,href])=>`<li><span>${label}</span><a href="${href}"${href.startsWith("http")?' target="_blank" rel="noopener"':""}>${value}</a></li>`).join("");
 $("#contactForm").addEventListener("submit",e=>{
   e.preventDefault();
@@ -251,7 +252,7 @@ addEventListener("scroll",()=>{
 // Theme
 const root=document.documentElement,themeColor=$("#themeColor");
 const isDark=()=>root.dataset.theme?root.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;
-const syncThemeColor=()=>themeColor.setAttribute("content",isDark()?"#16140f":"#f3efe6");
+const syncThemeColor=()=>themeColor.setAttribute("content",isDark()?"#17120c":"#fff4e0");
 syncThemeColor();
 $("#themeToggle").addEventListener("click",()=>{
   const next=isDark()?"light":"dark";
