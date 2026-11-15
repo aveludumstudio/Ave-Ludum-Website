@@ -106,18 +106,37 @@ dragScroll(workGrid,dx=>{
 // Project dialog
 const dialog=$("#projectDialog");
 let shots=[],shot=0;
+const dialogVideo=$("#dialogVideo");
+// a gallery item is a picture, or a short looping clip when it has "video" ("image" is its poster)
 const show=i=>{
   shot=(i+shots.length)%shots.length;
-  $("#dialogImage").src=shots[shot].image;$("#dialogImage").alt=shots[shot].alt;
+  const s=shots[shot];
+  $("#dialogImage").hidden=!!s.video;dialogVideo.hidden=!s.video;
+  if(s.video){
+    dialogVideo.poster=s.image;dialogVideo.src=s.video;dialogVideo.setAttribute("aria-label",s.alt);
+    if(!reduceMotion)dialogVideo.play().catch(()=>{});
+  }else{
+    dialogVideo.pause();dialogVideo.removeAttribute("src");dialogVideo.load();
+    $("#dialogImage").src=s.image;$("#dialogImage").alt=s.alt;
+  }
+  $("#dialogCaption").textContent=s.caption||"";
   document.querySelectorAll("#dialogThumbs button").forEach((t,j)=>t.setAttribute("aria-pressed",String(j===shot)));
 };
 onSwipe($("#dialogImage"),d=>{if(shots.length>1)show(shot+d)});
+onSwipe(dialogVideo,d=>{if(shots.length>1)show(shot+d)});
+// click a clip to pause or play it (a swipe across it doesn't count as a click)
+let videoDownX=0;
+dialogVideo.addEventListener("pointerdown",e=>videoDownX=e.clientX);
+dialogVideo.addEventListener("click",e=>{
+  if(Math.abs(e.clientX-videoDownX)>10)return;
+  dialogVideo.paused?dialogVideo.play():dialogVideo.pause();
+});
 dragScroll($("#dialogThumbs"));
 $("#workGrid").addEventListener("click",e=>{
   const b=e.target.closest(".work-open");if(!b)return;
   const p=c.work[b.dataset.index];
   shots=p.gallery||[{image:p.image,alt:`${p.title} screenshot`}];
-  $("#dialogThumbs").innerHTML=shots.length>1?shots.map((s,i)=>`<button type="button" data-shot="${i}" aria-label="Show image ${i+1} of ${shots.length}"><img src="${s.image}" alt=""></button>`).join(""):"";
+  $("#dialogThumbs").innerHTML=shots.length>1?shots.map((s,i)=>`<button type="button" data-shot="${i}"${s.video?' class="is-video"':""} aria-label="Show ${s.video?"clip":"image"} ${i+1} of ${shots.length}"><img src="${s.image}" alt=""></button>`).join(""):"";
   $("#dialogThumbs").onclick=e=>{const t=e.target.closest("[data-shot]");if(t)show(+t.dataset.shot)};
   show(0);
   $("#dialogType").textContent=p.type;
@@ -128,6 +147,7 @@ $("#workGrid").addEventListener("click",e=>{
   dialog.showModal();
 });
 $("#dialogClose").addEventListener("click",()=>dialog.close());
+dialog.addEventListener("close",()=>dialogVideo.pause());
 closeOnBackdrop(dialog);
 dialog.addEventListener("keydown",e=>{if(shots.length<2)return;if(e.key==="ArrowLeft")show(shot-1);if(e.key==="ArrowRight")show(shot+1)});
 

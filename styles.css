@@ -303,7 +303,14 @@ nav[aria-label="Main"] a[aria-current]::after{content:"";display:block;height:2p
 .project-dialog{width:min(820px,calc(100% - 32px));max-height:calc(100vh - 48px);padding:0;border:0;border-radius:10px;background:var(--surface);color:var(--ink);overflow:auto}
 .project-dialog::backdrop{background:rgba(20,16,10,.7)}
 .project-dialog>img{width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--line)}
-.dialog-thumbs{display:flex;gap:8px;padding:12px 32px 0;overflow-x:auto}
+.project-dialog>video{display:block;width:100%;aspect-ratio:16/9;object-fit:cover;background:#111;cursor:pointer}
+.project-dialog>video[hidden],.project-dialog>img[hidden]{display:none}
+.dialog-thumbs button{position:relative}
+.dialog-thumbs .is-video::after{content:"▶";position:absolute;inset:0;display:grid;place-items:center;color:#fff;font-size:16px;text-shadow:0 1px 4px rgba(0,0,0,.8);background:rgba(0,0,0,.18)}
+.dialog-caption{margin:10px 32px 0;color:var(--muted);font-size:15px}
+.dialog-caption:empty{display:none}
+.dialog-thumbs{display:flex;gap:8px;padding:12px 32px 0;overflow-x:auto;scrollbar-width:none}
+.dialog-thumbs::-webkit-scrollbar{display:none}
 .dialog-thumbs:empty{display:none}
 .dialog-thumbs button{flex:0 0 88px;height:52px;padding:0;border:2px solid transparent;border-radius:4px;overflow:hidden;background:none;cursor:pointer;opacity:.6}
 .dialog-thumbs button:hover{opacity:1}

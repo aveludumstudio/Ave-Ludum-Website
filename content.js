@@ -2,6 +2,20 @@
 // Filters under "Work" are built automatically from each project's category.
 window.siteContent={
 work:[
+{title:"AVELS Heavy Vehicle Simulator",type:"Multiplayer training simulator",category:"Simulation",image:"assets/avels/avels-snowy-yard.webp",
+ description:"A multiplayer simulator for heavy equipment. Trainees drive dump trucks, wheel loaders and backhoes around a work yard, guided by spotters on foot using hand signals and voice chat.",
+ role:"Simulation design, vehicle systems, multiplayer",stack:["Unity","C#","Multiplayer","Voice chat"],
+ // clips: "image" is the poster frame shown before the clip plays
+ gallery:[
+  {video:"assets/avels/avels-loading.mp4",image:"assets/avels/avels-loading.webp",alt:"A wheel loader raises its bucket over a dump truck",caption:"Loading the dump truck with a wheel loader."},
+  {video:"assets/avels/avels-tipping.mp4",image:"assets/avels/avels-tipping.webp",alt:"A dump truck tips its bed and drops a load of rocks",caption:"Tipping the load at the drop-off point."},
+  {video:"assets/avels/avels-spotter.mp4",image:"assets/avels/avels-spotter.webp",alt:"A worker in a hi-vis vest waves a dump truck forward",caption:"A spotter on foot guides the driver in with hand signals."},
+  {video:"assets/avels/avels-gestures.mp4",image:"assets/avels/avels-gestures.webp",alt:"A worker picks a hand signal from a radial menu",caption:"Spotters pick hand signals from a quick gesture wheel."},
+  {video:"assets/avels/avels-cab-view.mp4",image:"assets/avels/avels-cab-view.webp",alt:"Cab view of a loader lifting rocks toward a row of skips",caption:"Operating the loader from the cab."},
+  {image:"assets/avels/avels-snowy-yard.webp",alt:"Trucks, a trailer and wheel loaders parked in a snowy yard between brick warehouses",caption:"The yard under snow."},
+  {image:"assets/avels/avels-loaders.webp",alt:"A backhoe and a wheel loader covered in snow beside a dump truck",caption:"Backhoe, wheel loader and dump truck."},
+  {image:"assets/avels/avels-rain-truck.webp",alt:"A mud-covered dump truck in the rain outside a brick warehouse",caption:"Rain, and a mud-caked dump truck."}
+ ]},
 {title:"The Legend of Toakala",type:"Folklore game",category:"Games",image:"assets/toakala-combat.webp",
  description:"A 3D game from Maros that retells the Toa Kala folktale as something you can walk through and play.",
  role:"Game development, level design, narrative, 3D",stack:["Unity","3D"],
