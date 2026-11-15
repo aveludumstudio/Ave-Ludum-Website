@@ -327,8 +327,22 @@ nav[aria-label="Main"] a[aria-current]::after{content:"";display:block;height:2p
 .dialog-close:hover{background:rgba(0,0,0,.85)}
 
 /* Drag and swipe: strips scroll under the mouse, slides step on a sideways swipe */
-.work-grid,.dialog-thumbs{cursor:grab}
-.work-grid.is-dragging,.dialog-thumbs.is-dragging{scroll-snap-type:none;cursor:grabbing;user-select:none}
+.work-grid,.dialog-thumbs,.reel{cursor:grab}
+.work-grid.is-dragging,.dialog-thumbs.is-dragging,.reel.is-dragging{scroll-snap-type:none;cursor:grabbing;user-select:none}
+
+/* Behind the scenes: a strip of portrait clips, sized so the chapter fits one screen */
+.reel{list-style:none;margin:0;padding:4px 8px 10px 2px;display:grid;grid-auto-flow:column;grid-auto-columns:clamp(130px,calc((100svh - 470px) * .5625),220px);gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:none}
+.reel::-webkit-scrollbar{display:none}
+.reel-card{position:relative;scroll-snap-align:start;min-width:0}
+.reel-card video{display:block;width:100%;aspect-ratio:9/16;object-fit:cover;border:2px solid var(--edge);border-radius:var(--radius);box-shadow:5px 5px 0 var(--shade);background:#111;cursor:pointer;transition:transform .25s cubic-bezier(.3,1.5,.5,1)}
+.reel-card:nth-child(odd):hover video{transform:rotate(-1.2deg) translateY(-3px)}
+.reel-card:nth-child(even):hover video{transform:rotate(1.2deg) translateY(-3px)}
+.reel-tag{position:absolute;top:10px;left:10px;padding:1px 10px;border:1.5px solid var(--edge);border-radius:999px;background:var(--pop);color:#211a12;font:700 12px var(--display);box-shadow:2px 2px 0 var(--shade);pointer-events:none}
+.reel-card[data-tag="Studio"] .reel-tag{background:var(--mint)}
+.reel-card p{margin:10px 0 0;color:var(--muted);font-size:14px;line-height:1.35}
+#behind-the-scenes h2::after{background:var(--berry)}
+#behind-the-scenes .level-intro{margin-bottom:24px}
+@media (max-width:640px){.reel{grid-auto-columns:44%;gap:14px}}
 .is-dragging *{cursor:grabbing!important;pointer-events:none}
 .swipeable{cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-drag:none}
 .swipeable:active{cursor:grabbing}

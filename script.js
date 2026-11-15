@@ -75,33 +75,56 @@ $("#filters").addEventListener("click",e=>{
 });
 renderWork();
 
-// Work carousel: arrows step one card at a time; swiping/trackpad still works
-const workGrid=$("#workGrid");
-const cardStep=()=>{const card=workGrid.querySelector(".work-card");return card?card.getBoundingClientRect().width+parseFloat(getComputedStyle(workGrid).columnGap||0):workGrid.clientWidth};
-const syncWorkCarousel=()=>{
-  const max=workGrid.scrollWidth-workGrid.clientWidth;
-  $("#workPrev").disabled=workGrid.scrollLeft<=2;
-  $("#workNext").disabled=workGrid.scrollLeft>=max-2;
-  // progress bar shows which slice of the list is in view
-  const visible=max>0?workGrid.clientWidth/workGrid.scrollWidth:1;
-  $("#workProgress").style.width=`${visible*100}%`;
-  $("#workProgress").style.left=`${max>0?(workGrid.scrollLeft/workGrid.scrollWidth)*100:0}%`;
-  $(".carousel-bar").hidden=max<=2;
+// Sideways carousels (work, behind the scenes): arrows step one card at a time,
+// the bar shows which slice is in view; swipe, trackpad and mouse drag all work.
+// Returns sync() for when the cards change.
+const carousel=(grid,prev,next,bar)=>{
+  const step=()=>{const card=grid.firstElementChild;return card?card.getBoundingClientRect().width+parseFloat(getComputedStyle(grid).columnGap||0):grid.clientWidth};
+  const progress=bar.querySelector(".carousel-track span");
+  const sync=()=>{
+    const max=grid.scrollWidth-grid.clientWidth;
+    prev.disabled=grid.scrollLeft<=2;
+    next.disabled=grid.scrollLeft>=max-2;
+    const visible=max>0?grid.clientWidth/grid.scrollWidth:1;
+    progress.style.width=`${visible*100}%`;
+    progress.style.left=`${max>0?(grid.scrollLeft/grid.scrollWidth)*100:0}%`;
+    bar.hidden=max<=2;
+  };
+  prev.addEventListener("click",()=>grid.scrollBy({left:-step(),behavior:"smooth"}));
+  next.addEventListener("click",()=>grid.scrollBy({left:step(),behavior:"smooth"}));
+  grid.addEventListener("scroll",sync,{passive:true});
+  grid.addEventListener("keydown",e=>{
+    if(e.key==="ArrowRight"){e.preventDefault();next.click()}
+    if(e.key==="ArrowLeft"){e.preventDefault();prev.click()}
+  });
+  addEventListener("resize",sync);
+  // after a mouse drag, settle on a whole card in the direction it was dragged
+  dragScroll(grid,dx=>{
+    const s=step(),pos=grid.scrollLeft/s;
+    grid.scrollTo({left:(dx<0?Math.ceil(pos-.15):Math.floor(pos+.15))*s,behavior:"smooth"});
+  });
+  sync();
+  return sync;
 };
-$("#workPrev").addEventListener("click",()=>workGrid.scrollBy({left:-cardStep(),behavior:"smooth"}));
-$("#workNext").addEventListener("click",()=>workGrid.scrollBy({left:cardStep(),behavior:"smooth"}));
-workGrid.addEventListener("scroll",syncWorkCarousel,{passive:true});
-workGrid.addEventListener("keydown",e=>{
-  if(e.key==="ArrowRight"){e.preventDefault();$("#workNext").click()}
-  if(e.key==="ArrowLeft"){e.preventDefault();$("#workPrev").click()}
-});
-addEventListener("resize",syncWorkCarousel);
-syncWorkCarousel();
-// after a mouse drag, settle on a whole card in the direction it was dragged
-dragScroll(workGrid,dx=>{
-  const step=cardStep(),pos=workGrid.scrollLeft/step;
-  workGrid.scrollTo({left:(dx<0?Math.ceil(pos-.15):Math.floor(pos+.15))*step,behavior:"smooth"});
-});
+const syncWorkCarousel=carousel($("#workGrid"),$("#workPrev"),$("#workNext"),$("#work .carousel-bar"));
+
+// Behind the scenes: portrait clips that play while they're on screen
+$("#reel").innerHTML=c.reel.map(r=>`
+  <li class="reel-card" data-tag="${r.tag}">
+    <video muted loop playsinline preload="none" poster="${r.image}" src="${r.video}" aria-label="${r.caption}"></video>
+    <span class="reel-tag">${r.tag}</span>
+    <p>${r.caption}</p>
+  </li>`).join("");
+carousel($("#reel"),$("#reelPrev"),$("#reelNext"),$("#behind-the-scenes .carousel-bar"));
+const reelVideos=[...document.querySelectorAll("#reel video")];
+if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
+  const reelObserver=new IntersectionObserver(entries=>entries.forEach(e=>{
+    if(e.isIntersecting)e.target.play().catch(()=>{});else e.target.pause();
+  }),{threshold:.6});
+  reelVideos.forEach(v=>reelObserver.observe(v));
+}
+// click a clip to pause or play it (a drag across the strip is swallowed before this)
+reelVideos.forEach(v=>v.addEventListener("click",()=>v.paused?v.play():v.pause()));
 
 // Project dialog
 const dialog=$("#projectDialog");

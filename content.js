@@ -105,6 +105,20 @@ team:{
   ]
  }
 },
+// "Behind the scenes" reel: short portrait clips. tag is "Pitch" or "Studio";
+// "image" is the poster frame shown before a clip plays.
+reel:[
+ {tag:"Pitch",video:"assets/studio-life/pitch-title.mp4",image:"assets/studio-life/pitch-title.webp",caption:"Opening the Legend of Toakala pitch."},
+ {tag:"Pitch",video:"assets/studio-life/pitch-slides.mp4",image:"assets/studio-life/pitch-slides.webp",caption:"Walking through the game, slide by slide."},
+ {tag:"Pitch",video:"assets/studio-life/pitch-concept.mp4",image:"assets/studio-life/pitch-concept.webp",caption:"The game concept, in front of the room."},
+ {tag:"Pitch",video:"assets/studio-life/pitch-cutscenes.mp4",image:"assets/studio-life/pitch-cutscenes.webp",caption:"Showing how the cutscenes will look."},
+ {tag:"Pitch",video:"assets/studio-life/pitch-feedback.mp4",image:"assets/studio-life/pitch-feedback.webp",caption:"Questions and feedback from the table."},
+ {tag:"Studio",video:"assets/studio-life/studio-team.mp4",image:"assets/studio-life/studio-team.webp",caption:"An ordinary afternoon at the studio."},
+ {tag:"Studio",video:"assets/studio-life/studio-notebook.mp4",image:"assets/studio-life/studio-notebook.webp",caption:"Scene notes and level layouts, sketched by hand."},
+ {tag:"Studio",video:"assets/studio-life/studio-terrain.mp4",image:"assets/studio-life/studio-terrain.webp",caption:"Painting terrain in Unity."},
+ {tag:"Studio",video:"assets/studio-life/studio-edit.mp4",image:"assets/studio-life/studio-edit.webp",caption:"Cutting a Legend of Toakala video."},
+ {tag:"Studio",video:"assets/studio-life/studio-blockout.mp4",image:"assets/studio-life/studio-blockout.webp",caption:"Blocking out a village in Blender."}
+],
 studioCopy:[
 "Ave Ludum Studio is an independent studio from Makassar, South Sulawesi. Alongside original games inspired by Indonesian places and folklore, we build interactive work for clients—combining game-development thinking with clear scope, practical prototypes, and collaborative delivery."
 ],
