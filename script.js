@@ -246,7 +246,7 @@ const preselect=t=>{if(t&&[...typeSelect.options].some(o=>o.value===t))typeSelec
 document.addEventListener("click",e=>{const a=e.target.closest("a[data-type]");if(a)preselect(a.dataset.type)});
 preselect(new URLSearchParams(location.search).get("type"));
 $("#formNote").textContent=c.inquiry.endpoint
-  ?"We reply within a few working days. Your details are only used to answer this inquiry."
+  ?"Your details are only used to answer this inquiry. You'll get an email with your reference number."
   :`Sending opens your email app with the inquiry filled in, addressed to ${c.email}. Nothing is sent until you press send there.`;
 const fieldError=(field,message)=>{
   const label=field.closest("label");
@@ -290,12 +290,17 @@ form.addEventListener("submit",async e=>{
   submitButton.disabled=true;submitButton.classList.add("is-loading");
   submitButton.querySelector(".button-label").textContent="Sending…";
   try{
-    const res=await fetch(c.inquiry.endpoint,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},
-      body:JSON.stringify({_subject:subject,...d,consent:"yes"})});
+    // Apps Script web apps can't answer CORS preflights, so the JSON goes as text/plain there
+    const appsScript=c.inquiry.provider==="apps-script";
+    const res=await fetch(c.inquiry.endpoint,{method:"POST",
+      headers:{"Content-Type":appsScript?"text/plain;charset=utf-8":"application/json",Accept:"application/json"},
+      body:JSON.stringify({_subject:subject,...d,consent:"yes",page:location.href})});
     const json=await res.json().catch(()=>({}));
-    if(!res.ok||json.success===false||json.success==="false")throw new Error(json.message||res.statusText);
+    // a validation message from the server is shown as-is
+    if(json.ok===false&&json.error){showStatus("error",json.error);return}
+    if(!res.ok||json.ok===false||json.success===false||json.success==="false")throw new Error(json.message||res.statusText);
     form.reset();
-    showStatus("success","Thank you for considering Ave Ludum Studio. Your project inquiry has been received. We'll review your requirements and get back to you.");
+    showStatus("success",`Thank you for considering Ave Ludum Studio. Your project inquiry has been received. We'll review your requirements and get back to you.${json.id?` Your reference number is ${json.id}.`:""}`);
   }catch(err){
     showStatus("error",`Sorry, your inquiry couldn't be sent just now. Please try again, or email us at ${c.email}.`);
   }finally{

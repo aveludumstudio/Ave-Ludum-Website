@@ -9,9 +9,11 @@ Update `content.js` to change the public-facing text, work, services, studio inf
 Each team member has a photo slot in `assets/team/`, named after them in lowercase: `fri.jpg`, `zaki.jpg`, `muja.jpg`, `dharma.jpg`, `zara.jpg`, `anes.jpg`, `fari.jpg`, `wildan.jpg`, `dara.jpg`. To change a photo, replace the file with a square headshot (about 400×400 px) and keep the same name. The site shows it in a small circle, so keep the face centred. Names, roles and job descriptions are in `content.js` under `team`.
 
 ## Project inquiry form
-The "Start a project" form validates its fields, then sends the inquiry in one of two ways, set in `content.js` under `inquiry`:
+The form validates its fields, then sends the inquiry to the studio backend: a Google Apps Script attached to a Google Sheet, which saves each inquiry, emails the studio and the client, and adds an inquiry manager to the sheet for replies and quotations. The code and step-by-step setup are in `backend/` (see `backend/README.md`).
+
+It is configured in `content.js` under `inquiry`:
 - `endpoint` empty (the default): the form opens the visitor's email app with the inquiry filled in, addressed to `email`. Nothing is sent until they press send.
-- `endpoint` set to a form service URL that accepts JSON (for example Formspree, Web3Forms or FormSubmit's `/ajax/` URL): the form posts there and shows a loading state, then a success or error message. Most services need a one-time setup or activation by the inbox owner, so send one test inquiry after setting it.
+- `endpoint` set to the Apps Script web app URL (with `provider:"apps-script"`): the form posts there, shows a loading state, then the confirmation with a reference number, or the reason the server gave if a field was rejected.
 
 `whatsapp` takes the studio's WhatsApp number in international format without "+" (e.g. `6281234567890`). When it's empty the WhatsApp button stays hidden.
 

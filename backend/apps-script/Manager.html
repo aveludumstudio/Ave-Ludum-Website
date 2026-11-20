@@ -1,0 +1,190 @@
+<!doctype html>
+<html>
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<style>
+  :root{--ink:#15130f;--muted:#5b554b;--line:#e2ddd3;--bg:#f6f4ef;--accent:#ec5a1f}
+  *{box-sizing:border-box}
+  body{margin:0;font:14px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:var(--bg)}
+  .app{display:grid;grid-template-columns:360px 1fr;height:100vh}
+  .list{border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;background:#fff}
+  .tools{display:grid;gap:8px;padding:12px;border-bottom:1px solid var(--line)}
+  .tools input,.tools select{width:100%;padding:7px 9px;border:1px solid var(--line);border-radius:6px;font:inherit}
+  .count{color:var(--muted);font-size:12px}
+  ul{list-style:none;margin:0;padding:0;overflow:auto;flex:1}
+  li{padding:10px 12px;border-bottom:1px solid var(--line);cursor:pointer}
+  li:hover{background:#faf8f4}
+  li.active{background:#fff1ea;box-shadow:inset 3px 0 0 var(--accent)}
+  li .top{display:flex;justify-content:space-between;gap:8px;font-weight:600}
+  li .sub{color:var(--muted);font-size:12px}
+  .pill{display:inline-block;padding:1px 8px;border-radius:999px;font-size:11px;font-weight:600;background:#eee;color:#333}
+  .pill.New{background:#ec5a1f;color:#fff}.pill.Contacted{background:#4f9be8;color:#fff}.pill.Quoted{background:#f3c14b}
+  .pill.Won{background:#2e9a5b;color:#fff}.pill.Lost{background:#999;color:#fff}.pill.Archived{background:#ddd;color:#555}
+  .detail{overflow:auto;padding:20px 24px}
+  .empty{color:var(--muted);padding:40px;text-align:center}
+  h1{font-size:20px;margin:0 0 2px}
+  .meta{color:var(--muted);margin-bottom:14px}
+  dl{display:grid;grid-template-columns:140px 1fr;gap:6px 12px;margin:0 0 14px}
+  dt{color:var(--muted)}dd{margin:0;word-break:break-word}
+  .desc{white-space:pre-wrap;background:#fff;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:6px;padding:10px 12px;margin-bottom:16px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:14px;margin-bottom:14px}
+  .card h2{font-size:14px;margin:0 0 10px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  label{display:grid;gap:4px;font-weight:600;font-size:13px;margin-bottom:10px}
+  input,select,textarea{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:6px;font:inherit;font-weight:400}
+  textarea{resize:vertical}
+  button{padding:8px 14px;border:0;border-radius:6px;background:var(--accent);color:#fff;font:600 13px system-ui,sans-serif;cursor:pointer}
+  button.ghost{background:#fff;color:var(--ink);box-shadow:inset 0 0 0 1px var(--line)}
+  button:disabled{opacity:.6;cursor:progress}
+  .actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .msg{font-size:13px;color:var(--muted)}
+  .msg.err{color:#c2362b}.msg.ok{color:#2e9a5b}
+  .links a{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="app">
+  <section class="list">
+    <div class="tools">
+      <input id="search" placeholder="Search name, email, organization, ID">
+      <select id="filter"><option value="">All statuses</option></select>
+      <div class="actions"><button class="ghost" id="refresh" type="button">Refresh</button><span class="count" id="count"></span></div>
+    </div>
+    <ul id="list"></ul>
+  </section>
+  <section class="detail" id="detail"><p class="empty">Loading inquiries…</p></section>
+</div>
+
+<script>
+const STATUSES=['New','Contacted','Quoted','Won','Lost','Archived'];
+let inquiries=[],current=null;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=iso=>iso?new Date(iso).toLocaleString('id-ID',{dateStyle:'medium',timeStyle:'short'}):'';
+const rupiah=n=>n===''||n==null?'':'Rp'+Number(n).toLocaleString('id-ID');
+$('#filter').innerHTML+=STATUSES.map(s=>`<option>${s}</option>`).join('');
+
+function load(keepId){
+  $('#count').textContent='Loading…';
+  google.script.run.withSuccessHandler(rows=>{
+    inquiries=rows;renderList();
+    const again=keepId&&inquiries.find(i=>i.ID===keepId);
+    if(again)show(again.ID);else if(!current)$('#detail').innerHTML=`<p class="empty">${inquiries.length?'Pick an inquiry on the left.':'No inquiries yet. New ones from the website appear here.'}</p>`;
+  }).withFailureHandler(err=>{$('#count').textContent='';$('#detail').innerHTML=`<p class="empty msg err">${esc(err.message)}</p>`}).getInquiries();
+}
+
+function renderList(){
+  const q=$('#search').value.toLowerCase(),f=$('#filter').value;
+  const rows=inquiries.filter(i=>(!f||i.Status===f)&&(!q||[i.ID,i.Name,i.Email,i.Organization].join(' ').toLowerCase().includes(q)));
+  $('#count').textContent=`${rows.length} of ${inquiries.length}`;
+  $('#list').innerHTML=rows.map(i=>`<li data-id="${esc(i.ID)}" class="${current===i.ID?'active':''}">
+    <div class="top"><span>${esc(i.Name)}</span><span class="pill ${esc(i.Status)}">${esc(i.Status)}</span></div>
+    <div class="sub">${esc(i['Project type'])} · ${esc(i.Budget)}</div>
+    <div class="sub">${esc(i.ID)} · ${fmt(i.Received)}</div></li>`).join('');
+}
+
+function templates(i){
+  return {
+    followup:{subject:`Your project inquiry (${i.ID})`,body:
+`Hi ${i.Name},
+
+Thank you for contacting Ave Ludum Studio about your ${i['Project type'].toLowerCase()} project.
+
+Before we prepare a quotation, could you tell us a little more about:
+-
+-
+
+Best regards,
+Ave Ludum Studio`},
+    quote:{subject:`Quotation for your project (${i.ID})`,body:
+`Hi ${i.Name},
+
+Thank you for your inquiry. Based on what you shared, here is our proposed scope.
+
+Scope:
+-
+
+Deliverables:
+-
+
+Timeline:
+Estimated cost: [amount]
+
+The final price depends on the agreed scope. Let us know if you'd like to adjust anything, and we're happy to discuss it on a call.
+
+Best regards,
+Ave Ludum Studio`}
+  };
+}
+
+function show(id){
+  current=id;renderList();
+  const i=inquiries.find(x=>x.ID===id);if(!i)return;
+  const wa=String(i.WhatsApp||'').replace(/[^\d]/g,'').replace(/^0/,'62');
+  $('#detail').innerHTML=`
+    <h1>${esc(i.Name)}${i.Organization?` · ${esc(i.Organization)}`:''}</h1>
+    <p class="meta">${esc(i.ID)} · received ${fmt(i.Received)}${i['Last reply at']?` · last reply ${fmt(i['Last reply at'])}`:''}</p>
+    <dl>
+      <dt>Email</dt><dd class="links"><a href="mailto:${esc(i.Email)}">${esc(i.Email)}</a></dd>
+      ${i.WhatsApp?`<dt>WhatsApp</dt><dd class="links"><a href="https://wa.me/${wa}" target="_blank">${esc(i.WhatsApp)}</a></dd>`:''}
+      <dt>Project type</dt><dd>${esc(i['Project type'])}</dd>
+      <dt>Budget</dt><dd>${esc(i.Budget)}</dd>
+      ${i.Timeline?`<dt>Timeline</dt><dd>${esc(i.Timeline)}</dd>`:''}
+      ${i['Reference links']?`<dt>References</dt><dd>${esc(i['Reference links'])}</dd>`:''}
+      ${i.Page?`<dt>Sent from</dt><dd>${esc(i.Page)}</dd>`:''}
+      ${i['Quote (IDR)']!==''?`<dt>Quoted</dt><dd>${rupiah(i['Quote (IDR)'])}</dd>`:''}
+    </dl>
+    <div class="desc">${esc(i.Description)}</div>
+
+    <div class="card">
+      <h2>Tracking</h2>
+      <div class="row">
+        <label>Status<select id="status">${STATUSES.map(s=>`<option${s===i.Status?' selected':''}>${s}</option>`).join('')}</select></label>
+        <label>Quote amount (IDR)<input id="quote" type="number" min="0" step="50000" value="${esc(i['Quote (IDR)'])}"></label>
+      </div>
+      <label>Internal notes<textarea id="notes" rows="4">${esc(i['Internal notes'])}</textarea></label>
+      <div class="actions"><button id="save" type="button">Save</button><span class="msg" id="saveMsg"></span></div>
+    </div>
+
+    <div class="card">
+      <h2>Reply to client</h2>
+      <div class="actions" style="margin-bottom:10px">
+        <button class="ghost" type="button" data-template="followup">Use follow-up template</button>
+        <button class="ghost" type="button" data-template="quote">Use quotation template</button>
+      </div>
+      <label>Subject<input id="subject"></label>
+      <label>Message<textarea id="body" rows="12"></textarea></label>
+      <label><span><input type="checkbox" id="isQuote" style="width:auto"> This is a quotation: save the amount above and mark as Quoted</span></label>
+      <div class="actions"><button id="send" type="button">Send to ${esc(i.Email)}</button><span class="msg" id="sendMsg"></span></div>
+    </div>`;
+
+  $('#save').onclick=()=>{
+    const btn=$('#save');btn.disabled=true;$('#saveMsg').className='msg';$('#saveMsg').textContent='Saving…';
+    google.script.run.withSuccessHandler(()=>{btn.disabled=false;$('#saveMsg').className='msg ok';$('#saveMsg').textContent='Saved.';load(i.ID)})
+      .withFailureHandler(err=>{btn.disabled=false;$('#saveMsg').className='msg err';$('#saveMsg').textContent=err.message})
+      .updateInquiry(i.ID,{status:$('#status').value,notes:$('#notes').value,quote:$('#quote').value});
+  };
+  document.querySelectorAll('[data-template]').forEach(b=>b.onclick=()=>{
+    const t=templates(i)[b.dataset.template];$('#subject').value=t.subject;$('#body').value=t.body;
+    $('#isQuote').checked=b.dataset.template==='quote';
+  });
+  $('#send').onclick=()=>{
+    const isQuote=$('#isQuote').checked,quote=$('#quote').value;
+    if(isQuote&&!quote){$('#sendMsg').className='msg err';$('#sendMsg').textContent='Enter the quote amount in Tracking first.';return}
+    if(!confirm(`Send this email to ${i.Email}?`))return;
+    const btn=$('#send');btn.disabled=true;$('#sendMsg').className='msg';$('#sendMsg').textContent='Sending…';
+    google.script.run.withSuccessHandler(()=>{btn.disabled=false;$('#sendMsg').className='msg ok';$('#sendMsg').textContent='Sent.';load(i.ID)})
+      .withFailureHandler(err=>{btn.disabled=false;$('#sendMsg').className='msg err';$('#sendMsg').textContent=err.message})
+      .sendReply(i.ID,$('#subject').value,$('#body').value,isQuote?quote:'');
+  };
+}
+
+$('#list').addEventListener('click',e=>{const li=e.target.closest('li');if(li)show(li.dataset.id)});
+$('#search').addEventListener('input',renderList);
+$('#filter').addEventListener('change',renderList);
+$('#refresh').addEventListener('click',()=>load(current));
+load();
+</script>
+</body>
+</html>

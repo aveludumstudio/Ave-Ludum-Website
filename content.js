@@ -282,11 +282,13 @@ originals:{
 products:[],
 plannedProducts:["Unity starter templates","Reusable gameplay systems","UI kits","3D asset packs","Educational interactive templates","Development tools"],
 // Project inquiry form.
-// endpoint: a form service URL that accepts JSON POSTs (e.g. Formspree, Web3Forms, FormSubmit).
+// endpoint: the inquiry backend URL. The studio backend is the Google Apps Script web app in
+//   backend/apps-script (setup in backend/README.md); its URL ends in /exec. A form service that
+//   accepts JSON (Formspree, Web3Forms…) also works: set provider to "" for those.
 //   Empty = the form opens the visitor's email app with the inquiry filled in instead.
 // whatsapp: the studio's WhatsApp number in international format without "+" (e.g. 6281234567890).
 //   Empty = the WhatsApp button is hidden.
-inquiry:{endpoint:"",whatsapp:""},
+inquiry:{endpoint:"",provider:"apps-script",whatsapp:""},
 email:"ave.ludum@gmail.com",
 location:{
  intro:"We work out of a small house on a quiet street in Rappocini, Makassar. Look for the sign above the gate.",

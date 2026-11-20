@@ -674,3 +674,6 @@ h2{letter-spacing:-.025em}
   html{scroll-behavior:auto}
   *{transition:none!important;animation:none!important}
 }
+
+/* hidden spam trap in the inquiry form: people never see it, bots fill it in */
+.hp-field{position:absolute!important;left:-9999px;width:1px;height:1px;overflow:hidden}
