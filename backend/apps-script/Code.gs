@@ -15,7 +15,8 @@ const CONFIG = {
   STUDIO_NAME: 'Ave Ludum Studio',
   SEND_CLIENT_ACKNOWLEDGEMENT: true,     // email the client a copy with their reference number
   SHEET_NAME: 'Inquiries',
-  MAX_PER_EMAIL_PER_HOUR: 3              // basic spam guard
+  MAX_PER_EMAIL_PER_HOUR: 3,             // basic spam guard
+  MAX_ACKNOWLEDGEMENTS_PER_DAY: 40       // keeps the free Gmail quota (about 100/day) for studio emails and replies
 };
 
 // Must match the options in the website form (index.html)
@@ -57,8 +58,9 @@ function doPost(e) {
   try {
     const sheet = sheet_();
     id = newId_(sheet);
-    sheet.appendRow([id, new Date(), 'New', clean.name, clean.organization, clean.email, clean.whatsapp,
-      clean.projectType, clean.budget, clean.timeline, clean.links, clean.description, clean.page, '', '', '', '']);
+    const t = sheetText_;
+    sheet.appendRow([id, new Date(), 'New', t(clean.name), t(clean.organization), t(clean.email), t(clean.whatsapp),
+      clean.projectType, clean.budget, t(clean.timeline), t(clean.links), t(clean.description), t(clean.page), '', '', '', '']);
   } finally {
     lock.releaseLock();
   }
@@ -66,8 +68,13 @@ function doPost(e) {
 
   // The inquiry is saved at this point; a mail failure shouldn't lose it or fail the visitor.
   try { notifyStudio_(id, clean); } catch (err) { console.error('Studio notification failed', err); }
-  if (CONFIG.SEND_CLIENT_ACKNOWLEDGEMENT) {
-    try { acknowledgeClient_(id, clean); } catch (err) { console.error('Client acknowledgement failed', err); }
+  // Acknowledgements go to addresses typed into a public form, so cap them per day:
+  // someone abusing the form can't use up the studio's email quota.
+  const ackKey = 'acks_' + Utilities.formatDate(new Date(), 'Asia/Makassar', 'yyyyMMdd');
+  const acks = Number(cache.get(ackKey) || 0);
+  if (CONFIG.SEND_CLIENT_ACKNOWLEDGEMENT && acks < CONFIG.MAX_ACKNOWLEDGEMENTS_PER_DAY) {
+    try { acknowledgeClient_(id, clean); cache.put(ackKey, String(acks + 1), 21600); }
+    catch (err) { console.error('Client acknowledgement failed', err); }
   }
   return json_({ ok: true, id: id });
 }
@@ -183,7 +190,7 @@ function updateInquiry(id, changes) {
     if (STATUSES.indexOf(changes.status) < 0) throw new Error('Unknown status.');
     sheet.getRange(row, COL['Status']).setValue(changes.status);
   }
-  if (changes.notes != null) sheet.getRange(row, COL['Internal notes']).setValue(String(changes.notes));
+  if (changes.notes != null) sheet.getRange(row, COL['Internal notes']).setValue(sheetText_(String(changes.notes)));
   if (changes.quote != null) sheet.getRange(row, COL['Quote (IDR)']).setValue(changes.quote === '' ? '' : Number(changes.quote));
   return true;
 }
@@ -255,6 +262,12 @@ function requireEditor_() {
   const ss = SpreadsheetApp.getActive();
   const allowed = [ss.getOwner() && ss.getOwner().getEmail()].concat(ss.getEditors().map(u => u.getEmail()));
   if (!user || allowed.indexOf(user) < 0) throw new Error('Only editors of the inquiry sheet can do this.');
+}
+
+// Text from the public form is stored as plain text: a value starting with = + - or @
+// would otherwise run as a spreadsheet formula (formula injection).
+function sheetText_(s) {
+  return /^[=+\-@]/.test(s) ? "'" + s : s;
 }
 
 function esc_(s) {

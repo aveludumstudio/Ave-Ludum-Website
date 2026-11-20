@@ -56,7 +56,7 @@ work:[
   {image:"assets/concept-toakala-lakeside.webp",alt:"Greyscale painting of a long-haired figure standing by a lake, with butterflies and karst hills behind",caption:"Concept painting: lakeside."},
   {image:"assets/concept-toakala-village-gate.webp",alt:"Greyscale painting of a torch-lit stone archway leading into a jungle village",caption:"Concept painting: village gate."}
  ]},
-{slug:"supermarket-vr",title:"Supermarket VR",type:"VR training simulator",category:"VR / XR",kind:"Client project",status:"Delivered",image:"assets/project-supermarket-vr.jpg",
+{slug:"supermarket-vr",title:"Supermarket VR",type:"VR training simulator",category:"VR / XR",kind:"Client project",status:"Delivered",image:"assets/project-supermarket-vr.webp",
  description:"A VR recreation of a client's supermarket, built so staff can practise checkout and customer service before they ever stand at a real till.",
  role:"Simulation design, 3D environment, interaction",stack:["Unity","C#","VR"],
  caseStudy:{
@@ -68,12 +68,12 @@ work:[
   contribution:"Simulation design, the 3D environment and the VR interactions."
  },
  gallery:[
-  {image:"assets/project-supermarket-vr.jpg",alt:"Supermarket VR project image",caption:"Supermarket VR."},
+  {image:"assets/project-supermarket-vr.webp",alt:"Supermarket VR project image",caption:"Supermarket VR."},
   {video:"assets/supermarket-vr/vr-playtest.mp4",image:"assets/supermarket-vr/vr-playtest.webp",alt:"A tester wearing a VR headset uses the controllers while the VR view shows on a laptop",caption:"Testing with the client in a VR headset."},
   {image:"assets/supermarket-vr/vr-playtest-photo-1.webp",alt:"A tester in a VR headset at a table with a laptop showing the VR view, watched by a colleague",caption:"Client playtest."},
   {image:"assets/supermarket-vr/vr-playtest-photo-2.webp",alt:"A tester in a VR headset holding a controller beside a laptop",caption:"The VR view mirrored on a laptop during testing."}
  ]},
-{slug:"pilah-bumi",title:"Pilah Bumi",type:"Environmental mobile game",category:"Simulation",status:"Base game complete",image:"assets/project-pilah-bumi.png",
+{slug:"pilah-bumi",title:"Pilah Bumi",type:"Environmental mobile game",category:"Simulation",status:"Base game complete",image:"assets/project-pilah-bumi.webp",
  description:"A free-roam waste sorting game for mobile. You pick up litter scattered around an open 3D map and sort it into the right bins.",
  role:"Game design, systems, 3D",stack:["Unity 6","C#","Mobile"],
  caseStudy:{
@@ -88,10 +88,10 @@ work:[
   {video:"assets/pilah-bumi/pilah-pickup.mp4",image:"assets/pilah-bumi/pilah-pickup.webp",alt:"A plastic bottle on the road with grab and pick-up prompts",caption:"Finding and picking up litter."},
   {video:"assets/pilah-bumi/pilah-storage.mp4",image:"assets/pilah-bumi/pilah-storage.webp",alt:"A storage grid holding oranges and bananas",caption:"The storage inventory."},
   {video:"assets/pilah-bumi/pilah-complete.mp4",image:"assets/pilah-bumi/pilah-complete.webp",alt:"A Complete banner after the last item is sorted",caption:"Clearing the area completes the task."},
-  {image:"assets/project-pilah-bumi.png",alt:"Pilah Bumi title screen with Play and Quit buttons beside two bins",caption:"Title screen."},
+  {image:"assets/project-pilah-bumi.webp",alt:"Pilah Bumi title screen with Play and Quit buttons beside two bins",caption:"Title screen."},
   {image:"assets/pilah-bumi/pilah-night.webp",alt:"The neighbourhood at night under street lights",caption:"The neighbourhood at night."}
  ]},
-{slug:"mini-dungeon",title:"Mini Dungeon",type:"Mobile roguelite",category:"Games",kind:"In-house",image:"assets/project-mini-dungeon.png",
+{slug:"mini-dungeon",title:"Mini Dungeon",type:"Mobile roguelite",category:"Games",kind:"In-house",image:"assets/project-mini-dungeon.webp",
  description:"A top-down, survivors-style roguelite with procedurally generated maps. Our in-house mobile project.",
  role:"Gameplay systems, procedural generation",stack:["Unity","C#","Mobile"],
  caseStudy:{
@@ -100,7 +100,7 @@ work:[
   features:["Top-down, survivors-style play","Procedurally generated maps","Built for mobile"],
   contribution:"An in-house project: gameplay systems and procedural generation by Ave Ludum."
  }},
-{slug:"mager-ar",title:"MAGER AR",type:"Augmented reality",category:"AR",kind:"Community project",status:"Completed",image:"assets/project-mager-ar.png",
+{slug:"mager-ar",title:"MAGER AR",type:"Augmented reality",category:"AR",kind:"Community project",status:"Completed",image:"assets/project-mager-ar.webp",
  description:"Stickers and keychains for the Makassar Game Developer community that come to life when you point a phone at them.",
  role:"AR app, 3D models",stack:["Unity","AR"],
  caseStudy:{
@@ -110,7 +110,7 @@ work:[
   statusNote:"Completed. We can build a custom version for your own stickers, merchandise or characters.",
   contribution:"The AR app and its 3D models."
  }},
-{slug:"booth-renders",title:"Booth renders",type:"Event visualisation",category:"3D",kind:"Client project",status:"Delivered",image:"assets/project-booth-renders.png",
+{slug:"booth-renders",title:"Booth renders",type:"Event visualisation",category:"3D",kind:"Client project",status:"Delivered",image:"assets/project-booth-renders.webp",
  description:"Real-time 3D renders of exhibition booths and stands, so clients can see the layout and foot traffic before anything gets built.",
  role:"3D modelling, real-time rendering",stack:["Real-time 3D"],
  caseStudy:{
@@ -121,7 +121,7 @@ work:[
   feedback:{quote:"Perfect for visualising projects — better than expected.",source:"The client"},
   contribution:"3D modelling and real-time rendering."
  }},
-{slug:"key-art",title:"Key art",type:"Visual development",category:"3D",status:"Completed",image:"assets/project-key-art.jpg",
+{slug:"key-art",title:"Key art",type:"Visual development",category:"3D",status:"Completed",image:"assets/project-key-art.webp",
  description:"A painted key art piece from our visual development work.",
  role:"Illustration, visual development",stack:["Digital painting","3D"],
  caseStudy:{
@@ -220,9 +220,9 @@ divisions:[
 whatWeDo:[
  {id:"game-development",title:"Game Development",pitch:"Get a playable game or game feature built in Unity, from a first prototype you can test with players to a finished build.",bestFor:"startups, game teams and brands with a game idea",example:"The Legend of Toakala",text:"Custom games, gameplay systems, mechanics and Unity prototypes, from first playable to finished build.",image:"assets/toakala/tk-explore.webp",alt:"Exploring the forest in The Legend of Toakala, our mobile game",type:"Game Development",
   details:["Custom games and game features","Gameplay systems and mechanics","Unity prototypes and first playables","Interactive entertainment and co-development"],work:["The Legend of Toakala","Mini Dungeon"]},
- {id:"interactive-applications",title:"Interactive Applications",pitch:"Turn a lesson, campaign or process into something people use with their own hands, so it sticks better than slides or a video.",bestFor:"schools, universities, training providers and campaigns",example:"Pilah Bumi",text:"Interactive learning apps, digital experiences, product demonstrations and custom applications.",image:"assets/project-pilah-bumi.png",alt:"Pilah Bumi, a waste sorting simulation",type:"Educational Application",
+ {id:"interactive-applications",title:"Interactive Applications",pitch:"Turn a lesson, campaign or process into something people use with their own hands, so it sticks better than slides or a video.",bestFor:"schools, universities, training providers and campaigns",example:"Pilah Bumi",text:"Interactive learning apps, digital experiences, product demonstrations and custom applications.",image:"assets/project-pilah-bumi.webp",alt:"Pilah Bumi, a waste sorting simulation",type:"Educational Application",
   details:["Interactive learning applications","Educational games","Digital experiences for events and campaigns","Custom interactive applications"],work:["Pilah Bumi","MAGER AR"]},
- {id:"interactive-3d",title:"Interactive 3D & Visualization",pitch:"Let clients explore a product, booth or space in real-time 3D before anything is built or bought, and decide faster.",bestFor:"manufacturers, exhibitors and property developers",example:"Booth renders",text:"3D environments, interactive product visualization, virtual showrooms and 3D demonstrations.",image:"assets/project-booth-renders.png",alt:"Real-time 3D render of an exhibition booth",type:"Interactive 3D Application",
+ {id:"interactive-3d",title:"Interactive 3D & Visualization",pitch:"Let clients explore a product, booth or space in real-time 3D before anything is built or bought, and decide faster.",bestFor:"manufacturers, exhibitors and property developers",example:"Booth renders",text:"3D environments, interactive product visualization, virtual showrooms and 3D demonstrations.",image:"assets/project-booth-renders.webp",alt:"Real-time 3D render of an exhibition booth",type:"Interactive 3D Application",
   details:["3D environments","Interactive product visualization","Virtual showrooms and exhibition previews","3D demonstrations"],work:["Booth renders"]},
  {id:"vr-simulation",title:"VR & Simulation",pitch:"Let people practise risky or expensive tasks safely, in VR or on screen, as often as they need before doing it for real.",bestFor:"industrial, retail and corporate training teams",example:"AVELS Heavy Vehicle Simulator",text:"Virtual reality experiences, training scenarios, educational simulations and interactive demonstrations.",image:"assets/avels/avels-loading.webp",alt:"A wheel loader loading a dump truck in the AVELS simulator",type:"VR / Simulation",
   details:["Virtual reality experiences","Training scenarios and equipment familiarization","Educational simulations","Interactive demonstrations"],work:["AVELS Heavy Vehicle Simulator","Supermarket VR"]}
@@ -235,10 +235,10 @@ segments:[
  {title:"Game Developers & Startups",text:"Prototyping, Unity development, technical assistance and co-development for teams that need extra hands or a playable proof of concept.",work:["MAGER AR"]}
 ],
 fieldPhotos:[
-{image:"assets/toakala-discussion.jpg",width:2000,height:1125,focus:"center 78%",caption:"Discussing The Legend of Toakala with Achmad Yusran Arief of Dinas Kebudayaan dan Kepariwisataan Sulawesi Selatan and storywriter Rizka Aulia Sabila."},
-{image:"assets/team-photo.jpg",width:1800,height:1012,focus:"center 82%",caption:"The team on a field trip in Maros."},
-{image:"assets/client-review-field-01.jpg",width:1600,height:1067,caption:"Talking through a project on site."},
-{image:"assets/client-review-field-02.jpg",width:1600,height:1067,caption:"Review session during field work."}
+{image:"assets/toakala-discussion.webp",width:1600,height:900,focus:"center 78%",caption:"Discussing The Legend of Toakala with Achmad Yusran Arief of Dinas Kebudayaan dan Kepariwisataan Sulawesi Selatan and storywriter Rizka Aulia Sabila."},
+{image:"assets/team-photo.webp",width:1600,height:900,focus:"center 82%",caption:"The team on a field trip in Maros."},
+{image:"assets/client-review-field-01.webp",width:1600,height:1067,caption:"Talking through a project on site."},
+{image:"assets/client-review-field-02.webp",width:1600,height:1067,caption:"Review session during field work."}
 ],
 testimonials:[
 {quote:"Good quality project, as initially agreed.",source:"VR simulator client"},

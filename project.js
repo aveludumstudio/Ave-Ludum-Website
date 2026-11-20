@@ -8,6 +8,8 @@ $("#footerWork").innerHTML=c.work.map(p=>`<li><a href="project.html?p=${p.slug}"
 
 if(index<0){
   document.title="Project not found | Ave Ludum Studio";
+  // keep unknown project links out of search results
+  const robots=document.createElement("meta");robots.name="robots";robots.content="noindex";document.head.append(robots);
   $("#case").innerHTML=`<section class="shell page-hero"><h1>Project not found</h1>
     <p class="lead">That project link doesn't match anything in our portfolio. It may have been renamed.</p>
     <a class="button" href="index.html#work">See All Work</a></section>`;
@@ -21,8 +23,9 @@ const url=abs(`project.html?p=${p.slug}`);
 
 // page metadata for sharing and search
 document.title=`${p.title}: Case Study | Ave Ludum Studio`;
-const summary=`${p.description} A ${p.type.toLowerCase()} by Ave Ludum Studio.`;
-$("#metaDescription").content=summary;
+// search results cut descriptions at about 155 characters, so trim on a word boundary
+const clip=(s,n=155)=>s.length<=n?s:s.slice(0,s.lastIndexOf(" ",n-1)).replace(/[,.;:]$/,"")+"…";
+$("#metaDescription").content=clip(p.description);
 $("#canonical").href=url;
 $("#ogUrl").content=url;
 $("#ogTitle").content=`${p.title} | Ave Ludum Studio`;
@@ -102,11 +105,12 @@ document.head.append(ld);
 
 // media viewer: pictures and looping clips, with arrows, thumbnails, swipe and arrow keys
 const img=$("#caseImage"),video=$("#caseVideo");
+const videoToggle=playToggle(video,$(".case-viewer"));
 let shot=0;
 const show=i=>{
   shot=(i+media.length)%media.length;
   const m=media[shot];
-  img.hidden=!!m.video;video.hidden=!m.video;
+  img.hidden=!!m.video;video.hidden=!m.video;videoToggle.hidden=!m.video;
   if(m.video){
     video.poster=m.image;video.src=m.video;video.setAttribute("aria-label",m.alt);
     if(!reduceMotion)video.play().catch(()=>{});

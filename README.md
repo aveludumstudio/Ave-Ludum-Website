@@ -26,6 +26,7 @@ Every project in `work` (in `content.js`) has its own page at `project.html?p=<s
 ## Files
 - `services.html` / `services.js` — services and pricing page
 - `project.html` / `project.js` — case study page for each project
+- `404.html` — page shown for broken links (uses `<base href="/">` so it works at any path)
 - `site.js` — shared by every page: theme toggle, footer links, price formatting, swipe and drag helpers
 - `index.html` — page structure
 - `content.js` — editable content

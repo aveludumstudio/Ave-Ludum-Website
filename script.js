@@ -80,7 +80,7 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
   reelVideos.forEach(v=>reelObserver.observe(v));
 }
 // click a clip to pause or play it (a drag across the strip is swallowed before this)
-reelVideos.forEach(v=>v.addEventListener("click",()=>v.paused?v.play():v.pause()));
+reelVideos.forEach(v=>{v.addEventListener("click",()=>v.paused?v.play():v.pause());playToggle(v,v.closest(".reel-card"))});
 
 // Projects open their case study page (project.html?p=slug)
 const projectUrl=p=>`project.html?p=${p.slug}`;
@@ -199,6 +199,7 @@ $("#segments").addEventListener("click",e=>{const b=e.target.closest("[data-proj
 document.addEventListener("click",e=>{const b=e.target.closest("[data-project-title]");if(b){e.preventDefault();openProject(workIndex(b.dataset.projectTitle))}});
 
 // Hero demo clip plays unless the visitor prefers reduced motion (then the poster frame stays)
+playToggle($("#heroVideo"),$(".hero-art"));
 if(!matchMedia("(prefers-reduced-motion: reduce)").matches)$("#heroVideo").play().catch(()=>{});
 
 // Process
