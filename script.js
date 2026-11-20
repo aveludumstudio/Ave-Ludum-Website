@@ -282,8 +282,10 @@ $("#whatWeDo").innerHTML=c.whatWeDo.map(s=>`
     <img src="${s.image}" alt="${s.alt}" loading="lazy" decoding="async">
     <div class="offer-body">
       <h3>${s.title}</h3>
-      <p>${s.text}</p>
-      <p class="offer-links"><a href="services.html#${s.id}">Learn more</a><a href="#contact" data-type="${s.type}">Discuss a project</a></p>
+      <p>${s.pitch}</p>
+      <p class="offer-fit"><strong>Best for</strong> ${s.bestFor}</p>
+      <p class="offer-example">Example: <button type="button" data-project-title="${s.example}">${s.example}</button></p>
+      <p class="offer-links"><a class="button button-sm" href="#contact" data-type="${s.type}">Discuss a project</a><a href="services.html#${s.id}">Learn more</a></p>
     </div>
   </article>`).join("");
 
@@ -296,6 +298,11 @@ $("#segments").innerHTML=c.segments.map(s=>`
     ${s.work.length?`<p class="segment-work">Related work: ${s.work.filter(t=>workIndex(t)>=0).map(t=>`<button type="button" data-project="${workIndex(t)}">${t}</button>`).join(", ")}</p>`:""}
   </article>`).join("");
 $("#segments").addEventListener("click",e=>{const b=e.target.closest("[data-project]");if(b)openProject(+b.dataset.project)});
+// links that name a project (hero proof line, service examples) open it in the project dialog
+document.addEventListener("click",e=>{const b=e.target.closest("[data-project-title]");if(b){e.preventDefault();openProject(workIndex(b.dataset.projectTitle))}});
+
+// Hero demo clip plays unless the visitor prefers reduced motion (then the poster frame stays)
+if(!matchMedia("(prefers-reduced-motion: reduce)").matches)$("#heroVideo").play().catch(()=>{});
 
 // Process
 $("#processSteps").innerHTML=c.process.map(([name,text],i)=>`<li><span class="step-number">${String(i+1).padStart(2,"0")}</span><h3>${name}</h3><p>${text}</p></li>`).join("");

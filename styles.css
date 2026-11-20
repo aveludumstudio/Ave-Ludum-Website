@@ -548,6 +548,43 @@ h2{letter-spacing:-.025em}
   .hero h1{font-size:clamp(40px,12vw,52px)}
 }
 
+/* ===== Conversion details: hero proof, service fit, inline CTAs, next steps ===== */
+/* links styled as text but built as buttons because they open the project dialog */
+.hero-proof button,.hero-art figcaption button,.offer-example button{padding:0;border:0;background:none;color:var(--accent-text);font:inherit;font-weight:600;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.hero{padding:32px 0 80px}
+.hero h1{font-size:clamp(44px,5.6vw,76px)}
+.hero .lead{margin:14px 0 22px}
+.hero-micro{margin-top:14px}
+.hero-chips{list-style:none;margin:-4px 0 22px;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.hero-chips a{display:block;padding:5px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font-weight:600;font-size:14px;text-decoration:none}
+.hero-chips a:hover{border-color:var(--accent-text);color:var(--accent-text)}
+.hero-proof{margin:10px 0 0;color:var(--muted);font-size:14px;max-width:52ch}
+.hero-art video{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius);box-shadow:var(--shadow-lift);background:#111}
+.offer-fit{margin:0 0 6px!important;font-size:14px!important}
+.offer-fit strong{color:var(--ink);margin-right:2px}
+.offer-example{margin:0 0 16px!important;font-size:14px!important}
+.offer-links{align-items:center}
+.offer-links .button{color:var(--accent-ink)}
+.offer-links .button:hover{text-decoration:none}
+.inline-cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-top:26px;padding:18px 22px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.inline-cta p{flex:1 1 320px;margin:0}
+.next-title{margin:26px 0 10px;color:var(--muted);font:700 13px var(--body);letter-spacing:.1em;text-transform:uppercase}
+.next-steps{margin:0;padding:0;list-style:none;counter-reset:next;display:grid;gap:10px}
+.next-steps li{counter-increment:next;position:relative;padding-left:36px;color:var(--muted);font-size:15px;line-height:1.5}
+.next-steps li::before{content:counter(next);position:absolute;left:0;top:0;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font:700 13px var(--display)}
+.next-steps strong{color:var(--ink)}
+@media (max-width:900px){
+  /* on smaller screens the pitch and the buttons come first, the demo clip after */
+  .hero .hero-art{order:0}
+}
+@media (max-width:640px){
+  .hero-chips{margin:-4px 0 20px}
+  .hero-chips a{font-size:13px;padding:4px 10px}
+  .hero .hero-actions .button{flex:1 1 auto;text-align:center}
+  .hero-art figcaption{font-size:13px}
+  .inline-cta .button{width:100%;text-align:center}
+}
+
 /* Responsive */
 @media (max-width:900px){
   .team-group{grid-template-columns:1fr;gap:14px}

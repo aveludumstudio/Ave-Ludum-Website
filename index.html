@@ -24,8 +24,8 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Karla:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="assets/project-key-art.jpg" fetchpriority="high">
-<link rel="stylesheet" href="styles.css?v=20261120-1">
+<link rel="preload" as="image" href="assets/avels/avels-loading.webp" fetchpriority="high">
+<link rel="stylesheet" href="styles.css?v=20261121-1">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -65,15 +65,21 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
     <h1>Build Beyond Imagination.</h1>
     <p class="hero-sub">We turn ideas into interactive experiences.</p>
     <p class="lead">From playable game prototypes and immersive 3D environments to educational applications and VR simulations, Ave Ludum Studio creates digital experiences that make ideas tangible.</p>
+    <ul class="hero-chips" aria-label="What we build">
+      <li><a href="#services">Games</a></li><li><a href="#services">Unity prototypes</a></li><li><a href="#services">Interactive 3D</a></li><li><a href="#services">Learning apps</a></li><li><a href="#services">VR &amp; simulation</a></li>
+    </ul>
     <div class="hero-actions">
       <a class="button" href="#contact">Start a Project</a>
       <a class="button button-ghost" href="#work">Explore Our Work</a>
     </div>
     <p class="hero-micro">For schools and universities, businesses, cultural institutions and game teams, in Indonesia and abroad.</p>
+    <p class="hero-proof">Recent work: <button type="button" data-project-title="AVELS Heavy Vehicle Simulator">heavy vehicle training simulator</button>, <button type="button" data-project-title="Supermarket VR">VR retail training</button>, <button type="button" data-project-title="The Legend of Toakala">The Legend of Toakala</button></p>
   </div>
   <figure class="hero-art">
-    <img src="assets/project-key-art.jpg" alt="Key art from The Legend of Toakala: a white monkey holding a dark infant in front of a burning wooden house" width="2048" height="1152" fetchpriority="high">
-    <figcaption>The Legend of Toakala, our original game in development</figcaption>
+    <video id="heroVideo" muted loop playsinline preload="metadata" poster="assets/avels/avels-loading.webp" width="960" height="540" aria-label="A wheel loader loading a dump truck in the AVELS heavy vehicle simulator">
+      <source src="assets/avels/avels-loading.mp4" type="video/mp4">
+    </video>
+    <figcaption>AVELS heavy vehicle simulator: multiplayer equipment training, built in Unity. <button type="button" data-project-title="AVELS Heavy Vehicle Simulator">See the project</button></figcaption>
   </figure>
   <button type="button" class="hero-next" data-go="next">
     <span>Use the arrows or scroll</span>
@@ -84,8 +90,8 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
 <section id="services" class="section shell chapter" data-title="What we do">
   <div class="section-head">
     <div>
-      <p class="eyebrow">Ave Ludum Interactive Solutions</p>
-      <h2>What we do</h2>
+      <p class="eyebrow">What we do</p>
+      <h2>Ideas people can play, explore and practise with</h2>
     </div>
     <a class="link" href="services.html">All services &amp; starting prices</a>
   </div>
@@ -95,8 +101,8 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
 <section id="work" class="section shell chapter" data-title="Selected work">
   <div class="section-head">
     <div>
-      <p class="eyebrow">Portfolio</p>
-      <h2>Selected work</h2>
+      <p class="eyebrow">Selected work</p>
+      <h2>Real projects, from games to training sims</h2>
     </div>
     <div class="filters" id="filters" role="group" aria-label="Filter projects"></div>
   </div>
@@ -110,13 +116,18 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
       </div>
     </div>
   </div>
+  <div class="inline-cta">
+    <p><strong>Have a project like these in mind?</strong> Tell us the goal and we'll suggest a practical first step.</p>
+    <a class="button" href="#contact">Start a Project</a>
+    <a class="link" href="services.html#offers">See starting prices</a>
+  </div>
 </section>
 
 <section id="solutions" class="section shell chapter" data-title="Who we work with">
   <div class="section-head">
     <div>
-      <p class="eyebrow">Our solutions</p>
-      <h2>Who we work with</h2>
+      <p class="eyebrow">Who we work with</p>
+      <h2>Built for the people you need to reach</h2>
     </div>
     <a class="link" href="#contact">Discuss Your Idea</a>
   </div>
@@ -127,8 +138,8 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
 <section id="process" class="section shell chapter" data-title="How we work">
   <div class="section-head">
     <div>
-      <p class="eyebrow">Our process</p>
-      <h2>How we work</h2>
+      <p class="eyebrow">How we work</p>
+      <h2>A clear path from idea to delivery</h2>
     </div>
   </div>
   <ol class="process" id="processSteps"></ol>
@@ -261,7 +272,13 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
   <div class="contact-side">
     <p class="eyebrow">Start a project</p>
     <h2>Tell us about your idea</h2>
-    <p>You don't need a technical specification yet. Tell us what you want people to do, who it's for and when you need it, and we'll come back with questions, a suggested first step and a quotation.</p>
+    <p>You don't need a technical specification yet. Tell us what you want people to do and who it's for. A rough idea is enough to start.</p>
+    <h3 class="next-title">What happens next</h3>
+    <ol class="next-steps">
+      <li><strong>We read your brief</strong> and look at any references you send.</li>
+      <li><strong>We reply with questions</strong> and a suggested first step, often a small prototype.</li>
+      <li><strong>You get a quotation</strong> with scope, deliverables and timeline before any work starts.</li>
+    </ol>
     <div class="contact-quick">
       <a class="button button-ghost" id="whatsappLink" href="#" target="_blank" rel="noopener" hidden>Chat on WhatsApp</a>
       <a class="button button-ghost" href="mailto:ave.ludum@gmail.com">Email ave.ludum@gmail.com</a>
@@ -292,7 +309,7 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
       </label>
     </div>
     <div class="form-row">
-      <label>Desired timeline<input name="timeline" placeholder="e.g. a demo by March" required></label>
+      <label><span>Desired timeline <span class="optional">(optional)</span></span><input name="timeline" placeholder="e.g. a demo by March"></label>
       <label><span>Reference links <span class="optional">(optional)</span></span><input name="links" inputmode="url" placeholder="Videos, sites, documents"></label>
     </div>
     <label>Project description<textarea name="description" rows="4" placeholder="What should people be able to do, who is it for, and what does success look like?" required></textarea></label>
@@ -385,8 +402,8 @@ try{var t=localStorage.getItem("ave-ludum-theme");if(t)document.documentElement.
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Organization","name":"Ave Ludum Studio","url":"https://aveludumstudio.com/","logo":"https://aveludumstudio.com/assets/logo-ave-ludum.png","slogan":"Build Beyond Imagination.","description":"Independent game development and interactive technology studio in Makassar, Indonesia: custom games, Unity prototypes, interactive 3D, educational applications and VR simulations.","email":"ave.ludum@gmail.com","knowsAbout":["Game development","Unity","Interactive 3D","Virtual reality","Training simulation","Educational games"],"address":{"@type":"PostalAddress","streetAddress":"Jln. Mapala IV, Blok E30 No. 13, Tidung, Kec. Rappocini","addressLocality":"Makassar","addressRegion":"South Sulawesi","postalCode":"90222","addressCountry":"ID"},"location":{"@type":"Place","geo":{"@type":"GeoCoordinates","latitude":-5.1678416,"longitude":119.4414785},"hasMap":"https://maps.app.goo.gl/prLRSztEHbN9Wsh98"},"sameAs":["https://www.instagram.com/ave.ludum/","https://www.linkedin.com/company/ave-ludum-studio","https://www.facebook.com/profile.php?id=61594251814646","https://github.com/aveludumstudio"]}
 </script>
-<script src="content.js?v=20261120-1"></script>
-<script src="site.js?v=20261120-1"></script>
-<script src="script.js?v=20261120-1"></script>
+<script src="content.js?v=20261121-1"></script>
+<script src="site.js?v=20261121-1"></script>
+<script src="script.js?v=20261121-1"></script>
 </body>
 </html>
