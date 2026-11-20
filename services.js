@@ -11,7 +11,7 @@ $("#serviceAreas").innerHTML=c.whatWeDo.map((s,i)=>`
       <h2 id="${s.id}-title">${s.title}</h2>
       <p>${s.text}</p>
       <ul class="check-list">${s.details.map(d=>`<li>${d}</li>`).join("")}</ul>
-      ${s.work.length?`<p class="service-work">Related work: ${s.work.map(t=>`<a href="index.html#work">${t}</a>`).join(", ")}</p>`:""}
+      ${s.work.length?`<p class="service-work">Related work: ${s.work.map(t=>{const p=c.work.find(w=>w.title===t);return p?`<a href="project.html?p=${p.slug}">${t}</a>`:t}).join(", ")}</p>`:""}
       <a class="button" href="${quoteLink(s.type)}">Discuss a Project</a>
     </div>
   </section>`).join("");

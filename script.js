@@ -1,55 +1,7 @@
 const $=s=>document.querySelector(s),c=window.siteContent;
 
-// Mouse drag for strips that fingers can already scroll natively.
-// onEnd(dx) runs after a drag, e.g. to settle on the nearest card.
-const dragScroll=(el,onEnd)=>{
-  let startX=0,startLeft=0,dragging=false,moved=false;
-  el.addEventListener("pointerdown",e=>{
-    if(e.pointerType!=="mouse"||e.button!==0)return;
-    dragging=true;moved=false;startX=e.clientX;startLeft=el.scrollLeft;
-  });
-  addEventListener("pointermove",e=>{
-    if(!dragging)return;
-    const dx=e.clientX-startX;
-    if(!moved&&Math.abs(dx)<6)return;
-    if(!moved){moved=true;el.classList.add("is-dragging")} // turns snapping off while dragging
-    el.scrollLeft=startLeft-dx;
-  });
-  addEventListener("pointerup",e=>{
-    if(!dragging)return;dragging=false;
-    if(!moved)return;
-    el.classList.remove("is-dragging");
-    onEnd?.(e.clientX-startX);
-    setTimeout(()=>moved=false); // let the click that ends the drag be swallowed first
-  });
-  // a drag shouldn't also count as a click on the card it started on
-  el.addEventListener("click",e=>{if(moved){e.preventDefault();e.stopImmediatePropagation()}},true);
-  el.addEventListener("dragstart",e=>e.preventDefault());
-};
-
-// Swipe with a finger, or drag with the mouse, to step back/forward (step gets -1 or 1)
-const onSwipe=(el,step)=>{
-  let x0=null,y0=0,id=null;
-  el.classList.add("swipeable");
-  el.addEventListener("pointerdown",e=>{if(e.button!==0)return;x0=e.clientX;y0=e.clientY;id=e.pointerId});
-  addEventListener("pointerup",e=>{
-    if(x0===null||e.pointerId!==id)return;
-    const dx=e.clientX-x0,dy=e.clientY-y0;x0=null;
-    if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.2)step(dx<0?1:-1);
-  });
-  addEventListener("pointercancel",()=>x0=null);
-  el.addEventListener("dragstart",e=>e.preventDefault());
-};
-
-// Close a dialog on a backdrop click, but not when a drag inside it ends out there
-const closeOnBackdrop=d=>{
-  let downOnBackdrop=false;
-  d.addEventListener("pointerdown",e=>downOnBackdrop=e.target===d);
-  d.addEventListener("click",e=>{if(e.target===d&&downOnBackdrop)d.close()});
-};
-
 // Work grid + filters (filters come from the categories actually used)
-// project kind (Original IP, client project…) and status, shown on cards and in the dialog
+// project kind (Original IP, client project…) and status, shown on cards and case studies
 const badges=p=>[p.kind,p.status].filter(Boolean).map((b,i)=>`<span class="badge${i?" badge-status":""}">${b}</span>`).join("");
 const categories=["All",...new Set(c.work.map(p=>p.category))];
 let activeFilter="All";
@@ -57,16 +9,16 @@ $("#filters").innerHTML=categories.map(f=>`<button type="button" data-filter="${
 const renderWork=()=>{
   $("#workGrid").innerHTML=c.work.map((p,i)=>({p,i})).filter(({p})=>activeFilter==="All"||p.category===activeFilter).map(({p,i})=>`
     <article class="work-card">
-      <button type="button" class="work-open" data-index="${i}">
-        <span class="work-image"><img src="${p.image}" alt="" loading="lazy" decoding="async">${p.kind||p.status?`<span class="work-badges">${badges(p)}</span>`:""}</span>
+      <a class="work-open" href="project.html?p=${p.slug}">
+        <span class="work-image"><img src="${p.image}" alt="" loading="lazy" decoding="async">${p.kind||p.status?`<span class="work-badges">${badges(p)}</span>`:""}${p.gallery?.some(g=>g.video)?`<span class="work-video">▶ Video</span>`:""}</span>
         <span class="work-text">
           <span class="work-type">${p.type}</span>
           <span class="work-title">${p.title}</span>
           <span class="work-desc">${p.description}</span>
           <span class="work-stack">${p.stack.join(" · ")}</span>
-          <span class="work-more">View project →</span>
+          <span class="work-more">Read the case study →</span>
         </span>
-      </button>
+      </a>
     </article>`).join("");
 };
 $("#filters").addEventListener("click",e=>{
@@ -130,64 +82,9 @@ if(!matchMedia("(prefers-reduced-motion: reduce)").matches){
 // click a clip to pause or play it (a drag across the strip is swallowed before this)
 reelVideos.forEach(v=>v.addEventListener("click",()=>v.paused?v.play():v.pause()));
 
-// Project dialog
-const dialog=$("#projectDialog");
-let shots=[],shot=0;
-const dialogVideo=$("#dialogVideo");
-// a gallery item is a picture, or a short looping clip when it has "video" ("image" is its poster)
-const show=i=>{
-  shot=(i+shots.length)%shots.length;
-  const s=shots[shot];
-  $("#dialogImage").hidden=!!s.video;dialogVideo.hidden=!s.video;
-  if(s.video){
-    dialogVideo.poster=s.image;dialogVideo.src=s.video;dialogVideo.setAttribute("aria-label",s.alt);
-    if(!reduceMotion)dialogVideo.play().catch(()=>{});
-  }else{
-    dialogVideo.pause();dialogVideo.removeAttribute("src");dialogVideo.load();
-    $("#dialogImage").src=s.image;$("#dialogImage").alt=s.alt;
-  }
-  $("#dialogCaption").textContent=s.caption||"";
-  document.querySelectorAll("#dialogThumbs button").forEach((t,j)=>t.setAttribute("aria-pressed",String(j===shot)));
-};
-onSwipe($("#dialogImage"),d=>{if(shots.length>1)show(shot+d)});
-onSwipe(dialogVideo,d=>{if(shots.length>1)show(shot+d)});
-// click a clip to pause or play it (a swipe across it doesn't count as a click)
-let videoDownX=0;
-dialogVideo.addEventListener("pointerdown",e=>videoDownX=e.clientX);
-dialogVideo.addEventListener("click",e=>{
-  if(Math.abs(e.clientX-videoDownX)>10)return;
-  dialogVideo.paused?dialogVideo.play():dialogVideo.pause();
-});
-dragScroll($("#dialogThumbs"));
-// Optional case-study fields, shown in this order when a project has them
-const caseSections=[["objective","The objective"],["solution","Our solution"],["process","Development process"],["features","Interactive features"],["outcome","Outcome"]];
-const openProject=index=>{
-  const p=c.work[index];
-  shots=p.gallery||[{image:p.image,alt:`${p.title} screenshot`}];
-  $("#dialogThumbs").innerHTML=shots.length>1?shots.map((s,i)=>`<button type="button" data-shot="${i}"${s.video?' class="is-video"':""} aria-label="Show ${s.video?"clip":"image"} ${i+1} of ${shots.length}"><img src="${s.image}" alt=""></button>`).join(""):"";
-  $("#dialogThumbs").onclick=e=>{const t=e.target.closest("[data-shot]");if(t)show(+t.dataset.shot)};
-  show(0);
-  $("#dialogType").textContent=p.type;
-  $("#dialogTitle").textContent=p.title;
-  $("#dialogBadges").innerHTML=badges(p);
-  $("#dialogDescription").textContent=p.description;
-  $("#dialogSections").innerHTML=caseSections.filter(([key])=>p[key]).map(([key,heading])=>`<h3>${heading}</h3>${Array.isArray(p[key])?`<ul>${p[key].map(x=>`<li>${x}</li>`).join("")}</ul>`:`<p>${p[key]}</p>`}`).join("");
-  $("#dialogRole").textContent=p.role;
-  $("#dialogStack").textContent=p.stack.join(", ");
-  // originals aren't something to commission, so their CTA points elsewhere
-  const cta=$("#dialogCta");
-  cta.textContent=p.kind==="Original IP"?"Discuss Your Idea":"Start a Similar Project";
-  cta.dataset.type=p.category==="Games"?"Game Development":p.category==="VR / XR"||p.category==="Simulation"?"VR / Simulation":"Interactive 3D Application";
-  dialog.showModal();
-};
-$("#dialogCta").addEventListener("click",()=>dialog.close());
-$("#workGrid").addEventListener("click",e=>{
-  const b=e.target.closest(".work-open");if(b)openProject(+b.dataset.index);
-});
-$("#dialogClose").addEventListener("click",()=>dialog.close());
-dialog.addEventListener("close",()=>dialogVideo.pause());
-closeOnBackdrop(dialog);
-dialog.addEventListener("keydown",e=>{if(shots.length<2)return;if(e.key==="ArrowLeft")show(shot-1);if(e.key==="ArrowRight")show(shot+1)});
+// Projects open their case study page (project.html?p=slug)
+const projectUrl=p=>`project.html?p=${p.slug}`;
+const openProject=index=>{if(c.work[index])location.href=projectUrl(c.work[index])};
 
 // Level design walkthrough
 const level=c.levelDesign;
@@ -298,7 +195,7 @@ $("#segments").innerHTML=c.segments.map(s=>`
     ${s.work.length?`<p class="segment-work">Related work: ${s.work.filter(t=>workIndex(t)>=0).map(t=>`<button type="button" data-project="${workIndex(t)}">${t}</button>`).join(", ")}</p>`:""}
   </article>`).join("");
 $("#segments").addEventListener("click",e=>{const b=e.target.closest("[data-project]");if(b)openProject(+b.dataset.project)});
-// links that name a project (hero proof line, service examples) open it in the project dialog
+// links that name a project (hero proof line, service examples) open its case study
 document.addEventListener("click",e=>{const b=e.target.closest("[data-project-title]");if(b){e.preventDefault();openProject(workIndex(b.dataset.projectTitle))}});
 
 // Hero demo clip plays unless the visitor prefers reduced motion (then the poster frame stays)
@@ -315,7 +212,6 @@ $("#originalsText").textContent=o.text;
 $("#originalsFacts").innerHTML=o.facts.map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join("");
 $("#originalsUpdates").innerHTML=o.updates.map(([when,what])=>`<li><time>${when}</time> ${what}</li>`).join("");
 $("#originalsImages").innerHTML=o.images.map(src=>`<img src="${src}" alt="" loading="lazy" decoding="async">`).join("");
-$("#originalsShots").addEventListener("click",()=>openProject(workIndex(o.title)));
 
 // About: the three divisions
 $("#divisions").innerHTML=c.divisions.map(d=>`<li><p class="division-label">Ave Ludum</p><h3>${d.name}</h3><p>${d.text}</p><a href="${d.link}">${d.linkText} →</a></li>`).join("");

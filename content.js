@@ -1,11 +1,24 @@
 // Edit this file to change the text, projects and links on the site.
 // Filters under "Work" are built automatically from each project's category.
 window.siteContent={
+// Each project has a case study page at project.html?p=<slug>.
+// caseStudy fields only hold what we can show or have confirmed. Leave a field out
+// rather than guess; the page skips any section that has nothing in it.
+//   challenge / approach: one or two sentences each
+//   features: list of what users can do in it
+//   statusNote: a line about where the project is now
+//   contribution: what Ave Ludum did on it
+// gallery items are pictures, or short clips when they have "video" ("image" is the clip's poster).
 work:[
-{title:"AVELS Heavy Vehicle Simulator",type:"Multiplayer training simulator",category:"Simulation",image:"assets/avels/avels-snowy-yard.webp",
+{slug:"avels-heavy-vehicle-simulator",title:"AVELS Heavy Vehicle Simulator",type:"Multiplayer training simulator",category:"Simulation",image:"assets/avels/avels-snowy-yard.webp",
  description:"A multiplayer simulator for heavy equipment. Trainees drive dump trucks, wheel loaders and backhoes around a work yard, guided by spotters on foot using hand signals and voice chat.",
- role:"Simulation design, vehicle systems, multiplayer",stack:["Unity","C#","Multiplayer","Voice chat"],
- // clips: "image" is the poster frame shown before the clip plays
+ role:"Simulation design, vehicle systems, multiplayer",stack:["Unity 6","C#","Multiplayer","Vivox voice chat"],
+ caseStudy:{
+  challenge:"Several people have to work the same yard at once: drivers in different machines, and spotters on foot guiding them. The simulator needs all of them in one shared session, talking and signalling to each other.",
+  approach:"A networked Unity session that players join with a code. Each machine has its own controls and a cab view, spotters walk the yard on foot, and everyone can talk with push-to-talk voice or send hand signals from a gesture wheel. The yard is shown in snow and in rain.",
+  features:["Drive a dump truck, a wheel loader and a backhoe","First-person cab view","Load rocks with the loader and tip them from the dump truck","Join a shared session with a join code","Push-to-talk voice chat between players","Spotters send hand signals from a gesture wheel","Snow and rain, with mud building up on the vehicles"],
+  contribution:"Ave Ludum designed and built the simulator: vehicles and their controls, the multiplayer session, voice chat and the spotter's gesture wheel."
+ },
  gallery:[
   {video:"assets/avels/avels-loading.mp4",image:"assets/avels/avels-loading.webp",alt:"A wheel loader raises its bucket over a dump truck",caption:"Loading the dump truck with a wheel loader."},
   {video:"assets/avels/avels-tipping.mp4",image:"assets/avels/avels-tipping.webp",alt:"A dump truck tips its bed and drops a load of rocks",caption:"Tipping the load at the drop-off point."},
@@ -16,34 +29,85 @@ work:[
   {image:"assets/avels/avels-loaders.webp",alt:"A backhoe and a wheel loader covered in snow beside a dump truck",caption:"Backhoe, wheel loader and dump truck."},
   {image:"assets/avels/avels-rain-truck.webp",alt:"A mud-covered dump truck in the rain outside a brick warehouse",caption:"Rain, and a mud-caked dump truck."}
  ]},
-{title:"The Legend of Toakala",type:"Folklore game",category:"Games",kind:"Original IP",status:"In development",image:"assets/toakala-combat.webp",
+{slug:"the-legend-of-toakala",title:"The Legend of Toakala",type:"Folklore game",category:"Games",kind:"Original IP",status:"In development",image:"assets/toakala-combat.webp",
  description:"Our original game: a 3D adventure that retells the Toa Kala folktale from Maros, South Sulawesi, as something you can walk through and play.",
  role:"Game development, level design, narrative, 3D",stack:["Unity","3D"],
+ caseStudy:{
+  challenge:"Turn a folktale from Maros into a game people can walk through and play, while staying true to the region's landscapes, stories and culture.",
+  approach:"Story first: the story is written with storywriter Rizka Aulia Sabila and discussed with Dinas Kebudayaan dan Kepariwisataan Sulawesi Selatan. Each level is planned on paper as a route, explored in mood paintings, then built in Unity.",
+  features:["Explore forests, karst cliffs, a river valley and a village","Sword combat","A level route that moves from tight cliff paths to an open valley","Cutscenes to carry the story, now in planning"],
+  statusNote:"In development. Pitched to Dinas Kebudayaan dan Kepariwisataan Sulawesi Selatan on 31 October 2026.",
+  contribution:"Our own game: concept, game and level design, art and development by Ave Ludum, with the story written together with Rizka Aulia Sabila."
+ },
  gallery:[
-  {image:"assets/toakala-combat.webp",alt:"A white-furred hero with a sword faces an enemy in a sunlit forest ruin"},
-  {image:"assets/toakala-cliff-path.webp",alt:"A stone path winding between tall cliffs toward a glowing doorway"},
-  {image:"assets/toakala-lagoon.webp",alt:"A turquoise lagoon surrounded by jungle and stone pillars"},
-  {image:"assets/toakala-shrine.webp",alt:"A stone throne and torches below a wooden stairway leading up to a hut"},
-  {image:"assets/toakala-level-layout.webp",alt:"Top-down view of the level in the Unity editor"}
+  {image:"assets/toakala-combat.webp",alt:"A white-furred hero with a sword faces an enemy in a sunlit forest ruin",caption:"Combat in a forest ruin."},
+  {image:"assets/toakala-cliff-path.webp",alt:"A stone path winding between tall cliffs toward a glowing doorway",caption:"The cliff path toward the cave mouth."},
+  {image:"assets/toakala-lagoon.webp",alt:"A turquoise lagoon surrounded by jungle and stone pillars",caption:"The valley lagoon."},
+  {image:"assets/toakala-shrine.webp",alt:"A stone throne and torches below a wooden stairway leading up to a hut",caption:"The way into the village."},
+  {image:"assets/project-key-art.jpg",alt:"Painted key art: a white monkey holding a dark infant in front of a burning wooden house",caption:"Key art."},
+  {image:"assets/concept-toakala-lakeside.webp",alt:"Greyscale painting of a long-haired figure standing by a lake, with butterflies and karst hills behind",caption:"Concept painting: lakeside."},
+  {image:"assets/concept-toakala-village-gate.webp",alt:"Greyscale painting of a torch-lit stone archway leading into a jungle village",caption:"Concept painting: village gate."},
+  {image:"assets/toakala-level-layout.webp",alt:"Top-down view of the level in the Unity editor",caption:"The level in the Unity editor, seen from above."}
  ]},
-{title:"Supermarket VR",type:"VR training simulator",category:"VR / XR",kind:"Client project",status:"Delivered",image:"assets/project-supermarket-vr.jpg",
+{slug:"supermarket-vr",title:"Supermarket VR",type:"VR training simulator",category:"VR / XR",kind:"Client project",status:"Delivered",image:"assets/project-supermarket-vr.jpg",
  description:"A VR recreation of a client's supermarket, built so staff can practise checkout and customer service before they ever stand at a real till.",
- role:"Simulation design, 3D environment, interaction",stack:["Unity","C#","VR"]},
-{title:"Pilah Bumi",type:"Environmental simulation",category:"Simulation",image:"assets/project-pilah-bumi.png",
+ role:"Simulation design, 3D environment, interaction",stack:["Unity","C#","VR"],
+ caseStudy:{
+  challenge:"Give staff somewhere to practise checkout and customer service before they work at a real till.",
+  approach:"Recreate the client's own supermarket in VR, so practice happens in a space that matches the store staff will work in.",
+  features:["A VR recreation of the client's store","Practise checkout","Practise customer service"],
+  statusNote:"Delivered to the client.",
+  contribution:"Simulation design, the 3D environment and the VR interactions."
+ }},
+{slug:"pilah-bumi",title:"Pilah Bumi",type:"Environmental simulation",category:"Simulation",image:"assets/project-pilah-bumi.png",
  description:"A free-roam waste sorting sim. You pick up litter scattered around an open 3D map and sort it into the right bins.",
- role:"Game design, systems, 3D",stack:["Unity","C#"]},
-{title:"Mini Dungeon",type:"Mobile roguelite",category:"Games",kind:"In-house",image:"assets/project-mini-dungeon.png",
+ role:"Game design, systems, 3D",stack:["Unity 6","C#"],
+ caseStudy:{
+  challenge:"Teach waste sorting by doing it: players have to find the litter themselves and decide which bin each piece belongs in.",
+  approach:"A first-person, free-roam neighbourhood with litter scattered around it. Players grab or pick up items, carry them in an inventory, and drop each one into the matching bin until the area is clean.",
+  features:["Free-roam 3D neighbourhood","Grab or pick up litter","Carry items in a storage inventory and hotbar","Sort each item into the right bin","An objective counter that tracks the clean-up","Day and night"],
+  contribution:"Game design, the gameplay systems and the 3D world."
+ },
+ gallery:[
+  {video:"assets/pilah-bumi/pilah-sorting.mp4",image:"assets/pilah-bumi/pilah-sorting.webp",alt:"Dropping a banana peel into a green bin",caption:"Sorting litter into the right bin."},
+  {video:"assets/pilah-bumi/pilah-pickup.mp4",image:"assets/pilah-bumi/pilah-pickup.webp",alt:"A plastic bottle on the road with grab and pick-up prompts",caption:"Finding and picking up litter."},
+  {video:"assets/pilah-bumi/pilah-storage.mp4",image:"assets/pilah-bumi/pilah-storage.webp",alt:"A storage grid holding oranges and bananas",caption:"The storage inventory."},
+  {video:"assets/pilah-bumi/pilah-complete.mp4",image:"assets/pilah-bumi/pilah-complete.webp",alt:"A Complete banner after the last item is sorted",caption:"Clearing the area completes the task."},
+  {image:"assets/project-pilah-bumi.png",alt:"Pilah Bumi title screen with Play and Quit buttons beside two bins",caption:"Title screen."},
+  {image:"assets/pilah-bumi/pilah-night.webp",alt:"The neighbourhood at night under street lights",caption:"The neighbourhood at night."}
+ ]},
+{slug:"mini-dungeon",title:"Mini Dungeon",type:"Mobile roguelite",category:"Games",kind:"In-house",image:"assets/project-mini-dungeon.png",
  description:"A top-down, survivors-style roguelite with procedurally generated maps. Our in-house mobile project.",
- role:"Gameplay systems, procedural generation",stack:["Unity","C#","Mobile"]},
-{title:"MAGER AR",type:"Augmented reality",category:"AR",kind:"Community project",image:"assets/project-mager-ar.png",
+ role:"Gameplay systems, procedural generation",stack:["Unity","C#","Mobile"],
+ caseStudy:{
+  challenge:"Make a mobile roguelite where each run plays out differently.",
+  approach:"Procedurally generated maps in a top-down, survivors-style format.",
+  features:["Top-down, survivors-style play","Procedurally generated maps","Built for mobile"],
+  contribution:"An in-house project: gameplay systems and procedural generation by Ave Ludum."
+ }},
+{slug:"mager-ar",title:"MAGER AR",type:"Augmented reality",category:"AR",kind:"Community project",image:"assets/project-mager-ar.png",
  description:"Stickers and keychains for the Makassar Game Developer community that come to life when you point a phone at them.",
- role:"AR app, 3D models",stack:["Unity","AR"]},
-{title:"Booth renders",type:"Event visualisation",category:"3D",kind:"Client project",status:"Delivered",image:"assets/project-booth-renders.png",
+ role:"AR app, 3D models",stack:["Unity","AR"],
+ caseStudy:{
+  challenge:"Bring the community's stickers and keychains to life on a phone.",
+  approach:"An AR app that shows 3D models when a phone is pointed at the stickers and keychains.",
+  features:["Point a phone at a sticker or keychain","A 3D model appears on it"],
+  contribution:"The AR app and its 3D models."
+ }},
+{slug:"booth-renders",title:"Booth renders",type:"Event visualisation",category:"3D",kind:"Client project",status:"Delivered",image:"assets/project-booth-renders.png",
  description:"Real-time 3D renders of exhibition booths and stands, so clients can see the layout and foot traffic before anything gets built.",
- role:"3D modelling, real-time rendering",stack:["Real-time 3D"]},
-{title:"Key art",type:"Visual development",category:"3D",image:"assets/project-key-art.jpg",
+ role:"3D modelling, real-time rendering",stack:["Real-time 3D"],
+ caseStudy:{
+  challenge:"Show clients what a booth will look like, and how people will move around it, before anything is built.",
+  approach:"Model the booths and stands in 3D and render them in real time.",
+  features:["Real-time 3D booth and stand layouts","A preview of layout and foot traffic"],
+  statusNote:"Delivered to the client.",
+  contribution:"3D modelling and real-time rendering."
+ }},
+{slug:"key-art",title:"Key art",type:"Visual development",category:"3D",image:"assets/project-key-art.jpg",
  description:"A painted key art piece from our visual development work.",
- role:"Illustration, visual development",stack:["Digital painting","3D"]}
+ role:"Illustration, visual development",stack:["Digital painting","3D"],
+ caseStudy:{contribution:"Illustration and visual development."}}
 ],
 // "Level design" section: the Unity top-down layout with clickable stops.
 // x/y are the marker's position on the layout image, in percent.

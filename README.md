@@ -18,9 +18,13 @@ The "Start a project" form validates its fields, then sends the inquiry in one o
 ## Services, pricing and products
 Packages and their starting prices are under `offers` in `content.js`; set `showPrices:false` to hide every price. Digital products go in `products` (title, text, price, url, image); while it's empty the site shows the planned list as "Coming soon".
 
+## Case studies
+Every project in `work` (in `content.js`) has its own page at `project.html?p=<slug>`. The page shows a large screenshot and clip viewer, then numbered sections: overview, challenge, approach, interactive features, technology, status and what Ave Ludum contributed. Fill these in under each project's `caseStudy`. A section with nothing in it is left out, so add details only once they're confirmed. When you add a project, give it a `slug` and add its URL to `sitemap.xml`.
+
 ## Files
 - `services.html` / `services.js` — services and pricing page
-- `site.js` — shared by both pages: theme toggle, footer links, price formatting
+- `project.html` / `project.js` — case study page for each project
+- `site.js` — shared by every page: theme toggle, footer links, price formatting, swipe and drag helpers
 - `index.html` — page structure
 - `content.js` — editable content
 - `script.js` — rendering and interactions

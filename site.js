@@ -22,3 +22,52 @@ $("#year").textContent=new Date().getFullYear();
 
 // "Rp1.500.000" style prices, as written in Indonesia
 const formatRupiah=n=>"Rp"+n.toLocaleString("id-ID");
+
+// Mouse drag for strips that fingers can already scroll natively.
+// onEnd(dx) runs after a drag, e.g. to settle on the nearest card.
+const dragScroll=(el,onEnd)=>{
+  let startX=0,startLeft=0,dragging=false,moved=false;
+  el.addEventListener("pointerdown",e=>{
+    if(e.pointerType!=="mouse"||e.button!==0)return;
+    dragging=true;moved=false;startX=e.clientX;startLeft=el.scrollLeft;
+  });
+  addEventListener("pointermove",e=>{
+    if(!dragging)return;
+    const dx=e.clientX-startX;
+    if(!moved&&Math.abs(dx)<6)return;
+    if(!moved){moved=true;el.classList.add("is-dragging")} // turns snapping off while dragging
+    el.scrollLeft=startLeft-dx;
+  });
+  addEventListener("pointerup",e=>{
+    if(!dragging)return;dragging=false;
+    if(!moved)return;
+    el.classList.remove("is-dragging");
+    onEnd?.(e.clientX-startX);
+    setTimeout(()=>moved=false); // let the click that ends the drag be swallowed first
+  });
+  // a drag shouldn't also count as a click on the card it started on
+  el.addEventListener("click",e=>{if(moved){e.preventDefault();e.stopImmediatePropagation()}},true);
+  el.addEventListener("dragstart",e=>e.preventDefault());
+};
+
+// Swipe with a finger, or drag with the mouse, to step back/forward (step gets -1 or 1)
+const onSwipe=(el,step)=>{
+  let x0=null,y0=0,id=null;
+  el.classList.add("swipeable");
+  el.addEventListener("pointerdown",e=>{if(e.button!==0)return;x0=e.clientX;y0=e.clientY;id=e.pointerId});
+  addEventListener("pointerup",e=>{
+    if(x0===null||e.pointerId!==id)return;
+    const dx=e.clientX-x0,dy=e.clientY-y0;x0=null;
+    if(Math.abs(dx)>40&&Math.abs(dx)>Math.abs(dy)*1.2)step(dx<0?1:-1);
+  });
+  addEventListener("pointercancel",()=>x0=null);
+  el.addEventListener("dragstart",e=>e.preventDefault());
+};
+
+// Close a dialog on a backdrop click, but not when a drag inside it ends out there
+const closeOnBackdrop=d=>{
+  let downOnBackdrop=false;
+  d.addEventListener("pointerdown",e=>downOnBackdrop=e.target===d);
+  d.addEventListener("click",e=>{if(e.target===d&&downOnBackdrop)d.close()});
+};
+
