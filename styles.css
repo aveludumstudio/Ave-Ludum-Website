@@ -590,6 +590,9 @@ h2{letter-spacing:-.025em}
 .case-section .check-list{margin:6px 0 0}
 .tech-list{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .tech-list li{padding:5px 12px;border:1px solid var(--line);border-radius:999px;background:var(--surface);font-weight:600;font-size:14px}
+.case-quote{margin:4px 0 0;padding-left:18px;border-left:3px solid var(--accent)}
+.case-section .case-quote p{color:var(--ink);font:700 clamp(19px,2vw,23px)/1.35 var(--display)}
+.case-quote footer{margin-top:6px;color:var(--muted);font-size:15px}
 .case-facts{position:sticky;top:calc(var(--header) + 24px);padding:24px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
 .case-facts dl{margin:0;display:grid;gap:14px}
 .case-facts dt{color:var(--muted);font-size:12px;letter-spacing:.08em;text-transform:uppercase}

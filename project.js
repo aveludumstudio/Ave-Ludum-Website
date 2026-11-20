@@ -39,6 +39,7 @@ const sections=[
   ["Interactive features",cs.features&&`<ul class="check-list">${cs.features.map(f=>`<li>${f}</li>`).join("")}</ul>`],
   ["Technology",`<ul class="tech-list">${p.stack.map(t=>`<li>${t}</li>`).join("")}</ul>`],
   ["Project status",statusText&&`<p>${statusText}</p>`],
+  ["Client feedback",cs.feedback&&`<blockquote class="case-quote"><p>“${cs.feedback.quote}”</p><footer>${cs.feedback.source}</footer></blockquote>`],
   ["What Ave Ludum contributed",cs.contribution&&`<p>${cs.contribution}</p>`]
 ].filter(([,body])=>body);
 const prev=c.work[(index-1+c.work.length)%c.work.length],next=c.work[(index+1)%c.work.length];

@@ -8,16 +8,18 @@ window.siteContent={
 //   features: list of what users can do in it
 //   statusNote: a line about where the project is now
 //   contribution: what Ave Ludum did on it
+//   feedback: {quote, source}, only real client feedback for this project
 // gallery items are pictures, or short clips when they have "video" ("image" is the clip's poster).
 work:[
-{slug:"avels-heavy-vehicle-simulator",title:"AVELS Heavy Vehicle Simulator",type:"Multiplayer training simulator",category:"Simulation",image:"assets/avels/avels-snowy-yard.webp",
- description:"A multiplayer simulator for heavy equipment. Trainees drive dump trucks, wheel loaders and backhoes around a work yard, guided by spotters on foot using hand signals and voice chat.",
- role:"Simulation design, vehicle systems, multiplayer",stack:["Unity 6","C#","Multiplayer","Vivox voice chat"],
+{slug:"avels-heavy-vehicle-simulator",title:"AVELS Heavy Vehicle Simulator",type:"Multiplayer training simulator",category:"Simulation",kind:"Internal prototype",status:"Ready for testing",image:"assets/avels/avels-snowy-yard.webp",
+ description:"A multiplayer PC simulator for heavy equipment. Trainees drive dump trucks, wheel loaders and backhoes around a work yard, guided by spotters on foot using hand signals and voice chat.",
+ role:"Simulation design, vehicle systems, multiplayer",stack:["Unity 6","C#","Netcode for GameObjects","Vivox voice chat","PC"],
  caseStudy:{
   challenge:"Several people have to work the same yard at once: drivers in different machines, and spotters on foot guiding them. The simulator needs all of them in one shared session, talking and signalling to each other.",
-  approach:"A networked Unity session that players join with a code. Each machine has its own controls and a cab view, spotters walk the yard on foot, and everyone can talk with push-to-talk voice or send hand signals from a gesture wheel. The yard is shown in snow and in rain.",
-  features:["Drive a dump truck, a wheel loader and a backhoe","First-person cab view","Load rocks with the loader and tip them from the dump truck","Join a shared session with a join code","Push-to-talk voice chat between players","Spotters send hand signals from a gesture wheel","Snow and rain, with mud building up on the vehicles"],
-  contribution:"Ave Ludum designed and built the simulator: vehicles and their controls, the multiplayer session, voice chat and the spotter's gesture wheel."
+  approach:"A networked Unity session built on Netcode for GameObjects that players join with a code. Each machine has its own controls and a cab view, spotters walk the yard on foot, and everyone can talk with push-to-talk voice or send hand signals from a gesture wheel. The yard is shown in snow and in rain.",
+  features:["Drive a dump truck, a wheel loader and a backhoe","First-person cab view","Load rocks with the loader and tip them from the dump truck","Join a shared session with a join code, up to 4 players so far","Push-to-talk voice chat between players","Spotters send hand signals from a gesture wheel","Snow and rain, with mud building up on the vehicles"],
+  statusNote:"In progress and ready for testing. The PC build runs multiplayer sessions with up to 4 concurrent players so far.",
+  contribution:"Built in-house by Ave Ludum as a prototype. It can be adapted into the simulator a client needs: different vehicles, equipment, sites or training procedures."
  },
  gallery:[
   {video:"assets/avels/avels-loading.mp4",image:"assets/avels/avels-loading.webp",alt:"A wheel loader raises its bucket over a dump truck",caption:"Loading the dump truck with a wheel loader."},
@@ -29,43 +31,56 @@ work:[
   {image:"assets/avels/avels-loaders.webp",alt:"A backhoe and a wheel loader covered in snow beside a dump truck",caption:"Backhoe, wheel loader and dump truck."},
   {image:"assets/avels/avels-rain-truck.webp",alt:"A mud-covered dump truck in the rain outside a brick warehouse",caption:"Rain, and a mud-caked dump truck."}
  ]},
-{slug:"the-legend-of-toakala",title:"The Legend of Toakala",type:"Folklore game",category:"Games",kind:"Original IP",status:"In development",image:"assets/toakala-combat.webp",
- description:"Our original game: a 3D adventure that retells the Toa Kala folktale from Maros, South Sulawesi, as something you can walk through and play.",
- role:"Game development, level design, narrative, 3D",stack:["Unity","3D"],
+{slug:"the-legend-of-toakala",title:"The Legend of Toakala",type:"Mobile folklore adventure",category:"Games",kind:"Original IP",status:"In development",image:"assets/toakala/tk-explore.webp",
+ description:"Our original mobile game: a 3D adventure that retells the Toa Kala folktale from Maros, South Sulawesi, as something you can walk through and play.",
+ role:"Game development, level design, narrative, 3D",stack:["Unity 6","C#","Mobile (Android)"],
  caseStudy:{
-  challenge:"Turn a folktale from Maros into a game people can walk through and play, while staying true to the region's landscapes, stories and culture.",
-  approach:"Story first: the story is written with storywriter Rizka Aulia Sabila and discussed with Dinas Kebudayaan dan Kepariwisataan Sulawesi Selatan. Each level is planned on paper as a route, explored in mood paintings, then built in Unity.",
-  features:["Explore forests, karst cliffs, a river valley and a village","Sword combat","A level route that moves from tight cliff paths to an open valley","Cutscenes to carry the story, now in planning"],
-  statusNote:"In development. Pitched to Dinas Kebudayaan dan Kepariwisataan Sulawesi Selatan on 31 October 2026.",
+  challenge:"Turn a folktale from Maros into a game people can play on their phones, while staying true to the region's landscapes, stories and culture.",
+  approach:"Story first: the story is written with storywriter Rizka Aulia Sabila and discussed with Dinas Kebudayaan dan Kepariwisataan Sulawesi Selatan. Each level is planned on paper as a route, explored in mood paintings, then built in Unity for mobile. The painted concept style carries into the game's story cutscenes, and local heritage is woven into the quests.",
+  features:["Explore forests, rivers, karst cliffs and a royal village","Touch controls with an on-screen joystick, jump and sprint","Quests with on-screen objectives and distance markers","Dialogue with character portraits","Painted story cutscenes with narration","A Lipa' Sabbe weaving puzzle: match a traditional pattern thread by thread","Notes on local heritage, like the Bugis silk sarong","A cave puzzle built around the handprints of Leang-Leang","Catching Bantimurung butterflies"],
+  statusNote:"In development for mobile, with a new art style. Pitched to Dinas Kebudayaan dan Kepariwisataan Sulawesi Selatan on 31 October 2026.",
   contribution:"Our own game: concept, game and level design, art and development by Ave Ludum, with the story written together with Rizka Aulia Sabila."
  },
  gallery:[
-  {image:"assets/toakala-combat.webp",alt:"A white-furred hero with a sword faces an enemy in a sunlit forest ruin",caption:"Combat in a forest ruin."},
-  {image:"assets/toakala-cliff-path.webp",alt:"A stone path winding between tall cliffs toward a glowing doorway",caption:"The cliff path toward the cave mouth."},
-  {image:"assets/toakala-lagoon.webp",alt:"A turquoise lagoon surrounded by jungle and stone pillars",caption:"The valley lagoon."},
-  {image:"assets/toakala-shrine.webp",alt:"A stone throne and torches below a wooden stairway leading up to a hut",caption:"The way into the village."},
-  {image:"assets/project-key-art.jpg",alt:"Painted key art: a white monkey holding a dark infant in front of a burning wooden house",caption:"Key art."},
+  {video:"assets/toakala/tk-explore.mp4",image:"assets/toakala/tk-explore.webp",alt:"Toakala, a white monkey warrior, runs along a stone path with touch controls on screen",caption:"Exploring with touch controls."},
+  {video:"assets/toakala/tk-cutscene.mp4",image:"assets/toakala/tk-cutscene.webp",alt:"A greyscale painted scene of a jungle kingdom gate with narration text",caption:"A painted story cutscene."},
+  {video:"assets/toakala/tk-weaving.mp4",image:"assets/toakala/tk-weaving.webp",alt:"A weaving puzzle matching a red, yellow and purple sarong pattern",caption:"The Lipa' Sabbe weaving puzzle, then a note on the Bugis silk sarong."},
+  {video:"assets/toakala/tk-dialogue.mp4",image:"assets/toakala/tk-dialogue.webp",alt:"Toakala meets Putri I Bissu Daeng, with character portraits in the dialogue box",caption:"Meeting Putri I Bissu Daeng."},
+  {video:"assets/toakala/tk-handprints.mp4",image:"assets/toakala/tk-handprints.webp",alt:"Toakala runs through a rocky cave area touching red handprints on the walls",caption:"The Leang-Leang handprint puzzle."},
+  {video:"assets/toakala/tk-village.mp4",image:"assets/toakala/tk-village.webp",alt:"A village street with thatched houses and tall tiered roofs in the distance",caption:"The royal village."},
+  {image:"assets/toakala/tk-lagoon-huts.webp",alt:"A turquoise lagoon with lily pads and thatched huts on the far bank",caption:"The lagoon."},
+  {image:"assets/toakala/tk-forest-lagoon.webp",alt:"A woman in green stands by a lagoon in the forest",caption:"Forest lagoon."},
+  {image:"assets/toakala/tk-bridge.webp",alt:"A wooden bridge leading into a misty forest",caption:"A bridge into the mist."},
+  {image:"assets/toakala/tk-river-hut.webp",alt:"A shallow river running past a thatched hut in the forest",caption:"River crossing."},
+  {image:"assets/toakala/tk-title.webp",alt:"The Legend of Toa Kala title screen with Play, About and Quit",caption:"Title screen."},
   {image:"assets/concept-toakala-lakeside.webp",alt:"Greyscale painting of a long-haired figure standing by a lake, with butterflies and karst hills behind",caption:"Concept painting: lakeside."},
-  {image:"assets/concept-toakala-village-gate.webp",alt:"Greyscale painting of a torch-lit stone archway leading into a jungle village",caption:"Concept painting: village gate."},
-  {image:"assets/toakala-level-layout.webp",alt:"Top-down view of the level in the Unity editor",caption:"The level in the Unity editor, seen from above."}
+  {image:"assets/concept-toakala-village-gate.webp",alt:"Greyscale painting of a torch-lit stone archway leading into a jungle village",caption:"Concept painting: village gate."}
  ]},
 {slug:"supermarket-vr",title:"Supermarket VR",type:"VR training simulator",category:"VR / XR",kind:"Client project",status:"Delivered",image:"assets/project-supermarket-vr.jpg",
  description:"A VR recreation of a client's supermarket, built so staff can practise checkout and customer service before they ever stand at a real till.",
  role:"Simulation design, 3D environment, interaction",stack:["Unity","C#","VR"],
  caseStudy:{
   challenge:"Give staff somewhere to practise checkout and customer service before they work at a real till.",
-  approach:"Recreate the client's own supermarket in VR, so practice happens in a space that matches the store staff will work in.",
+  approach:"Recreate the client's own supermarket in VR, so practice happens in a space that matches the store staff will work in. We tested it with the client on a standalone VR headset.",
   features:["A VR recreation of the client's store","Practise checkout","Practise customer service"],
-  statusNote:"Delivered to the client.",
+  statusNote:"Delivered. The client was satisfied and has since asked us for a new project, which is under NDA.",
+  feedback:{quote:"Good quality project, as initially agreed.",source:"The client"},
   contribution:"Simulation design, the 3D environment and the VR interactions."
- }},
-{slug:"pilah-bumi",title:"Pilah Bumi",type:"Environmental simulation",category:"Simulation",image:"assets/project-pilah-bumi.png",
- description:"A free-roam waste sorting sim. You pick up litter scattered around an open 3D map and sort it into the right bins.",
- role:"Game design, systems, 3D",stack:["Unity 6","C#"],
+ },
+ gallery:[
+  {image:"assets/project-supermarket-vr.jpg",alt:"Supermarket VR project image",caption:"Supermarket VR."},
+  {video:"assets/supermarket-vr/vr-playtest.mp4",image:"assets/supermarket-vr/vr-playtest.webp",alt:"A tester wearing a VR headset uses the controllers while the VR view shows on a laptop",caption:"Testing with the client in a VR headset."},
+  {image:"assets/supermarket-vr/vr-playtest-photo-1.webp",alt:"A tester in a VR headset at a table with a laptop showing the VR view, watched by a colleague",caption:"Client playtest."},
+  {image:"assets/supermarket-vr/vr-playtest-photo-2.webp",alt:"A tester in a VR headset holding a controller beside a laptop",caption:"The VR view mirrored on a laptop during testing."}
+ ]},
+{slug:"pilah-bumi",title:"Pilah Bumi",type:"Environmental mobile game",category:"Simulation",status:"Base game complete",image:"assets/project-pilah-bumi.png",
+ description:"A free-roam waste sorting game for mobile. You pick up litter scattered around an open 3D map and sort it into the right bins.",
+ role:"Game design, systems, 3D",stack:["Unity 6","C#","Mobile"],
  caseStudy:{
   challenge:"Teach waste sorting by doing it: players have to find the litter themselves and decide which bin each piece belongs in.",
   approach:"A first-person, free-roam neighbourhood with litter scattered around it. Players grab or pick up items, carry them in an inventory, and drop each one into the matching bin until the area is clean.",
   features:["Free-roam 3D neighbourhood","Grab or pick up litter","Carry items in a storage inventory and hotbar","Sort each item into the right bin","An objective counter that tracks the clean-up","Day and night"],
+  statusNote:"The base game is complete. An expansion with a new island map has been proposed to a client and is in progress.",
   contribution:"Game design, the gameplay systems and the 3D world."
  },
  gallery:[
@@ -85,13 +100,14 @@ work:[
   features:["Top-down, survivors-style play","Procedurally generated maps","Built for mobile"],
   contribution:"An in-house project: gameplay systems and procedural generation by Ave Ludum."
  }},
-{slug:"mager-ar",title:"MAGER AR",type:"Augmented reality",category:"AR",kind:"Community project",image:"assets/project-mager-ar.png",
+{slug:"mager-ar",title:"MAGER AR",type:"Augmented reality",category:"AR",kind:"Community project",status:"Completed",image:"assets/project-mager-ar.png",
  description:"Stickers and keychains for the Makassar Game Developer community that come to life when you point a phone at them.",
  role:"AR app, 3D models",stack:["Unity","AR"],
  caseStudy:{
   challenge:"Bring the community's stickers and keychains to life on a phone.",
   approach:"An AR app that shows 3D models when a phone is pointed at the stickers and keychains.",
   features:["Point a phone at a sticker or keychain","A 3D model appears on it"],
+  statusNote:"Completed. We can build a custom version for your own stickers, merchandise or characters.",
   contribution:"The AR app and its 3D models."
  }},
 {slug:"booth-renders",title:"Booth renders",type:"Event visualisation",category:"3D",kind:"Client project",status:"Delivered",image:"assets/project-booth-renders.png",
@@ -102,12 +118,16 @@ work:[
   approach:"Model the booths and stands in 3D and render them in real time.",
   features:["Real-time 3D booth and stand layouts","A preview of layout and foot traffic"],
   statusNote:"Delivered to the client.",
+  feedback:{quote:"Perfect for visualising projects — better than expected.",source:"The client"},
   contribution:"3D modelling and real-time rendering."
  }},
-{slug:"key-art",title:"Key art",type:"Visual development",category:"3D",image:"assets/project-key-art.jpg",
+{slug:"key-art",title:"Key art",type:"Visual development",category:"3D",status:"Completed",image:"assets/project-key-art.jpg",
  description:"A painted key art piece from our visual development work.",
  role:"Illustration, visual development",stack:["Digital painting","3D"],
- caseStudy:{contribution:"Illustration and visual development."}}
+ caseStudy:{
+  statusNote:"Completed. We also take commissions for custom key art.",
+  contribution:"Illustration and visual development."
+ }}
 ],
 // "Level design" section: the Unity top-down layout with clickable stops.
 // x/y are the marker's position on the layout image, in percent.
@@ -198,7 +218,7 @@ divisions:[
 // type preselects the project type in the inquiry form. pitch, bestFor and example
 // (a project title from "work") are the home page card; text and details are services.html.
 whatWeDo:[
- {id:"game-development",title:"Game Development",pitch:"Get a playable game or game feature built in Unity, from a first prototype you can test with players to a finished build.",bestFor:"startups, game teams and brands with a game idea",example:"The Legend of Toakala",text:"Custom games, gameplay systems, mechanics and Unity prototypes, from first playable to finished build.",image:"assets/toakala-combat.webp",alt:"Combat scene from The Legend of Toakala",type:"Game Development",
+ {id:"game-development",title:"Game Development",pitch:"Get a playable game or game feature built in Unity, from a first prototype you can test with players to a finished build.",bestFor:"startups, game teams and brands with a game idea",example:"The Legend of Toakala",text:"Custom games, gameplay systems, mechanics and Unity prototypes, from first playable to finished build.",image:"assets/toakala/tk-explore.webp",alt:"Exploring the forest in The Legend of Toakala, our mobile game",type:"Game Development",
   details:["Custom games and game features","Gameplay systems and mechanics","Unity prototypes and first playables","Interactive entertainment and co-development"],work:["The Legend of Toakala","Mini Dungeon"]},
  {id:"interactive-applications",title:"Interactive Applications",pitch:"Turn a lesson, campaign or process into something people use with their own hands, so it sticks better than slides or a video.",bestFor:"schools, universities, training providers and campaigns",example:"Pilah Bumi",text:"Interactive learning apps, digital experiences, product demonstrations and custom applications.",image:"assets/project-pilah-bumi.png",alt:"Pilah Bumi, a waste sorting simulation",type:"Educational Application",
   details:["Interactive learning applications","Educational games","Digital experiences for events and campaigns","Custom interactive applications"],work:["Pilah Bumi","MAGER AR"]},
@@ -249,13 +269,13 @@ offers:[
 originals:{
  title:"The Legend of Toakala",
  status:"In development",
- text:"Our first original game: a 3D adventure that retells the Toa Kala folktale from Maros, South Sulawesi. Players travel through forests, karst cliffs and a royal village drawn from the region's landscapes and culture.",
- facts:[["Status","In development"],["Engine","Unity"],["Setting","Maros, South Sulawesi"],["Story","Written with storywriter Rizka Aulia Sabila"]],
+ text:"Our first original game: a mobile 3D adventure that retells the Toa Kala folktale from Maros, South Sulawesi. Players travel through forests, karst cliffs and a royal village, with quests built around local heritage like Lipa' Sabbe weaving and the handprints of Leang-Leang.",
+ facts:[["Status","In development"],["Platform","Mobile"],["Engine","Unity 6"],["Setting","Maros, South Sulawesi"]],
  updates:[
-  ["31 Oct 2026","Pitched to Dinas Kebudayaan dan Kepariwisataan Sulawesi Selatan."],
-  ["Ongoing","Level layouts, concept art and the first playable route in Unity."]
+  ["Nov 2026","New art style, with gameplay, quests and painted story cutscenes running on mobile."],
+  ["31 Oct 2026","Pitched to Dinas Kebudayaan dan Kepariwisataan Sulawesi Selatan."]
  ],
- images:["assets/toakala-cliff-path.webp","assets/toakala-lagoon.webp","assets/toakala-shrine.webp"]
+ images:["assets/toakala/tk-lagoon-huts.webp","assets/toakala/tk-explore.webp","assets/toakala/tk-village-street.webp"]
 },
 // Digital products for sale. Leave empty until something is ready to buy;
 // the section then shows what's planned, clearly marked as coming soon.
