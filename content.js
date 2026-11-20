@@ -16,8 +16,8 @@ work:[
   {image:"assets/avels/avels-loaders.webp",alt:"A backhoe and a wheel loader covered in snow beside a dump truck",caption:"Backhoe, wheel loader and dump truck."},
   {image:"assets/avels/avels-rain-truck.webp",alt:"A mud-covered dump truck in the rain outside a brick warehouse",caption:"Rain, and a mud-caked dump truck."}
  ]},
-{title:"The Legend of Toakala",type:"Folklore game",category:"Games",image:"assets/toakala-combat.webp",
- description:"A 3D game from Maros that retells the Toa Kala folktale as something you can walk through and play.",
+{title:"The Legend of Toakala",type:"Folklore game",category:"Games",kind:"Original IP",status:"In development",image:"assets/toakala-combat.webp",
+ description:"Our original game: a 3D adventure that retells the Toa Kala folktale from Maros, South Sulawesi, as something you can walk through and play.",
  role:"Game development, level design, narrative, 3D",stack:["Unity","3D"],
  gallery:[
   {image:"assets/toakala-combat.webp",alt:"A white-furred hero with a sword faces an enemy in a sunlit forest ruin"},
@@ -26,19 +26,19 @@ work:[
   {image:"assets/toakala-shrine.webp",alt:"A stone throne and torches below a wooden stairway leading up to a hut"},
   {image:"assets/toakala-level-layout.webp",alt:"Top-down view of the level in the Unity editor"}
  ]},
-{title:"Supermarket VR",type:"VR training simulator",category:"VR / XR",image:"assets/project-supermarket-vr.jpg",
+{title:"Supermarket VR",type:"VR training simulator",category:"VR / XR",kind:"Client project",status:"Delivered",image:"assets/project-supermarket-vr.jpg",
  description:"A VR recreation of a client's supermarket, built so staff can practise checkout and customer service before they ever stand at a real till.",
  role:"Simulation design, 3D environment, interaction",stack:["Unity","C#","VR"]},
 {title:"Pilah Bumi",type:"Environmental simulation",category:"Simulation",image:"assets/project-pilah-bumi.png",
  description:"A free-roam waste sorting sim. You pick up litter scattered around an open 3D map and sort it into the right bins.",
  role:"Game design, systems, 3D",stack:["Unity","C#"]},
-{title:"Mini Dungeon",type:"Mobile roguelite",category:"Games",image:"assets/project-mini-dungeon.png",
+{title:"Mini Dungeon",type:"Mobile roguelite",category:"Games",kind:"In-house",image:"assets/project-mini-dungeon.png",
  description:"A top-down, survivors-style roguelite with procedurally generated maps. Our in-house mobile project.",
  role:"Gameplay systems, procedural generation",stack:["Unity","C#","Mobile"]},
-{title:"MAGER AR",type:"Augmented reality",category:"AR",image:"assets/project-mager-ar.png",
+{title:"MAGER AR",type:"Augmented reality",category:"AR",kind:"Community project",image:"assets/project-mager-ar.png",
  description:"Stickers and keychains for the Makassar Game Developer community that come to life when you point a phone at them.",
  role:"AR app, 3D models",stack:["Unity","AR"]},
-{title:"Booth renders",type:"Event visualisation",category:"3D",image:"assets/project-booth-renders.png",
+{title:"Booth renders",type:"Event visualisation",category:"3D",kind:"Client project",status:"Delivered",image:"assets/project-booth-renders.png",
  description:"Real-time 3D renders of exhibition booths and stands, so clients can see the layout and foot traffic before anything gets built.",
  role:"3D modelling, real-time rendering",stack:["Real-time 3D"]},
 {title:"Key art",type:"Visual development",category:"3D",image:"assets/project-key-art.jpg",
@@ -120,7 +120,34 @@ reel:[
  {tag:"Studio",video:"assets/studio-life/studio-blockout.mp4",image:"assets/studio-life/studio-blockout.webp",caption:"Blocking out a village in Blender."}
 ],
 studioCopy:[
-"Ave Ludum Studio is an independent studio from Makassar, South Sulawesi. Alongside original games inspired by Indonesian places and folklore, we build interactive work for clients—combining game-development thinking with clear scope, practical prototypes, and collaborative delivery."
+"Ave Ludum Studio is an independent game development and interactive technology studio dedicated to transforming ideas into engaging digital experiences.",
+"We combine creativity, technology, and problem-solving to develop games, interactive applications, immersive environments, and simulation-based experiences.",
+"Whether developing a playable prototype, creating an educational experience, or exploring an original game concept, we believe technology becomes meaningful when people can interact with it."
+],
+// The studio's three divisions, shown in "About"
+divisions:[
+ {name:"Interactive Solutions",text:"Client-funded development: custom interactive applications, game prototypes, 3D demonstrations and simulations.",link:"services.html",linkText:"Services"},
+ {name:"Digital Products",text:"Reusable development tools, Unity assets, game systems, templates and interactive learning products.",link:"#products",linkText:"Coming soon"},
+ {name:"Originals",text:"Original games and experimental experiences of our own, starting with The Legend of Toakala.",link:"#originals",linkText:"Ave Ludum Originals"}
+],
+// "What we do" on the home page. id matches the section on services.html;
+// type preselects the project type in the inquiry form.
+whatWeDo:[
+ {id:"game-development",title:"Game Development",text:"Custom games, gameplay systems, mechanics and Unity prototypes, from first playable to finished build.",image:"assets/toakala-combat.webp",alt:"Combat scene from The Legend of Toakala",type:"Game Development",
+  details:["Custom games and game features","Gameplay systems and mechanics","Unity prototypes and first playables","Interactive entertainment and co-development"],work:["The Legend of Toakala","Mini Dungeon"]},
+ {id:"interactive-applications",title:"Interactive Applications",text:"Interactive learning apps, digital experiences, product demonstrations and custom applications.",image:"assets/project-pilah-bumi.png",alt:"Pilah Bumi, a waste sorting simulation",type:"Educational Application",
+  details:["Interactive learning applications","Educational games","Digital experiences for events and campaigns","Custom interactive applications"],work:["Pilah Bumi","MAGER AR"]},
+ {id:"interactive-3d",title:"Interactive 3D & Visualization",text:"3D environments, interactive product visualization, virtual showrooms and 3D demonstrations.",image:"assets/project-booth-renders.png",alt:"Real-time 3D render of an exhibition booth",type:"Interactive 3D Application",
+  details:["3D environments","Interactive product visualization","Virtual showrooms and exhibition previews","3D demonstrations"],work:["Booth renders"]},
+ {id:"vr-simulation",title:"VR & Simulation",text:"Virtual reality experiences, training scenarios, educational simulations and interactive demonstrations.",image:"assets/avels/avels-loading.webp",alt:"A wheel loader loading a dump truck in the AVELS simulator",type:"VR / Simulation",
+  details:["Virtual reality experiences","Training scenarios and equipment familiarization","Educational simulations","Interactive demonstrations"],work:["AVELS Heavy Vehicle Simulator","Supermarket VR"]}
+],
+// "Who we work with". work lists related projects on this site (titles must match "work").
+segments:[
+ {title:"Education & Research",text:"Interactive learning media, educational games, virtual laboratories and training simulations that let students practise instead of just read.",work:["Pilah Bumi"]},
+ {title:"Businesses & Industry",text:"Product demonstrations, interactive 3D visualization, equipment familiarization and simulations that show how something works before it's built or bought.",work:["AVELS Heavy Vehicle Simulator","Supermarket VR","Booth renders"]},
+ {title:"Tourism & Cultural Institutions",text:"Interactive storytelling, digital heritage experiences and virtual environments that bring local places and stories to new audiences.",work:["The Legend of Toakala"]},
+ {title:"Game Developers & Startups",text:"Prototyping, Unity development, technical assistance and co-development for teams that need extra hands or a playable proof of concept.",work:["MAGER AR"]}
 ],
 fieldPhotos:[
 {image:"assets/toakala-discussion.jpg",width:2000,height:1125,focus:"center 78%",caption:"Discussing The Legend of Toakala with Achmad Yusran Arief of Dinas Kebudayaan dan Kepariwisataan Sulawesi Selatan and storywriter Rizka Aulia Sabila."},
@@ -132,18 +159,49 @@ testimonials:[
 {quote:"Good quality project, as initially agreed.",source:"VR simulator client"},
 {quote:"Perfect for visualising projects — better than expected.",source:"Booth render client"}
 ],
-services:[
-["Unity Prototypes & Gameplay","Test a mechanic or concept with a focused playable build. Useful for pitches, proof-of-concept work, and early validation."],
-["Interactive 3D & Product Demos","Let customers explore a product, space, or process through a simple interactive experience built for an agreed platform."],
-["Training Simulations & VR","Prototype a procedural or training scenario with clear interactions and feedback. Content is developed with your subject-matter expert."],
-["Development Support","Add a feature, fix a defined bug, optimize a small section, or provide specialist Unity implementation for an existing project."]
-],
 process:[
-["Scope","Define the audience, problem, target platform, must-have interactions, and budget range."],
-["Prototype","Agree on a small deliverable and show progress early."],
-["Build & review","Share working builds at agreed milestones; gather consolidated feedback."],
-["Handoff","Deliver the agreed build, source files if included, and concise handoff notes."]
+["Discover","Understand your objectives, audience, requirements and project constraints."],
+["Design","Develop concepts, user flows, technical specifications and the project scope."],
+["Develop","Build, test, refine and optimize the interactive experience, with working builds shared along the way."],
+["Deliver","Provide the agreed deliverables, documentation and handover."]
 ],
+// Packaged starting points on services.html. price is a starting estimate in rupiah;
+// set showPrices to false to hide every price on the site.
+showPrices:true,
+offers:[
+ {id:"prototype-sprint",title:"Playable Prototype Sprint",for:"Startups, entrepreneurs, game developers and organizations",price:1500000,type:"Game Prototype / MVP",
+  includes:["Core gameplay mechanics","Unity prototype development","Basic user interface","One playable scene","Basic build and demonstration"]},
+ {id:"3d-product-demo",title:"Interactive 3D Product Demo",for:"Manufacturers, businesses, exhibitions and property developers",price:1500000,type:"Product Visualization",
+  includes:["3D product visualization","Interactive object inspection","Camera controls","Product information panels","Basic configurator features"]},
+ {id:"educational-module",title:"Educational Interactive Module",for:"Schools, universities and training providers",price:1500000,type:"Educational Application",
+  includes:["Interactive learning experiences","Educational games","Virtual laboratory concepts","Interactive assessments","Simulation-based learning"]},
+ {id:"vr-training-poc",title:"VR Training Proof of Concept",for:"Corporate training providers, universities and industrial clients",price:3000000,type:"VR / Simulation",
+  includes:["VR interaction","Scenario-based learning","Basic training workflows","Demonstration builds","Hardware-specific development where supported"]},
+ {id:"unity-support",title:"Unity Technical Support",for:"Independent developers, startups and small development teams",price:150000,unit:"/ hour",type:"Unity Technical Support",
+  includes:["Debugging","Performance optimization","C# scripting","Project architecture","Unity troubleshooting"]}
+],
+// Ave Ludum Originals: the studio's own games
+originals:{
+ title:"The Legend of Toakala",
+ status:"In development",
+ text:"Our first original game: a 3D adventure that retells the Toa Kala folktale from Maros, South Sulawesi. Players travel through forests, karst cliffs and a royal village drawn from the region's landscapes and culture.",
+ facts:[["Status","In development"],["Engine","Unity"],["Setting","Maros, South Sulawesi"],["Story","Written with storywriter Rizka Aulia Sabila"]],
+ updates:[
+  ["31 Oct 2026","Pitched to Dinas Kebudayaan dan Kepariwisataan Sulawesi Selatan."],
+  ["Ongoing","Level layouts, concept art and the first playable route in Unity."]
+ ],
+ images:["assets/toakala-cliff-path.webp","assets/toakala-lagoon.webp","assets/toakala-shrine.webp"]
+},
+// Digital products for sale. Leave empty until something is ready to buy;
+// the section then shows what's planned, clearly marked as coming soon.
+products:[],
+plannedProducts:["Unity starter templates","Reusable gameplay systems","UI kits","3D asset packs","Educational interactive templates","Development tools"],
+// Project inquiry form.
+// endpoint: a form service URL that accepts JSON POSTs (e.g. Formspree, Web3Forms, FormSubmit).
+//   Empty = the form opens the visitor's email app with the inquiry filled in instead.
+// whatsapp: the studio's WhatsApp number in international format without "+" (e.g. 6281234567890).
+//   Empty = the WhatsApp button is hidden.
+inquiry:{endpoint:"",whatsapp:""},
 email:"ave.ludum@gmail.com",
 location:{
  intro:"We work out of a small house on a quiet street in Rappocini, Makassar. Look for the sign above the gate.",

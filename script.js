@@ -49,6 +49,8 @@ const closeOnBackdrop=d=>{
 };
 
 // Work grid + filters (filters come from the categories actually used)
+// project kind (Original IP, client project…) and status, shown on cards and in the dialog
+const badges=p=>[p.kind,p.status].filter(Boolean).map((b,i)=>`<span class="badge${i?" badge-status":""}">${b}</span>`).join("");
 const categories=["All",...new Set(c.work.map(p=>p.category))];
 let activeFilter="All";
 $("#filters").innerHTML=categories.map(f=>`<button type="button" data-filter="${f}" aria-pressed="${f==="All"}">${f}</button>`).join("");
@@ -56,11 +58,13 @@ const renderWork=()=>{
   $("#workGrid").innerHTML=c.work.map((p,i)=>({p,i})).filter(({p})=>activeFilter==="All"||p.category===activeFilter).map(({p,i})=>`
     <article class="work-card">
       <button type="button" class="work-open" data-index="${i}">
-        <span class="work-image"><img src="${p.image}" alt="" loading="lazy" decoding="async"></span>
+        <span class="work-image"><img src="${p.image}" alt="" loading="lazy" decoding="async">${p.kind||p.status?`<span class="work-badges">${badges(p)}</span>`:""}</span>
         <span class="work-text">
           <span class="work-type">${p.type}</span>
           <span class="work-title">${p.title}</span>
           <span class="work-desc">${p.description}</span>
+          <span class="work-stack">${p.stack.join(" · ")}</span>
+          <span class="work-more">View project →</span>
         </span>
       </button>
     </article>`).join("");
@@ -155,19 +159,30 @@ dialogVideo.addEventListener("click",e=>{
   dialogVideo.paused?dialogVideo.play():dialogVideo.pause();
 });
 dragScroll($("#dialogThumbs"));
-$("#workGrid").addEventListener("click",e=>{
-  const b=e.target.closest(".work-open");if(!b)return;
-  const p=c.work[b.dataset.index];
+// Optional case-study fields, shown in this order when a project has them
+const caseSections=[["objective","The objective"],["solution","Our solution"],["process","Development process"],["features","Interactive features"],["outcome","Outcome"]];
+const openProject=index=>{
+  const p=c.work[index];
   shots=p.gallery||[{image:p.image,alt:`${p.title} screenshot`}];
   $("#dialogThumbs").innerHTML=shots.length>1?shots.map((s,i)=>`<button type="button" data-shot="${i}"${s.video?' class="is-video"':""} aria-label="Show ${s.video?"clip":"image"} ${i+1} of ${shots.length}"><img src="${s.image}" alt=""></button>`).join(""):"";
   $("#dialogThumbs").onclick=e=>{const t=e.target.closest("[data-shot]");if(t)show(+t.dataset.shot)};
   show(0);
   $("#dialogType").textContent=p.type;
   $("#dialogTitle").textContent=p.title;
+  $("#dialogBadges").innerHTML=badges(p);
   $("#dialogDescription").textContent=p.description;
+  $("#dialogSections").innerHTML=caseSections.filter(([key])=>p[key]).map(([key,heading])=>`<h3>${heading}</h3>${Array.isArray(p[key])?`<ul>${p[key].map(x=>`<li>${x}</li>`).join("")}</ul>`:`<p>${p[key]}</p>`}`).join("");
   $("#dialogRole").textContent=p.role;
   $("#dialogStack").textContent=p.stack.join(", ");
+  // originals aren't something to commission, so their CTA points elsewhere
+  const cta=$("#dialogCta");
+  cta.textContent=p.kind==="Original IP"?"Discuss Your Idea":"Start a Similar Project";
+  cta.dataset.type=p.category==="Games"?"Game Development":p.category==="VR / XR"||p.category==="Simulation"?"VR / Simulation":"Interactive 3D Application";
   dialog.showModal();
+};
+$("#dialogCta").addEventListener("click",()=>dialog.close());
+$("#workGrid").addEventListener("click",e=>{
+  const b=e.target.closest(".work-open");if(b)openProject(+b.dataset.index);
 });
 $("#dialogClose").addEventListener("click",()=>dialog.close());
 dialog.addEventListener("close",()=>dialogVideo.pause());
@@ -261,30 +276,137 @@ document.querySelectorAll("#team img.person-photo").forEach(img=>img.addEventLis
   img.replaceWith(s);
 },{once:true}));
 
-// Services + process
-$("#serviceList").innerHTML=c.services.map(([name,text])=>`<div><dt>${name}</dt><dd>${text}</dd></div>`).join("");
-$("#process").innerHTML=c.process.map(([name,text])=>`<li><strong>${name}.</strong> ${text}</li>`).join("");
+// What we do: the four service areas
+$("#whatWeDo").innerHTML=c.whatWeDo.map(s=>`
+  <article class="offer-card">
+    <img src="${s.image}" alt="${s.alt}" loading="lazy" decoding="async">
+    <div class="offer-body">
+      <h3>${s.title}</h3>
+      <p>${s.text}</p>
+      <p class="offer-links"><a href="services.html#${s.id}">Learn more</a><a href="#contact" data-type="${s.type}">Discuss a project</a></p>
+    </div>
+  </article>`).join("");
 
-// Contact
-$("#footerSocials").innerHTML=c.socials.map(([label,url])=>`<li><a href="${url}" target="_blank" rel="noopener">${label}</a></li>`).join("");
-$("#contactLinks").innerHTML=c.contact.map(([label,value,href])=>`<li><span>${label}</span><a href="${href}"${href.startsWith("http")?' target="_blank" rel="noopener"':""}>${value}</a></li>`).join("");
-$("#contactForm").addEventListener("submit",e=>{
+// Who we work with, with links to related projects on this page
+const workIndex=title=>c.work.findIndex(p=>p.title===title);
+$("#segments").innerHTML=c.segments.map(s=>`
+  <article class="segment">
+    <h3>${s.title}</h3>
+    <p>${s.text}</p>
+    ${s.work.length?`<p class="segment-work">Related work: ${s.work.filter(t=>workIndex(t)>=0).map(t=>`<button type="button" data-project="${workIndex(t)}">${t}</button>`).join(", ")}</p>`:""}
+  </article>`).join("");
+$("#segments").addEventListener("click",e=>{const b=e.target.closest("[data-project]");if(b)openProject(+b.dataset.project)});
+
+// Process
+$("#processSteps").innerHTML=c.process.map(([name,text],i)=>`<li><span class="step-number">${String(i+1).padStart(2,"0")}</span><h3>${name}</h3><p>${text}</p></li>`).join("");
+
+// Ave Ludum Originals
+const o=c.originals;
+$("#originalsTitle").textContent=o.title;
+$("#originalsStatus").textContent=o.status;
+$("#originalsText").textContent=o.text;
+$("#originalsFacts").innerHTML=o.facts.map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join("");
+$("#originalsUpdates").innerHTML=o.updates.map(([when,what])=>`<li><time>${when}</time> ${what}</li>`).join("");
+$("#originalsImages").innerHTML=o.images.map(src=>`<img src="${src}" alt="" loading="lazy" decoding="async">`).join("");
+$("#originalsShots").addEventListener("click",()=>openProject(workIndex(o.title)));
+
+// About: the three divisions
+$("#divisions").innerHTML=c.divisions.map(d=>`<li><p class="division-label">Ave Ludum</p><h3>${d.name}</h3><p>${d.text}</p><a href="${d.link}">${d.linkText} →</a></li>`).join("");
+
+// Digital products: real listings when there are any, otherwise what's planned
+if(c.products.length){
+  $("#productsIntro").textContent="Tools, templates and assets made by the studio, ready to use in your own projects.";
+  $("#productsList").innerHTML=`<div class="product-grid">${c.products.map(p=>`
+    <article class="product-card">
+      ${p.image?`<img src="${p.image}" alt="" loading="lazy" decoding="async">`:""}
+      <h3>${p.title}</h3><p>${p.text}</p>
+      ${p.price?`<p class="product-price">${formatRupiah(p.price)}</p>`:""}
+      <a class="button button-sm" href="${p.url}" target="_blank" rel="noopener">${p.cta||"Get it"}</a>
+    </article>`).join("")}</div>`;
+}else{
+  $("#productsIntro").textContent="We're building reusable Unity tools, gameplay systems, templates and learning products. Nothing is on sale yet. These are the first things we're working on:";
+  $("#productsList").innerHTML=`<ul class="planned-list">${c.plannedProducts.map(p=>`<li>${p}<span>Coming soon</span></li>`).join("")}</ul>
+    <p class="planned-note">Want to hear when the first one is ready? Follow us on <a href="${c.socials[0][1]}" target="_blank" rel="noopener">Instagram</a> or <a href="${c.socials[1][1]}" target="_blank" rel="noopener">LinkedIn</a>.</p>`;
+}
+
+// Start a project
+$("#contactLinks").innerHTML=c.contact.filter(([label])=>label!=="Email").map(([label,value,href])=>`<li><span>${label}</span><a href="${href}"${href.startsWith("http")?' target="_blank" rel="noopener"':""}>${value}</a></li>`).join("");
+if(c.inquiry.whatsapp){
+  const wa=$("#whatsappLink");
+  wa.href=`https://wa.me/${c.inquiry.whatsapp}?text=${encodeURIComponent("Hi Ave Ludum, I'd like to discuss a project.")}`;
+  wa.hidden=false;
+}
+const form=$("#contactForm"),formStatus=$("#formStatus"),submitButton=$("#formSubmit");
+const typeSelect=form.elements.projectType;
+// any "Discuss a project" style link with data-type preselects the project type
+const preselect=t=>{if(t&&[...typeSelect.options].some(o=>o.value===t))typeSelect.value=t};
+document.addEventListener("click",e=>{const a=e.target.closest("a[data-type]");if(a)preselect(a.dataset.type)});
+preselect(new URLSearchParams(location.search).get("type"));
+$("#formNote").textContent=c.inquiry.endpoint
+  ?"We reply within a few working days. Your details are only used to answer this inquiry."
+  :`Sending opens your email app with the inquiry filled in, addressed to ${c.email}. Nothing is sent until you press send there.`;
+const fieldError=(field,message)=>{
+  const label=field.closest("label");
+  label.querySelector(".field-error")?.remove();
+  field.toggleAttribute("aria-invalid",!!message);
+  if(message)label.insertAdjacentHTML("beforeend",`<span class="field-error">${message}</span>`);
+};
+const validate=()=>{
+  let first=null;
+  for(const field of form.elements){
+    if(!field.name||field.type==="submit")continue;
+    let message="";
+    if(field.type==="checkbox"&&field.required&&!field.checked)message="Please tick this so we can reply to you.";
+    else if(field.required&&!field.value.trim())message=field.tagName==="SELECT"?"Please choose an option.":"Please fill this in.";
+    else if(field.type==="email"&&field.value&&!field.validity.valid)message="Please check this email address.";
+    else if(field.name==="whatsapp"&&field.value&&!/^\+?[\d\s-]{8,}$/.test(field.value.trim()))message="Please enter a phone number, e.g. +62 812 3456 7890.";
+    fieldError(field,message);
+    if(message&&!first)first=field;
+  }
+  first?.focus();
+  return !first;
+};
+form.addEventListener("input",e=>{if(e.target.hasAttribute("aria-invalid"))fieldError(e.target,"")});
+form.addEventListener("change",e=>{if(e.target.hasAttribute("aria-invalid"))fieldError(e.target,"")});
+const showStatus=(kind,text)=>{formStatus.hidden=false;formStatus.className=`form-status is-${kind}`;formStatus.textContent=text};
+form.addEventListener("submit",async e=>{
   e.preventDefault();
-  const d=new FormData(e.target);
-  const subject=`Project quote request: ${d.get("project")}${d.get("company").trim()?` (${d.get("company").trim()})`:""}`;
-  // one line per field; optional fields are left out when empty
-  const fields=[["Name","name"],["Reply to","reply"],["Company","company"],["Project type","project"],["Target platform","platform"],["Target deadline","deadline"],["Budget range","budget"],["Reference links","links"]];
-  const details=fields.map(([label,key])=>[label,d.get(key).trim()]).filter(([,v])=>v).map(([label,v])=>`${label}: ${v}`).join("\n");
-  const body=`Hi Ave Ludum,\n\nGoal / problem:\n${d.get("brief").trim()}\n\n${details}\n\nI agree to be contacted about this enquiry.\n\n— ${d.get("name").trim()}`;
-  window.location.href=`mailto:${c.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  formStatus.hidden=true;
+  if(!validate())return;
+  const d=Object.fromEntries(new FormData(form));
+  const subject=`Project inquiry: ${d.projectType}${d.organization.trim()?` (${d.organization.trim()})`:""}`;
+  const fields=[["Name","name"],["Organization","organization"],["Email","email"],["WhatsApp","whatsapp"],["Project type","projectType"],["Estimated budget","budget"],["Desired timeline","timeline"],["Reference links","links"]];
+  const details=fields.map(([label,key])=>[label,(d[key]||"").trim()]).filter(([,v])=>v).map(([label,v])=>`${label}: ${v}`).join("\n");
+  if(!c.inquiry.endpoint){
+    // No form service configured yet: hand the inquiry to the visitor's email app
+    const body=`Hi Ave Ludum,\n\n${d.description.trim()}\n\n${details}\n\nI agree to be contacted about this inquiry.`;
+    location.href=`mailto:${c.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    showStatus("info",`Your email app should open with the inquiry ready to send. If nothing opens, email us at ${c.email}.`);
+    return;
+  }
+  submitButton.disabled=true;submitButton.classList.add("is-loading");
+  submitButton.querySelector(".button-label").textContent="Sending…";
+  try{
+    const res=await fetch(c.inquiry.endpoint,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},
+      body:JSON.stringify({_subject:subject,...d,consent:"yes"})});
+    const json=await res.json().catch(()=>({}));
+    if(!res.ok||json.success===false||json.success==="false")throw new Error(json.message||res.statusText);
+    form.reset();
+    showStatus("success","Thank you for considering Ave Ludum Studio. Your project inquiry has been received. We'll review your requirements and get back to you.");
+  }catch(err){
+    showStatus("error",`Sorry, your inquiry couldn't be sent just now. Please try again, or email us at ${c.email}.`);
+  }finally{
+    submitButton.disabled=false;submitButton.classList.remove("is-loading");
+    submitButton.querySelector(".button-label").textContent="Send Inquiry";
+  }
 });
+
 const loc=c.location;
 $("#visitIntro").textContent=loc.intro;
 $("#visitPhoto").src=loc.photo;$("#visitPhoto").alt=loc.photoAlt;
 $("#visitAddress").innerHTML=loc.address.join("<br>");
 $("#visitLink").href=loc.mapsUrl;
 $("#visitMap").src=loc.embedUrl;
-$("#year").textContent=new Date().getFullYear();
 
 // Chapters: each section is a screen; arrows, the rail, the header nav and the
 // keyboard move between them, and ordinary scrolling still works (CSS snaps gently).
@@ -351,15 +473,3 @@ addEventListener("scroll",()=>{
     ticking=false;
   });
 },{passive:true});
-
-// Theme
-const root=document.documentElement,themeColor=$("#themeColor");
-const isDark=()=>root.dataset.theme?root.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;
-const syncThemeColor=()=>themeColor.setAttribute("content",isDark()?"#17120c":"#fff4e0");
-syncThemeColor();
-$("#themeToggle").addEventListener("click",()=>{
-  const next=isDark()?"light":"dark";
-  root.dataset.theme=next;
-  try{localStorage.setItem("ave-ludum-theme",next)}catch(e){}
-  syncThemeColor();
-});
