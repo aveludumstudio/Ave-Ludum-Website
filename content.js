@@ -288,7 +288,7 @@ plannedProducts:["Unity starter templates","Reusable gameplay systems","UI kits"
 //   Empty = the form opens the visitor's email app with the inquiry filled in instead.
 // whatsapp: the studio's WhatsApp number in international format without "+" (e.g. 6281234567890).
 //   Empty = the WhatsApp button is hidden.
-inquiry:{endpoint:"",provider:"apps-script",whatsapp:""},
+inquiry:{endpoint:"https://script.google.com/macros/s/AKfycbxexXseOPBu4rNTzmuWDCVVDuumsGxFIv7Wb9hk_gL2K1JtPPVvb1N5x4KkVgRHhPk_sw/exec",provider:"apps-script",whatsapp:""},
 email:"ave.ludum@gmail.com",
 location:{
  intro:"We work out of a small house on a quiet street in Rappocini, Makassar. Look for the sign above the gate.",
